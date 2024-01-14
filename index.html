@@ -396,7 +396,7 @@
 				<div class="languages">
 					<h2>Scan QR to share this website</h2>
 					<p>
-					<div id="qrcode" style=""></div>
+					<div id="qrcode"></div>
 					</p>
 				</div>
 			</div>
@@ -487,15 +487,6 @@
 	<script src="js/custom.js"></script>
 	<script>
 		$(document).ready(function () {
-
-			var currentBlogPostLink = window.location.href;
-			var options = {
-				width: 80,
-				height: 80
-			};
-
-			var qrcode = new QRCode(document.getElementById("qrcode"), options);
-			qrcode.makeCode(currentBlogPostLink);
 
 		});
 	</script>
