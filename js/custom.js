@@ -15,11 +15,17 @@ $(function () {
 // start - restrict mobile users to view mobile version of website
 
 // Disable viewport meta tag for Bootstrap's responsiveness
-document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1.0');
+// document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1.0');
 
 // Optionally, remove Bootstrap's responsive media queries
-const mqs = document.querySelectorAll('link[media]');
-mqs.forEach(mq => mq.remove());
+// const mqs = document.querySelectorAll('link[media]');
+// mqs.forEach(mq => mq.remove());
+
+
+
+$('meta[name="viewport"]').attr('content', 'width=device-width, initial-scale=1.0');
+$('link[media]').remove();
+
 // end - restrict mobile users to view mobile version of website
 
 
