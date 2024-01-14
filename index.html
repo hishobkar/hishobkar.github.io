@@ -345,7 +345,7 @@
 		<div class="col-md-4 col-sm-12">
 			<div class="languages">
 				<h2>Scan QR to share this website</h2>
-				<p><div id="qrcode" style="height:70px; width:70px;"></div></p>
+				<p><div id="qrcode" style=""></div></p>
 			</div>
 		</div>
 	</div>
@@ -428,7 +428,13 @@ $(document).ready(function(){
   // Replace 'YOUR_BLOG_POST_LINK' with the actual link to your blog post
   var currentBlogPostLink = window.location.href;
   
-  qrcode.makeCode(currentBlogPostLink)
+  qrcode.makeCode(currentBlogPostLink);
+
+  // Set dynamic styles for the QR code element
+  $("#qrcode").css({
+    "height": "70px",
+    "width": "70px"
+  });
 });
 </script>
 </body>
