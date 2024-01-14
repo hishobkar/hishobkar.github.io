@@ -1,0 +1,134 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+	<title>Abhijeet.Hishobkar</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<!-- stylesheet css -->
+	<link rel="stylesheet" href="../../../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../css/font-awesome.min.css">
+	<link rel="stylesheet" href="../../../css/templatemo-blue.css">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    </head>
+    <body>
+
+<!-- nav bar start -->
+<nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light" style="background-color: #3366CC!important;">
+	<a class="navbar-brand" href="https://hishobkar.github.io">
+		<img src="https://hishobkar.github.io/images/tm-easy-profile.jpg" class="rounded-circle border border-light" width="50" height="50" alt="Profile">
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+	  <span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNavDropdown">
+	  <ul class="navbar-nav">
+		<li class="nav-item active">
+		  <a class="nav-link text-white" href="https://hishobkar.github.io">Home</a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link text-white" href="https://hishobkar.github.io">About</a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link text-white" href="https://hishobkar.github.io">Contact</a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link text-white" href="https://hishobkar.github.io">More</a>
+		</li>
+	  </ul>
+	</div>
+  </nav>
+<!-- nav bar end -->
+
+
+        <div class="container">
+          <div class="post-inner-content">
+            <header class="entry-header page-header">
+        
+              <h1 class="entry-title ">Concurrent Hosted Service Start and Stop in .NET 8</h1>
+              <div class="author">
+                <label class="post_info ds-implicit">
+                  by
+                  <a href="https://www.linkedin.com/in/hishobkar" target="_blank"
+                    >Abhijeet. Hishobkar</a
+                  >, UPDATED ON
+                  <time
+                    class="ENTRY-DATE PUBLISHED UPDATED"
+                    datetime="2023-07-27T09:48:11+02:00"
+                    >MAY 17, 2023</time
+                  >
+                </label>
+                <label class="read_time">80 mins read</label>
+              </div>
+            </header><!-- .entry-header -->
+        
+            <div class="entry-content">
+              <!-- PRyC WP: Add custom content to bottom of post/page: Standard Content START --><div id="pryc-wp-acctp-original-content">
+        <p>In this post, I will describe a new feature of the Microsoft.Extensions.Hosting library coming in .NET 8 (available since preview 4) affecting hosted services. Let’s first begin with a brief recap of hosted services. The hosting library for .NET, used in both the ASP.NET Core project template and the Worker Service template, provides the capability to start a long-running console application.</p>
+        <p>In the case of ASP.NET Core, the application starts the Kestrel webserver and runs until the process is shut down. The Worker Service template is perfect for creating lightweight processing applications which run continually. For example, this can include microservices which poll for messages from a queue and process them.</p>
+        <p>Hosted services are essentially background tasks started by the host which perform the work of the application. Applications may define one or more hosted services by registering an implementation of the IHostedService interface with the Microsoft dependency injection container. Microsoft provides a general implementation of this interface with the BackgroundService abstract class, which provides the core machinery required to start some long-running work.</p>
+        <p>To use BackgroundService, developers derive from this class and provide an implementation for the abstract ExecuteAsync method. When the hosting framework starts, it will trigger the Task defined in the ExecuteAsync method.</p>
+        <p>Before .NET 8, the code that starts and stops hosted services does so sequentially. Each IHostedService registered with the DI container is started in sequence by calling the StartAsync method on the instance. Crucially, this included awaiting the completion of the StartAsync method, meaning that each StartAsync Task was required to complete before the next service was triggered. The effect of this design does not significantly impact most applications, but it is still possible for this default behaviour to cause issues. Even though it’s recommended that there be little work inside StartAsync, it’s possible for a slow hosted service to delay the start of the remainder of the application.</p>
+        <p>When stopping applications, the same sequential behaviour occurred, this time with services being stopped in reverse order. Again, each StopAsync method for the registered services would be called with an await, causing them to run one after another. This behaviour can be more problematic at shutdown as there is a timeout configured that limits how long the graceful shutdown can take. This means that your timeout must consider the length of time needed to shut down each hosted service gracefully. In some situations, when draining currently in-process work, this could cause some services to consume most of the timeout window.</p>
+        <p>For those developers who have run into issues with the existing behaviour, good news! In .NET 8, we are gaining two new options which allow us to switch to a concurrent start and/or stop behaviour. To achieve this, we can configure the HostOptions and set one or both of the new properties to true to enable concurrent logic for starting or stopping any registered IHostedServices.</p>
+        <p>To configure concurrent start logic, we must set the ServicesStartConcurrently property to true. To configure concurrent shutdown, we can use ServicesStopConcurrently.</p>
+        
+        
+        <div class="wp-block-syntaxhighlighter-code "><div><div id="highlighter_190422" class="syntaxhighlighter  csharp"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp keyword">using</code> <code class="csharp plain">WorkerService;</code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2"><code class="csharp keyword">var</code> <code class="csharp plain">host = Host.CreateDefaultBuilder(args)</code></div><div class="line number4 index3 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">.ConfigureServices(services =&gt;</code></div><div class="line number5 index4 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number6 index5 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">services.Configure&lt;HostOptions&gt;(options =&gt;</code></div><div class="line number7 index6 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number8 index7 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">options.ServicesStartConcurrently = </code><code class="csharp keyword">true</code><code class="csharp plain">;</code></div><div class="line number9 index8 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">options.ServicesStopConcurrently = </code><code class="csharp keyword">true</code><code class="csharp plain">;</code></div><div class="line number10 index9 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">});</code></div><div class="line number11 index10 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">services.AddHostedService&lt;WorkerOne&gt;();</code></div><div class="line number12 index11 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">services.AddHostedService&lt;WorkerTwo&gt;();</code></div><div class="line number13 index12 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">})</code></div><div class="line number14 index13 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">.Build();</code></div><div class="line number15 index14 alt2">&nbsp;</div><div class="line number16 index15 alt1"><code class="csharp plain">host.Run();</code></div></div></td></tr></tbody></table></div></div></div>
+        
+        
+        <p>In the preceding code, we use the Configure method to configure the HostOptions, setting start and stop behaviour to run concurrently. In the above example, which registers two hosted services, they will start and stop concurrently without delaying the other.</p>
+        <p>Let’s explore the new code for the Host implementation:</p>
+        
+        
+        <div class="wp-block-syntaxhighlighter-code "><div><div id="highlighter_535930" class="syntaxhighlighter  csharp"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp keyword">if</code> <code class="csharp plain">(_options.ServicesStartConcurrently)</code></div><div class="line number2 index1 alt1"><code class="csharp plain">{</code></div><div class="line number3 index2 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">List&lt;Task&gt; tasks = </code><code class="csharp keyword">new</code> <code class="csharp plain">List&lt;Task&gt;();</code></div><div class="line number4 index3 alt1">&nbsp;</div><div class="line number5 index4 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">foreach</code> <code class="csharp plain">(IHostedService hostedService </code><code class="csharp keyword">in</code> <code class="csharp plain">_hostedServices)</code></div><div class="line number6 index5 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number7 index6 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">tasks.Add(Task.Run(() =&gt; StartAndTryToExecuteAsync(hostedService, combinedCancellationToken), combinedCancellationToken));</code></div><div class="line number8 index7 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number9 index8 alt2">&nbsp;</div><div class="line number10 index9 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">Task groupedTasks = Task.WhenAll(tasks);</code></div><div class="line number11 index10 alt2">&nbsp;</div><div class="line number12 index11 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">try</code></div><div class="line number13 index12 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number14 index13 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">await</code> <code class="csharp plain">groupedTasks.ConfigureAwait(</code><code class="csharp keyword">false</code><code class="csharp plain">);</code></div><div class="line number15 index14 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number16 index15 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">catch</code> <code class="csharp plain">(Exception ex)</code></div><div class="line number17 index16 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number18 index17 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">exceptions.AddRange(groupedTasks.Exception?.InnerExceptions ?? </code><code class="csharp keyword">new</code><code class="csharp plain">[] { ex }.AsEnumerable());</code></div><div class="line number19 index18 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number20 index19 alt1"><code class="csharp plain">}</code></div></div></td></tr></tbody></table></div></div></div>
+        
+        <div class="wp-block-syntaxhighlighter-code "><div><div id="highlighter_494516" class="syntaxhighlighter  csharp"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp keyword">private</code> <code class="csharp keyword">async</code> <code class="csharp plain">Task StartAndTryToExecuteAsync(IHostedService service, CancellationToken combinedCancellationToken)</code></div><div class="line number2 index1 alt1"><code class="csharp plain">{</code></div><div class="line number3 index2 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">await</code> <code class="csharp plain">service.StartAsync(combinedCancellationToken).ConfigureAwait(</code><code class="csharp keyword">false</code><code class="csharp plain">);</code></div><div class="line number4 index3 alt1">&nbsp;</div><div class="line number5 index4 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">if</code> <code class="csharp plain">(service </code><code class="csharp keyword">is</code> <code class="csharp plain">BackgroundService backgroundService)</code></div><div class="line number6 index5 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number7 index6 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">_ = TryExecuteBackgroundServiceAsync(backgroundService);</code></div><div class="line number8 index7 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number9 index8 alt2"><code class="csharp plain">}</code></div></div></td></tr></tbody></table></div></div></div>
+        
+        
+        <p>When ServicesStartConcurrently is set to true, internally, the code for the Host start logic will use Task.Run to ultimately invoke the StartAsync method on each registered hosted service. These Tasks are still triggered in the order they are registered, but crucially, they are not awaited at this point. The tasks are added to a list, and only once each Task has been triggered is WhenAll used to await the completion of StartAsync for each hosted service. In this mode, the startup will take only as long as the slowest StartAsync call, allowing the application as a whole to get going more quickly. It’s a similar story with the shutdown code:</p>
+        
+        
+        <div class="wp-block-syntaxhighlighter-code "><div><div id="highlighter_507243" class="syntaxhighlighter  csharp"><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="csharp keyword">if</code> <code class="csharp plain">(_options.ServicesStopConcurrently)</code></div><div class="line number2 index1 alt1"><code class="csharp plain">{</code></div><div class="line number3 index2 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">List&lt;Task&gt; tasks = </code><code class="csharp keyword">new</code> <code class="csharp plain">List&lt;Task&gt;();</code></div><div class="line number4 index3 alt1">&nbsp;</div><div class="line number5 index4 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">foreach</code> <code class="csharp plain">(IHostedService hostedService </code><code class="csharp keyword">in</code> <code class="csharp plain">hostedServices)</code></div><div class="line number6 index5 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number7 index6 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">tasks.Add(Task.Run(() =&gt; hostedService.StopAsync(token), token));</code></div><div class="line number8 index7 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number9 index8 alt2">&nbsp;</div><div class="line number10 index9 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">Task groupedTasks = Task.WhenAll(tasks);</code></div><div class="line number11 index10 alt2">&nbsp;</div><div class="line number12 index11 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">try</code></div><div class="line number13 index12 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number14 index13 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">await</code> <code class="csharp plain">groupedTasks.ConfigureAwait(</code><code class="csharp keyword">false</code><code class="csharp plain">);</code></div><div class="line number15 index14 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number16 index15 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp keyword">catch</code> <code class="csharp plain">(Exception ex)</code></div><div class="line number17 index16 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code></div><div class="line number18 index17 alt1"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">exceptions.AddRange(groupedTasks.Exception?.InnerExceptions ?? </code><code class="csharp keyword">new</code><code class="csharp plain">[] { ex }.AsEnumerable());</code></div><div class="line number19 index18 alt2"><code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code></div><div class="line number20 index19 alt1"><code class="csharp plain">}</code></div></div></td></tr></tbody></table></div></div></div>
+        
+        
+        <p>When it comes to shutdown, if ServicesStopConcurrently is set to true, then each StopAsync method will be called without awaiting the result. Each Task will be added to a List of tasks that can later be awaited together with WhenAll. This has the crucial effect of allowing each hosted service the entire length of the configured ShutdownTimeout to complete its work. A single slow StopAsync will no longer eat up the timeout remaining for subsequent services.</p>
+        <p>This is a small but welcome addition to the options for the hosting library. The existing sequential behaviour remains the default, but we can now easily configure the concurrent modes when suitable for our applications.</p>
+        <p>Generally, switching to the concurrent mode is expected to be safe for most applications. One thing to consider is any situations where your hosted services depend directly on one another in some crucial way. In such situations, starting or stopping them concurrently may cause bugs in your application, as you cannot rely on services registered before your service being completely started.</p>
+        <p>.NET 8 is still in preview at the time of writing, and you can try out this new feature by <a href="https://dotnet.microsoft.com/en-us/download/dotnet/8.0">downloading preview 4 or newer of the .NET SDK</a>.</p>
+        <!-- PRyC WP: Add custom content to bottom of post/page: Standard Content START --></div>
+      </div>
+          </div>
+        </div>
+
+<!-- footer section -->
+<footer>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12">
+				<p>Copyright &copy; 2024 - Abhijeet. Hishobkar</p>
+				<ul class="social-icons">
+					<li><a href="https://hishobkar.github.io" class="fa fa-facebook"></a></li>
+                    <li><a href="https://hishobkar.github.io" class="fa fa-google-plus"></a></li>
+					<li><a href="https://hishobkar.github.io" class="fa fa-twitter"></a></li>
+					<li><a href="https://hishobkar.github.io" class="fa fa-dribbble"></a></li>
+					<li><a href="https://hishobkar.github.io" class="fa fa-github"></a></li>
+					<li><a href="https://hishobkar.github.io" class="fa fa-behance"></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- footer ends -->
+         
+<!-- javascript js -->	
+<script src="../../../js/jquery.js"></script>
+<script src="../../../js/bootstrap.min.js"></script>	
+<script src="../../../js/jquery.backstretch.min.js"></script>
+<script src="../../../js/custom.js"></script>
+
+    </body>
+</html>

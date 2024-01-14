@@ -15,15 +15,35 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     </head>
     <body>
-        <!-- nav bar start -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: 20px!important;">
-            <a class="navbar-brand" href="../../index.html">Home</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-          </nav>
-        <!-- nav bar end -->
-        <div class="container">
+
+<!-- nav bar start -->
+<nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light" style="background-color: #3366CC!important;">
+	<a class="navbar-brand" href="https://hishobkar.github.io">
+		<img src="https://hishobkar.github.io/images/tm-easy-profile.jpg" class="rounded-circle border border-light" width="50" height="50" alt="Profile">
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+	  <span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNavDropdown">
+	  <ul class="navbar-nav">
+		<li class="nav-item active">
+		  <a class="nav-link text-white" href="https://hishobkar.github.io">Home</a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link text-white" href="https://hishobkar.github.io">About</a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link text-white" href="https://hishobkar.github.io">Contact</a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link text-white" href="https://hishobkar.github.io">More</a>
+		</li>
+	  </ul>
+	</div>
+  </nav>
+<!-- nav bar end -->
+
+<div class="container">
             <main class="post post__container"><header class="post__header"><h1 class="entry-title ds-typography__h1 ds-color__static-content-primary">Advanced SQL For Data Analytics (Step-by-Step Tutorial)</h1><div class="author"><label class="post_info ds-implicit"> by <a href="https://www.linkedin.com/in/hishobkar">Abhijeet Hishobkar</a>, UPDATED ON <time class="ENTRY-DATE PUBLISHED UPDATED" datetime="2022-12-01T12:05:38+01:00">DECEMBER 1, 2022</time>  </label> <label class="read_time">10 mins read</label></div></header><br><div class="entry-content post__content ds-implicit"><p><span style="font-weight: 400;">As a data analyst, advanced SQL is an important skill to have, because you need to go beyond just accessing data. You’ll have to deliver insights that help users take action or help data scientists transform data for machine learning. At my job, I’m constantly digging into data with advanced SQL techniques like aggregate functions, complex table joins, and common table expressions so that I can better understand how users are interacting with our products and help design features our customers need.&nbsp;</span></p><p><a href="./01_how-to-use-sql.html"><span style="font-weight: 400;">In my previous SQL article</span></a><span style="font-weight: 400;">, I walked through all of the SQL basics to teach you how to create a database and table, insert records, and select records. This tutorial is a continuation of that article and builds on the skills and examples we previously covered. If you’re new to SQL or data analytics, check out the beginner’s guide before working through this advanced SQL tutorial.&nbsp;</span></p><p><span style="font-weight: 400;">In this tutorial, we’ll cover the following concepts and look at examples that will prepare you for writing advanced SQL queries for data analysis:</span></p><ol> <li style="font-weight: 400;" aria-level="1"><a href="#creating-data"><span style="font-weight: 400;">Creating data for advanced SQL examples</span></a></li> <li style="font-weight: 400;" aria-level="1"><a href="#creating-tables"><span style="font-weight: 400;">Creating tables using normalization concepts</span></a></li> <li style="font-weight: 400;" aria-level="1"><a href="#joining-tables"><span style="font-weight: 400;">Joining tables</span></a></li> <li style="font-weight: 400;" aria-level="1"><a href="#writing-advanced-sql-joins"><span style="font-weight: 400;">Writing advanced SQL joins</span></a></li> <li style="font-weight: 400;" aria-level="1"><a href="#aliasing-tables-and-columns"><span style="font-weight: 400;">Aliasing tables and columns</span></a></li> <li style="font-weight: 400;" aria-level="1"><a href="#counting-records"><span style="font-weight: 400;">Counting records</span></a></li> <li style="font-weight: 400;" aria-level="1"><a href="#aggregating-averages"><span style="font-weight: 400;">Aggregating averages in advanced SQL</span></a></li> <li style="font-weight: 400;" aria-level="1"><a href="#summary"><span style="font-weight: 400;">Summary</span></a></li></ol><p><span style="font-weight: 400;">You can use the clickable menu to skip ahead to any section. Let’s get started!</span></p><h2 id="creating-data" class="intext-cta__blog-title"><span style="font-weight: 400;">1. Creating data for advanced SQL examples</span></h2><p><span style="font-weight: 400;">If you’re already familiar with inserting records into a database table and want to skip the beginner’s SQL tutorial and start with these advanced SQL concepts, run the following script to create the dataset we used </span><a href="./01_how-to-use-sql.html"><span style="font-weight: 400;">in the previous tutorial</span></a><span style="font-weight: 400;">.</span></p><pre><code>CREATE DATABASE exampleDatabase;
 
 CREATE TABLE client (
@@ -75,7 +95,27 @@ FROM client c
 INNER JOIN orders o on o.clientID = c.clientID
 GROUP BY c.clientID, c.firstName, c.lastName</code></pre><p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-19906 lazy-loaded" src="./images/advanced-sql-8.png" data-lazy-type="image" alt="advanced sql 8" width="338" height="123" title="advanced sql 8" data-srcset="" sizes="(max-width: 338px) 100vw, 338px"></p><h2 id="summary" class="intext-cta__blog-title" data-gtm-vis-first-on-screen781550_382="422175" data-gtm-vis-total-visible-time781550_382="100"><span style="font-weight: 400;">8. Summary</span></h2><p><span style="font-weight: 400;">While retrieving data using SQL can be simple, cleaning and aggregating the data requires skills that need to be practiced in order to master. In this tutorial we learned several concepts that will bring to you an advanced SQL skill level including table joins, aliasing variables, counting records, and applying aggregate functions and grouping.&nbsp;</span></p><p><span style="font-weight: 400;">These concepts are important to know because companies often keep data in different systems or database tables, leaving it up to data analysts to join them together and make sense of it all.&nbsp;</span></p></div></main>
         </div>
-        
+       
+<!-- footer section -->
+<footer>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12">
+				<p>Copyright &copy; 2024 - Abhijeet. Hishobkar</p>
+				<ul class="social-icons">
+					<li><a href="https://hishobkar.github.io" class="fa fa-facebook"></a></li>
+                    <li><a href="https://hishobkar.github.io" class="fa fa-google-plus"></a></li>
+					<li><a href="https://hishobkar.github.io" class="fa fa-twitter"></a></li>
+					<li><a href="https://hishobkar.github.io" class="fa fa-dribbble"></a></li>
+					<li><a href="https://hishobkar.github.io" class="fa fa-github"></a></li>
+					<li><a href="https://hishobkar.github.io" class="fa fa-behance"></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- footer ends -->
+ 
 <!-- javascript js -->	
 <script src="../../js/jquery.js"></script>
 <script src="../../js/bootstrap.min.js"></script>	
