@@ -10,6 +10,21 @@ $(window).load(function () {
 $(function () {
 	jQuery(document).ready(function () {
 
+
+
+// start - restrict mobile users to view mobile version of website
+
+// Disable viewport meta tag for Bootstrap's responsiveness
+document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1.0');
+
+// Optionally, remove Bootstrap's responsive media queries
+const mqs = document.querySelectorAll('link[media]');
+mqs.forEach(mq => mq.remove());
+// end - restrict mobile users to view mobile version of website
+
+
+
+
 		// // start - add libries dynamically
 		// const libraries = [
 		// 	// 'https://hishobkar.github.io/js/qrcode.min.js',
