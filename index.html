@@ -423,18 +423,16 @@
 <script src="js/custom.js"></script>
 <script>
 $(document).ready(function(){
-  var qrcode = new QRCode(document.getElementById("qrcode"));
 
-  // Replace 'YOUR_BLOG_POST_LINK' with the actual link to your blog post
   var currentBlogPostLink = window.location.href;
-  
+  var options = {
+    width: 50,
+    height: 50
+  };
+
+  var qrcode = new QRCode(document.getElementById("qrcode"), options);
   qrcode.makeCode(currentBlogPostLink);
 
-  // Set dynamic styles for the QR code element
-  $("#qrcode").css({
-    "height": "70px",
-    "width": "70px"
-  });
 });
 </script>
 </body>
