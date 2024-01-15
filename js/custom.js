@@ -14,7 +14,7 @@ $(function () {
 
 		// // start - add libries dynamically
 		// const libraries = [
-		// 	// 'https://hishobkar.github.io/js/qrcode.min.js',
+		// 	// './js/qrcode.min.js',
 		// 	// 'https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs@gh-pages/qrcode.min.js',
 		// 	// './js/library2.js',
 		// 	// ... paths to the other libraries
