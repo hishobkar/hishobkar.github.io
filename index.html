@@ -12,21 +12,7 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/templatemo-blue.css">
-
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-		crossorigin="anonymous"></script>
-	<style>
-		/* Custom CSS for hover effect */
-		.navbar-nav .nav-item.dropdown:hover>.dropdown-menu {
-			display: block;
-		}
-	</style>
-
-	<script src="./js/qrcode.min.js"></script>
-
+	<link rel="stylesheet" href="css/custom.css">
 </head>
 
 <body data-spy="scroll" data-target=".navbar-collapse">
@@ -51,180 +37,21 @@
 		<div class="collapse navbar-collapse" id="navbarNavDropdown">
 			<ul class="navbar-nav">
 				<li class="nav-item active">
-					<a class="nav-link text-white" href="https://hishobkar.github.io">Home</a>
+					<a class="nav-link text-white" href="index.html">Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white" href="https://hishobkar.github.io">About</a>
+					<a class="nav-link text-white" href="index.html#aboutme">About</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link text-white" href="https://hishobkar.github.io">Contact</a>
+					<a class="nav-link text-white" href="index.html#contact">Contact</a>
 				</li>
 
-				<li class="nav-item dropdown">
-					<a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Blogs
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="./blog/what-is-devops/index.html">What is DevOps</a>
-						<a class="dropdown-item" href="./blog/data-analytics/01_how-to-use-sql.html">How To Use SQL</a>
-						<a class="dropdown-item" href="./blog/data-analytics/02_advanced-sql.html">Advanced SQL</a>
-						<!-- <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#"></a> -->
-					</div>
+				<li class="nav-item">
+					<a class="nav-link text-white" href="./blog/index.html">Blogs</a>
 				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle text-white" href="#" id="category1Dropdown" role="button"
-						data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Article
-					</a>
-					<div class="dropdown-menu" aria-labelledby="category1Dropdown">
-
-						<div class="dropdown">
-							<a class="dropdown-item dropdown-toggle" href="#" id="submenu1" role="button"
-								data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Dot Net Core
-							</a>
-							<div class="dropdown-menu" aria-labelledby="submenu1">
-								<a class="dropdown-item"
-									href="./articles/DotNetCore/concurrent-hosted-service-start-and-stop-in-dotnet-8/index.html">Concurrent
-									Hosted Service Start and Stop in dotnet core 8</a>
-								<a class="dropdown-item"
-									href="./articles/DotNetCore/introducing-the-new-ihostedlifecycleservice-interface-in-dotnet-8/index.html">The
-									new ihostedlifecycleservice interface in dotnet core 8</a>
-								<a class="dropdown-item"
-									href="./articles/DotNetCore/accessing-state-in-system-text-json-custom-converters/index.html">Accessing
-									State in System.text.json Custom Converters</a>
-							</div>
-						</div>
-
-						<div class="dropdown">
-							<a class="dropdown-item dropdown-toggle" href="#" id="submenu2" role="button"
-								data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Jetbrains
-							</a>
-							<div class="dropdown-menu" aria-labelledby="submenu2">
-								<a class="dropdown-item"
-									href="./articles/DotNetCore/automating-memory-profiling-with-the-jetbrains-dotmemory-profiler-api/index.html">Automating
-									Memory Profiling with the Jetbrains Dotmemory Profiler API</a>
-							</div>
-						</div>
-
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Stay Tuned for below Concepts</a>
-						<div class="dropdown-divider"></div>
-
-						<!-- C programming start -->
-						<div class="dropdown">
-							<a class="dropdown-item dropdown-toggle" href="#" id="submenu1" role="button"
-								data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Basics of C Programming
-							</a>
-							<div class="dropdown-menu" aria-labelledby="submenu1">
-								<a class="dropdown-item" href="">Fundamentals Concepts :</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="">Demystifying C Pointers</a>
-								<a class="dropdown-item" href="">C Preprocessor Magic</a>
-								<a class="dropdown-item" href="">Building Blocks: Data Types and Operators</a>
-								<a class="dropdown-item" href="">Control Flow Champions</a>
-								<a class="dropdown-item" href="">Function Powerhouse: Designing and Using Functions</a>
-								<!-- <a class="dropdown-item" href=""></a> -->
-
-								<a class="dropdown-item" href="">Intermediate Concepts :</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="">Mastering Arrays: One-Dimensional and Multi-Dimensional
-									Wonders</a>
-								<a class="dropdown-item" href="">Structuring Data: Unleashing Structures and Unions</a>
-								<a class="dropdown-item" href="">File Magic: Reading and Writing to Files</a>
-								<a class="dropdown-item" href="">Command Line Warriors</a>
-								<a class="dropdown-item" href="">Make Files and Libraries: Reusable Code Power</a>
-								<!-- <a class="dropdown-item" href=""></a> -->
-
-								<a class="dropdown-item" href="">Advanced Concepts:</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="">Memory Management Masters</a>
-								<a class="dropdown-item" href="">Pointers and Arrays</a>
-								<a class="dropdown-item" href="">Preprocessor Macros</a>
-								<a class="dropdown-item" href="">Multithreading Mania</a>
-								<a class="dropdown-item" href="">Building Your Own Data Structures</a>
-								<!-- <a class="dropdown-item" href=""></a> -->
-
-								<a class="dropdown-item" href="">Special Topics:</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="">C for Embedded Systems</a>
-								<a class="dropdown-item" href="">C and Security</a>
-								<a class="dropdown-item" href="">Interfacing with Hardware</a>
-								<a class="dropdown-item" href="">C in the Modern World</a>
-								<a class="dropdown-item" href="">C Programming Challenges</a>
-								<!-- <a class="dropdown-item" href=""></a> -->
-							</div>
-						</div>
-						<!-- C programming end -->
-
-						<!-- Angulra Start -->
-						<div class="dropdown">
-							<a class="dropdown-item dropdown-toggle" href="#" id="submenu1" role="button"
-								data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								Web UI - Angular 17
-							</a>
-							<div class="dropdown-menu" aria-labelledby="submenu1">
-								<a class="dropdown-item" href="">Standalone Components: Breaking Free</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="">Explore the benefits and implications of using
-									standalone components without NgModules.</a>
-								<a class="dropdown-item" href="">Discuss migration strategies for existing Angular
-									projects.</a>
-								<a class="dropdown-item" href="">Showcase practical examples of using standalone
-									components in diverse scenarios.</a>
-								<!-- <a class="dropdown-item" href=""></a> -->
-
-								<a class="dropdown-item" href="">Enhanced Routing: New Tricks for Navigation</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="">Deep dive into the refined routing system, including
-									dynamic imports, route guards, and resolvers.</a>
-								<a class="dropdown-item" href="">Demonstrate how to optimize lazy loading and enhance
-									user experiences with seamless navigation.</a>
-								<a class="dropdown-item" href="">Share tips for handling complex routing scenarios
-									effectively.</a>
-
-								<!-- <a class="dropdown-item" href=""></a> -->
-
-								<a class="dropdown-item" href="">Built-in Standalone Directives: Powering Up Forms</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="">Uncover the benefits of using standalone directives
-									like ngIf, ngFor, and ngSwitch without NgModules.</a>
-								<a class="dropdown-item" href="">Explore examples of building dynamic forms and reusable
-									UI components with standalone directives.</a>
-								<!-- <a class="dropdown-item" href=""></a> -->
-
-								<a class="dropdown-item" href="">Improved TypeScript Support: Embrace Modern
-									Features</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="">Explain how Angular 17 leverages TypeScript 4.9 for
-									enhanced type safety and developer productivity.</a>
-								<a class="dropdown-item" href="">Highlight new TypeScript features like control flow
-									analysis for conditional types and improved type inference.</a>
-								<a class="dropdown-item" href="">Demonstrate how to write more robust and maintainable
-									Angular code with these advancements.</a>
-								<!-- <a class="dropdown-item" href=""></a> -->
-
-								<a class="dropdown-item" href="">Dependency Injection Refresh: Refined Injection
-									Patterns</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="">Dive into the streamlined dependency injection system,
-									including improvements for providers and injection tokens.</a>
-								<a class="dropdown-item" href="">Explore advanced techniques like hierarchical injectors
-									and custom injection tokens for flexible dependency management.</a>
-								<a class="dropdown-item" href="">Share best practices for organizing and managing
-									dependencies effectively in large-scale Angular applications.</a>
-								<!-- <a class="dropdown-item" href=""></a> -->
-							</div>
-						</div>
-						<!-- Angulra End -->
-
-					</div>
+				<li class="nav-item">
+					<a class="nav-link text-white" href="./articles/index.html">Articles</a>
 				</li>
-
 			</ul>
 		</div>
 	</nav>
@@ -298,7 +125,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 col-sm-12">
-					<img src="images/tm-easy-profile.jpg" class="img-responsive img-circle tm-border"
+					<img src="images/tm-easy-profile.jpg" class="img-responsive rounded-circle img-circle tm-border"
 						alt="templatemo easy profile" style="height: 300px;
                 width: 300px ">
 					<hr>
@@ -310,7 +137,7 @@
 	</header>
 
 	<!-- about and skills section -->
-	<section class="container">
+	<section class="container" id="aboutme">
 		<div class="row">
 			<div class="col-md-6 col-sm-12">
 				<div class="about">
@@ -405,7 +232,7 @@
 
 
 	<!-- contact and experience -->
-	<section class="container">
+	<section class="container" id="contact">
 		<div class="row">
 			<div class="col-md-4 col-sm-12">
 				<div class="contact">
@@ -484,6 +311,7 @@
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.backstretch.min.js"></script>
+	<script src="js/qrcode.min.js"></script>
 	<script src="js/custom.js"></script>
 	<script>
 		$(document).ready(function () {
