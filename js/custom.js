@@ -6,9 +6,11 @@ $(window).load(function () {
 	$('.preloader').delay(1000).fadeOut("slow"); // set duration in brackets    
 });
 
+
 // HOME BACKGROUND SLIDESHOW
 $(function () {
 	jQuery(document).ready(function () {
+
 
 		// // start - add libries dynamically
 		// const libraries = [
@@ -37,5 +39,23 @@ $(function () {
 		var qrcode = new QRCode(document.getElementById("qrcode"), options);
 		
 		qrcode.makeCode(currentBlogPostLink);
+
+
+
+
+// start - restrict mobile users to view mobile version of website
+
+// Disable viewport meta tag for Bootstrap's responsiveness
+// document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1.0');
+
+// Optionally, remove Bootstrap's responsive media queries
+// const mqs = document.querySelectorAll('link[media]');
+// mqs.forEach(mq => mq.remove());
+
+// end - restrict mobile users to view mobile version of website
+
+
+
+
 	});
 })
