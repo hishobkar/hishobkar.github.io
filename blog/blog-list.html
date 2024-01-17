@@ -88,11 +88,12 @@
 			</div>
 			<div class="container">
 				<nav class="blog-nav nav nav-justified my-5">
-					<a id="prevBtn" class="nav-link-prev nav-item nav-link rounded-left" style="color: #fff;">Previous<i
+					<a id="prevBtn1" class="nav-link-prev nav-item nav-link rounded-left" style="color: #fff;">Previous<i
 							class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
-					<a id="nextBtn" class="nav-link-next nav-item nav-link rounded-right" style="color: #fff;">Next<i
+					<a id="nextBtn1" class="nav-link-next nav-item nav-link rounded-right" style="color: #fff;">Next<i
 							class="arrow-next fas fa-long-arrow-alt-right"></i></a>
 				</nav>
+				<hr>
 			</div>
 			<div class="container">
 				<div class="item mb-5">
@@ -116,9 +117,9 @@
 			</div>
 			<div class="container">
 				<nav class="blog-nav nav nav-justified my-5">
-					<a id="prevBtn" class="nav-link-prev nav-item nav-link rounded-left" style="color: #fff;">Previous<i
+					<a id="prevBtn2" class="nav-link-prev nav-item nav-link rounded-left" style="color: #fff;">Previous<i
 							class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
-					<a id="nextBtn" class="nav-link-next nav-item nav-link rounded-right" style="color: #fff;">Next<i
+					<a id="nextBtn2" class="nav-link-next nav-item nav-link rounded-right" style="color: #fff;">Next<i
 							class="arrow-next fas fa-long-arrow-alt-right"></i></a>
 				</nav>
 			</div>
@@ -183,7 +184,7 @@
 			});
 
 			// Event listener for next button
-			$('#nextBtn').on('click', function () {
+			$('#nextBtn1').on('click', function () {
 				if (currentPage < Math.ceil(blogData.length / itemsPerPage)) {
 					currentPage++;
 					displayBlogList();
@@ -191,7 +192,23 @@
 			});
 
 			// Event listener for previous button
-			$('#prevBtn').on('click', function () {
+			$('#prevBtn1').on('click', function () {
+				if (currentPage > 1) {
+					currentPage--;
+					displayBlogList();
+				}
+			});
+
+			// Event listener for next button
+			$('#nextBtn2').on('click', function () {
+				if (currentPage < Math.ceil(blogData.length / itemsPerPage)) {
+					currentPage++;
+					displayBlogList();
+				}
+			});
+
+			// Event listener for previous button
+			$('#prevBtn2').on('click', function () {
 				if (currentPage > 1) {
 					currentPage--;
 					displayBlogList();
@@ -224,7 +241,7 @@
 			// Generate HTML for the current page
 			currentBlogData.forEach(blog => {
 				if (blog.BlogHeadline != "") {
-					const blogHtml = `
+					const blogHtml = `<hr>
 				<div class="item mb-5">
 					<div class="media">
 						<img class="blogimg mr-3 img-fluid post-thumb d-none d-md-flex"
@@ -237,7 +254,7 @@
 							<a class="more-link" href="${blog.BlogUrl}">Read more →</a>
 						</div>
 					</div>
-				</div>
+				</div><hr>
 				`;
 					$('#blogList').append(blogHtml);
 				}
