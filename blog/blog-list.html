@@ -17,7 +17,6 @@
 
 	<!-- Theme CSS -->
 	<link id="theme-style" rel="stylesheet" href="assets/css/theme-3.css">
-
 </head>
 
 <body>
@@ -77,13 +76,32 @@
 	<div class="main-wrapper">
 
 		<section class="blog-list px-3 py-5 p-md-5">
+
+			<div class="container">
+				<hr />
+				<center>
+					<h3>Search For blog's by topic :</h3>
+					<input type="text" id="searchInput" class="form-control mr-md-1 semail" style="max-width: 500px;"
+						placeholder="Search Blogs" />
+				</center>
+				<hr />
+			</div>
+			<div class="container">
+				<nav class="blog-nav nav nav-justified my-5">
+					<a id="prevBtn" class="nav-link-prev nav-item nav-link rounded-left" style="color: #fff;">Previous<i
+							class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
+					<a id="nextBtn" class="nav-link-next nav-item nav-link rounded-right" style="color: #fff;">Next<i
+							class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+				</nav>
+			</div>
 			<div class="container">
 				<div class="item mb-5">
 					<div class="media">
 						<img class="blogimg mr-3 img-fluid post-thumb d-none d-md-flex"
 							src="./assets/images/blog/blog-post-thumb-10.jpg" alt="image">
 						<div class="media-body">
-							<h3 class="title mb-1"><a href="blog-post.html">Why Every Developer Should Have A Blog</a>
+							<h3 class="title mb-1"><a href="blog-post.html" style="color: #3B7EEB">Why Every Developer
+									Should Have A Blog</a>
 							</h3>
 							<div class="meta mb-1"><span class="date">Published 4 months ago</span><span class="time">8
 									min read</span><span class="comment"><a href="#"></a></span></div>
@@ -180,6 +198,18 @@
 				}
 			});
 
+			$('#searchInput').on('input', function () {
+				const searchText = $(this).val();
+				if (searchText.length <= 0) {
+					location.reload();
+					return;
+				}
+				const filteredData = filterBlogData(searchText);
+				currentPage = 1; // Reset current page when searching
+				blogData = filteredData;
+				displayBlogList();
+			}).focus();
+
 		});
 
 		// Function to display blog list for the current page
@@ -193,15 +223,14 @@
 
 			// Generate HTML for the current page
 			currentBlogData.forEach(blog => {
-				if (blog.BlogHeadline != "")
-				{
+				if (blog.BlogHeadline != "") {
 					const blogHtml = `
 				<div class="item mb-5">
 					<div class="media">
 						<img class="blogimg mr-3 img-fluid post-thumb d-none d-md-flex"
 							src="${blog.IconImagePath}" alt="image">
 						<div class="media-body">
-							<h3 class="title mb-1"><a href="${blog.BlogUrl}">${blog.BlogHeadline}</a>
+							<h3 class="title mb-1"><a href="${blog.BlogUrl}" style="color: #3B7EEB">${blog.BlogHeadline}</a>
 							</h3>
 							<div class="meta mb-1"><span class="date">Published on ${blog.BlogDate}</span><span class="time">${blog.ReadTime} read</span><span class="comment"><a href="#"></a></span></div>
 							<div class="intro">${blog.BlogDescription}</div>
@@ -210,7 +239,7 @@
 					</div>
 				</div>
 				`;
-				$('#blogList').append(blogHtml);
+					$('#blogList').append(blogHtml);
 				}
 			});
 
@@ -219,6 +248,14 @@
 			$('#nextBtn').prop('disabled', endIndex >= blogData.length);
 		}
 
+		// Function to filter blog data based on search input
+		function filterBlogData(searchText) {
+			return blogData.filter(blog => {
+				const headlineMatch = blog.BlogHeadline.toLowerCase().includes(searchText.toLowerCase());
+				const descriptionMatch = blog.BlogDescription.toLowerCase().includes(searchText.toLowerCase());
+				return headlineMatch || descriptionMatch;
+			});
+		}
 	</script>
 
 
