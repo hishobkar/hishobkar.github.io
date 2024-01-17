@@ -84,101 +84,67 @@
 
     <div class="main-wrapper">
         <div class="container">
-            <div style="font-size: 25px !important;" _ngcontent-ng-c4236456555=""
-                class="response-content ng-trigger ng-trigger-responsePopulation ng-tns-c2975221420-17 ng-animate-disabled"
-                style=""><!----><message-content _ngcontent-ng-c4236456555=""
-                    class="model-response-text ng-tns-c4236456555-16 ng-star-inserted" _nghost-ng-c3652678316=""
-                    id="message-content-id-r_29aec8b8da75f222" style="height: auto;">
-                    <div _ngcontent-ng-c3652678316="" class="markdown markdown-main-panel" dir="ltr"
-                        style="--animation-duration: 600ms;">
-                        <br>
-                        <br>
-                        <h2 data-sourcepos="1:1-1:169"><strong>A guide on hosting a PHP website using XAMPP on a Windows server and making it
-                                accessible on the www</strong></h2>
-
-                        <br>
-                        <img class="img-fluid" src="header.jpg" />
-                        <br>
-                            <br>
-                        <p data-sourcepos="3:1-3:39"><strong>1. Install XAMPP on Windows Server:</strong></p>
-                        <ul data-sourcepos="4:1-8:0">
-                            <li data-sourcepos="4:1-4:121">Download the XAMPP installer from <a class="traceable-link"
-                                    target="_blank" rel="noopener noreferrer"
+            <div style=""><!----><message-content style="">
+                    <div style=""> <br> <br>
+                        <h2><strong>A guide on hosting a PHP website using XAMPP on a Windows server and making it
+                                accessible on the www</strong></h2> <br> <img src="header.jpg" class="img-fluid"> <br> <br>
+                        <p><strong>1. Install XAMPP on Windows Server:</strong></p>
+                        <ul>
+                            <li>Download the XAMPP installer from <a
                                     href="https://www.apachefriends.org/index.html">https://www.apachefriends.org/index.html</a>.
                             </li>
-                            <li data-sourcepos="5:1-5:58">Run the installer and follow the on-screen instructions.</li>
-                            <li data-sourcepos="6:1-6:54">Choose the components you need (Apache, MySQL, PHP).</li>
-                            <li data-sourcepos="7:1-8:0">Install XAMPP in a directory with write permissions (e.g.,
-                                C:\xampp).</li>
+                            <li>Run the installer and follow the on-screen instructions.</li>
+                            <li>Choose the components you need (Apache, MySQL, PHP).</li>
+                            <li>Install XAMPP in a directory with write permissions (e.g., C:\xampp).</li>
                         </ul>
-                        <p data-sourcepos="9:1-9:28"><strong>2. Start XAMPP Services:</strong></p>
-                        <ul data-sourcepos="10:1-12:0">
-                            <li data-sourcepos="10:1-10:31">Open the XAMPP Control Panel.</li>
-                            <li data-sourcepos="11:1-12:0">Start the Apache and MySQL services.</li>
+                        <p><strong>2. Start XAMPP Services:</strong></p>
+                        <ul>
+                            <li>Open the XAMPP Control Panel.</li>
+                            <li>Start the Apache and MySQL services.</li>
                         </ul>
-                        <p data-sourcepos="13:1-13:27"><strong>3. Place Website Files:</strong></p>
-                        <ul data-sourcepos="14:1-15:0">
-                            <li data-sourcepos="14:1-15:0">Copy your website files into the <code>htdocs</code>
-                                directory
-                                within your XAMPP installation (e.g., C:\xampp\htdocs).</li>
+                        <p><strong>3. Place Website Files:</strong></p>
+                        <ul>
+                            <li>Copy your website files into the <code>htdocs</code> directory within your XAMPP
+                                installation (e.g., C:\xampp\htdocs).</li>
                         </ul>
-                        <p data-sourcepos="16:1-16:41"><strong>4. Configure Virtual Host (Optional):</strong></p>
-                        <ul data-sourcepos="17:1-27:0">
-                            <li data-sourcepos="17:1-27:0">
-                                <p data-sourcepos="17:3-17:70">If you want to use a domain name instead of the server's
-                                    IP
-                                    address:</p>
-                                <ul data-sourcepos="18:5-20:0">
-                                    <li data-sourcepos="18:5-18:103">Open the <code>httpd-vhosts.conf</code> file in a
-                                        text
-                                        editor (usually found in C:\xampp\apache\conf\extra).</li>
-                                    <li data-sourcepos="19:5-20:0">Add a virtual host entry like this:</li>
-                                </ul>
-                                <code-block _nghost-ng-c4007627397="" ng-version="0.0.0-PLACEHOLDER"><!---->
-                                    <div _ngcontent-ng-c4007627397="" class="code-block ng-star-inserted"><!---->
-                                        <pre _ngcontent-ng-c4007627397=""><code _ngcontent-ng-c4007627397="" role="text" class="code-container no-decoration-radius">&lt;VirtualHost *:80&gt;
-                DocumentRoot "C:/xampp/htdocs/your-website-folder"
-                ServerName your-domain-name.com
-            &lt;/VirtualHost&gt;
-            </code></pre><!---->
+                        <p><strong>4. Configure Virtual Host (Optional):</strong></p>
+                        <ul>
+                            <li>
+                                <p>If you want to use a domain name instead of the server's IP address:</p>
+                                <ul>
+                                    <li>Open the <code>httpd-vhosts.conf</code> file in a text editor (usually found in
+                                        C:\xampp\apache\conf\extra).</li>
+                                    <li>Add a virtual host entry like this:</li>
+                                </ul> <code-block><!---->
+                                    <div><!---->
+                                        <pre><code _ngcontent-ng-c4007627397="" role="text" class="code-container no-decoration-radius"><virtualhost *:80=""> DocumentRoot "C:/xampp/htdocs/your-website-folder" ServerName your-domain-name.com </virtualhost> </code></pre>
+                                        <!---->
                                     </div><!---->
                                 </code-block>
                             </li>
                         </ul>
-                        <p data-sourcepos="28:1-28:55"><strong>5. Port Forwarding (Essential for External
-                                Access):</strong>
-                        </p>
-                        <ul data-sourcepos="29:1-32:0">
-                            <li data-sourcepos="29:1-29:43">Access your router's configuration panel.</li>
-                            <li data-sourcepos="30:1-30:32">Find port forwarding settings.</li>
-                            <li data-sourcepos="31:1-32:0">Create a rule to forward port 80 (HTTP) to the server's
-                                internal
-                                IP address.</li>
+                        <p><strong>5. Port Forwarding (Essential for External Access):</strong> </p>
+                        <ul>
+                            <li>Access your router's configuration panel.</li>
+                            <li>Find port forwarding settings.</li>
+                            <li>Create a rule to forward port 80 (HTTP) to the server's internal IP address.</li>
                         </ul>
-                        <p data-sourcepos="33:1-33:28"><strong>6. Test Website Locally:</strong></p>
-                        <ul data-sourcepos="34:1-36:0">
-                            <li data-sourcepos="34:1-34:63">Open a web browser on the server or a local network
-                                computer.
-                            </li>
-                            <li data-sourcepos="35:1-36:0">Access your website using either
-                                <code>http://localhost</code> or
-                                <code>http://server-ip-address</code>.
-                            </li>
+                        <p><strong>6. Test Website Locally:</strong></p>
+                        <ul>
+                            <li>Open a web browser on the server or a local network computer. </li>
+                            <li>Access your website using either <code>http://localhost</code> or
+                                <code>http://server-ip-address</code>. </li>
                         </ul>
-                        <p data-sourcepos="37:1-37:42"><strong>7. Access Website from Anywhere (www):</strong></p>
-                        <ul data-sourcepos="38:1-39:0">
-                            <li data-sourcepos="38:1-39:0">Use your domain name (if configured) or the server's public
-                                IP
-                                address to access the website from any device connected to the internet.</li>
+                        <p><strong>7. Access Website from Anywhere (www):</strong></p>
+                        <ul>
+                            <li>Use your domain name (if configured) or the server's public IP address to access the
+                                website from any device connected to the internet.</li>
                         </ul>
                     </div>
                 </message-content><!----><!---->
-                <div _ngcontent-ng-c4236456555="" class="response-footer ng-tns-c4236456555-16 complete gap">
-                    <!----><!----><sources-list _ngcontent-ng-c4236456555=""
-                        class="sources-list ng-tns-c4236456555-16 ng-star-inserted" _nghost-ng-c493169085="" style="">
-                        <div _ngcontent-ng-c493169085="" class="sources-list-container"><!----></div><!----><!---->
-                    </sources-list>
-                </div>
+                <div> <!----><!----><sources-list style="">
+                        <div><!----></div><!----><!---->
+                    </sources-list> </div>
             </div>
         </div>
     </div>
