@@ -128,7 +128,7 @@
                     
                     <span class="hljs-comment">// Retrieve user input</span>
                     <span class="hljs-variable">$username</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">'username'</span>];
-                    <span class="hljs-variable">$password</span> = <span class="hljs-title function_ invoke__">md5</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">'password'</span>]); <span class="hljs-comment">// Use a more secure hashing algorithm in production</span>
+                    <span class="hljs-variable">$password</span> = <span class="hljs-title function_ invoke__">md5</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">'password'</span>]); <span class="hljs-comment"></span>
                     
                     <span class="hljs-comment">// Check user credentials</span>
                     <span class="hljs-variable">$sql</span> = <span class="hljs-string">"SELECT * FROM users WHERE username='<span class="hljs-subst">$username</span>' AND password='<span class="hljs-subst">$password</span>'"</span>;
