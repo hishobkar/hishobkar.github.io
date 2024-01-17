@@ -18,6 +18,10 @@
     <link id="theme-style" rel="stylesheet" href="../assets/css/theme-3.css">
 
     <script src="../../js/qrcode.min.js"></script>
+    
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="./assets/css/monokai-sublime.min.css">
+
 </head>
 
 <body data-spy="scroll" data-target=".navbar-collapse">
@@ -81,85 +85,72 @@
         </nav>
     </header>
 
-
     <div class="main-wrapper">
         <div class="container" style="font-size: 25px;">
-            <div _ngcontent-ng-c3652678316="" class="markdown markdown-main-panel" dir="ltr" style="--animation-duration: 600ms;"><p data-sourcepos="1:2-1:142"><strong>Here are the steps to create a login form with MD5 encryption and MySQL database authentication in PHP, incorporating images for clarity:</strong></p>
-                
-                <br>
-                <img class="img-fluid" src="header.jpg">
-                <br>
-                    <br>
-                <span>
-            </span><p data-sourcepos="3:1-3:11"><strong>1. Create the Login Form:</strong></p><span>
-            </span><ul data-sourcepos="5:1-6:0"><span>
-            </span><li data-sourcepos="5:1-6:0"><strong>HTML file (index.php):</strong></li><span>
-            </span></ul><span>
-            </span><code-block _nghost-ng-c4007627397="" ng-version="0.0.0-PLACEHOLDER" class=""><!----><div _ngcontent-ng-c4007627397="" class="code-block ng-star-inserted"><div _ngcontent-ng-c4007627397="" class="code-block-decoration header gmat-subhead-2 ng-star-inserted"><span _ngcontent-ng-c4007627397="">HTML</span></div><!----><pre _ngcontent-ng-c4007627397=""><code _ngcontent-ng-c4007627397="" role="text" class="code-container"><span class="hljs-tag">&lt;<span class="hljs-name"><span class="citation-0">form</span></span><div class="dynamic-carousel-wrapper"><span class="citation-0"> </span></div><span class="hljs-attr"><span class="citation-0">action</span></span><span class="citation-0">=</span><span class="hljs-string"><span class="citation-0">"login.php"</span></span><div class="dynamic-carousel-wrapper"><span class="citation-0"> </span></div><span class="hljs-attr"><span class="citation-0">method</span></span><span class="citation-0">=</span><span class="hljs-string"><span class="citation-0">"post"</span></span><span class="citation-0">&gt;</span></span><div class="dynamic-carousel-wrapper"><span class="citation-0">
-                </span></div><span class="hljs-tag"><span class="citation-0">&lt;</span><span class="hljs-name"><span class="citation-0">label</span></span><div class="dynamic-carousel-wrapper"><span class="citation-0"> </span></div><span class="hljs-attr"><span class="citation-0">for</span></span><span class="citation-0">=</span><span class="hljs-string"><span class="citation-0">"username"</span></span><span class="citation-0">&gt;</span></span><span class="citation-0">Username:</span><span class="hljs-tag"><span class="citation-0">&lt;/</span><span class="hljs-name"><span class="citation-0">label</span></span><span class="citation-0">&gt;</span></span><div class="dynamic-carousel-wrapper"><span class="citation-0">
-                </span></div><span class="hljs-tag"><span class="citation-0">&lt;</span><span class="hljs-name"><span class="citation-0">input</span></span><div class="dynamic-carousel-wrapper"><span class="citation-0"> </span></div><span class="hljs-attr"><span class="citation-0">type</span></span><span class="citation-0">=</span><span class="hljs-string"><span class="citation-0">"text"</span></span><div class="dynamic-carousel-wrapper"><span class="citation-0"> </span></div><span class="hljs-attr"><span class="citation-0">id</span></span><span class="citation-0">=</span><span class="hljs-string"><span class="citation-0">"username"</span></span><div class="dynamic-carousel-wrapper"><span class="citation-0"> </span></div><span class="hljs-attr"><span class="citation-0">name</span></span><span class="citation-0">=</span><span class="hljs-string"><span class="citation-0">"username"</span></span><span class="citation-0">&gt;</span></span><span class="hljs-tag"><span class="citation-0">&lt;</span><span class="hljs-name"><span class="citation-0">br</span></span><span class="citation-0">&gt;</span></span><span class="hljs-tag"><span class="citation-0">&lt;</span><span class="hljs-name"><span class="citation-0"></span><span class="citation-0 citation-1">br</span></span><span class="citation-0 citation-1">&gt;</span></span><div class="dynamic-carousel-wrapper"><span class="citation-0 citation-1">
-                </span></div><span class="hljs-tag"><span class="citation-0 citation-1">&lt;</span><span class="hljs-name"><span class="citation-0 citation-1">label</span></span><div class="dynamic-carousel-wrapper"><span class="citation-0 citation-1"> </span></div><span class="hljs-attr"><span class="citation-0 citation-1">for</span></span><span class="citation-0 citation-1">=</span><span class="hljs-string"><span class="citation-0 citation-1">"password"</span></span><span class="citation-0 citation-1">&gt;</span></span><span class="citation-0 citation-1">Password:</span><span class="hljs-tag"><span class="citation-0 citation-1">&lt;/</span><span class="hljs-name"><span class="citation-0 citation-1">label</span></span><span class="citation-0 citation-1">&gt;</span></span><span class="citation-0 citation-1 citation-end-0"></span><div class="dynamic-carousel-wrapper"><span class="citation-1">
-                </span></div><span class="hljs-tag"><span class="citation-1">&lt;</span><span class="hljs-name"><span class="citation-1">input</span></span><div class="dynamic-carousel-wrapper"><span class="citation-1"> </span></div><span class="hljs-attr"><span class="citation-1">type</span></span><span class="citation-1">=</span><span class="hljs-string"><span class="citation-1">"password"</span></span><div class="dynamic-carousel-wrapper"><span class="citation-1"> </span></div><span class="hljs-attr"><span class="citation-1">id</span></span><span class="citation-1">=</span><span class="hljs-string"><span class="citation-1">"password"</span></span><div class="dynamic-carousel-wrapper"><span class="citation-1"> </span></div><span class="hljs-attr"><span class="citation-1">name</span></span><span class="citation-1">=</span><span class="hljs-string"><span class="citation-1">"password"</span></span><span class="citation-1">&gt;</span></span><span class="hljs-tag"><span class="citation-1">&lt;</span><span class="hljs-name"><span class="citation-1">br</span></span><span class="citation-1">&gt;</span></span><span class="hljs-tag"><span class="citation-1">&lt;</span><span class="hljs-name"><span class="citation-1">br</span></span><span class="citation-1">&gt;</span></span><div class="dynamic-carousel-wrapper"><span class="citation-1">
-                </span></div><span class="hljs-tag"><span class="citation-1">&lt;</span><span class="hljs-name"><span class="citation-1">input</span></span><div class="dynamic-carousel-wrapper"><span class="citation-1"> </span></div><span class="hljs-attr"><span class="citation-1">type</span></span><span class="citation-1">=</span><span class="hljs-string"><span class="citation-1">"submit"</span></span><div class="dynamic-carousel-wrapper"><span class="citation-1"> </span></div><span class="hljs-attr"><span class="citation-1">value</span></span><span class="citation-1">=</span><span class="hljs-string"><span class="citation-1">"Login"</span></span><span class="citation-1">&gt;</span></span><div class="dynamic-carousel-wrapper"><span class="citation-1">
-            </span></div><span class="hljs-tag"><span class="citation-1">&lt;/</span><span class="hljs-name"><span class="citation-1">form</span></span><span class="citation-1">&gt;</span></span><span class="citation-1 citation-end-1"></span>
-            </code></pre><div _ngcontent-ng-c4007627397="" hide-from-message-actions="" class="code-block-decoration footer gmat-overline hide-from-message-actions ng-star-inserted"><div _ngcontent-ng-c4007627397=""> Use code with caution. <a _ngcontent-ng-c4007627397="" href="/faq#coding" target="_blank" rel="noopener noreferrer" aria-label="Learn more (opens in a new window)" class="disclaimer-suffix">Learn more</a></div><!----></div><!----></div><!----></code-block><span>
-            </span><p data-sourcepos="17:1-17:30"></p><div class="dynamic-carousel-wrapper"><span><div class="attachment-container search-images"><single-image _nghost-ng-c838412465="" ng-version="0.0.0-PLACEHOLDER"><div _ngcontent-ng-c838412465="" hide-from-message-actions="" class="image-container hide-from-message-actions ng-star-inserted"><!----><!----></div><!----><!----><!----><!----><!----><!----><!----><!----><!----></single-image></div></span></div><p></p><span>
-            </span><p data-sourcepos="19:1-19:37"><strong>2. Connect to the MySQL Database:</strong></p><span>
-            </span><ul data-sourcepos="21:1-22:0"><span>
-            </span><li data-sourcepos="21:1-22:0"><strong>login.php file:</strong></li><span>
-            </span></ul><span>
-            </span><code-block _nghost-ng-c4007627397="" ng-version="0.0.0-PLACEHOLDER" class=""><!----><div _ngcontent-ng-c4007627397="" class="code-block ng-star-inserted"><div _ngcontent-ng-c4007627397="" class="code-block-decoration header gmat-subhead-2 ng-star-inserted"></div><!----><pre _ngcontent-ng-c4007627397=""><code _ngcontent-ng-c4007627397="" role="text" class="code-container"><span class="hljs-meta">&lt;?php</span>
-            <span class="hljs-variable">$<span class="citation-2">servername</span></span><span class="citation-2"> = </span><span class="hljs-string"><span class="citation-2">"localhost"</span></span><span class="citation-2">;
-            </span><span class="hljs-variable"><span class="citation-2">$username</span></span><span class="citation-2"> = </span><span class="hljs-string"><span class="citation-2">"your_username"</span></span><span class="citation-2">;
-            </span><span class="hljs-variable"><span class="citation-2">$password</span></span><span class="citation-2"> = </span><span class="hljs-string"><span class="citation-2">"your_password"</span></span><span class="citation-2">;
-            </span><span class="hljs-variable"><span class="citation-2">$dbname</span></span><span class="citation-2"> = </span><span class="hljs-string"><span class="citation-2">"your_database"</span></span><span class="citation-2">;
             
-            </span><span class="hljs-variable"><span class="citation-2">$</span><span class="citation-2 citation-3">conn</span></span><span class="citation-2 citation-3"> = </span><span class="hljs-keyword"><span class="citation-2 citation-3">new</span></span><span class="citation-2 citation-3"> mysqli(</span><span class="hljs-variable"><span class="citation-2 citation-3">$servername</span></span><span class="citation-2 citation-3">, </span><span class="hljs-variable"><span class="citation-2 citation-3">$username</span></span><span class="citation-2 citation-3">, </span><span class="hljs-variable"><span class="citation-2 citation-3">$password</span></span><span class="citation-2 citation-3 citation-end-2">,</span><div class="dynamic-carousel-wrapper"><span class="citation-3"> </span></div><span class="hljs-variable"><span class="citation-3">$dbname</span></span><span class="citation-3">);
-            
-            </span><span class="hljs-comment"><span class="citation-3">// Check connection</span></span><div class="dynamic-carousel-wrapper"><span class="citation-3">
-            </span></div><span class="hljs-keyword"><span class="citation-3">if</span></span><span class="citation-3"> (</span><span class="hljs-variable"><span class="citation-3">$conn</span></span><span class="citation-3">-&gt;connect_error) {
-                </span><span class="hljs-keyword"><span class="citation-3">die</span></span><span class="citation-3">(</span><span class="hljs-string"><span class="citation-3">"Connection failed: "</span></span><span class="citation-3"> . </span><span class="hljs-variable"><span class="citation-3">$conn</span></span><span class="citation-3 citation-end-3">-&gt;connect_error);</span>
-            }
-            <span class="hljs-meta">?&gt;</span>
-            </code></pre><div _ngcontent-ng-c4007627397="" hide-from-message-actions="" class="code-block-decoration footer gmat-overline hide-from-message-actions ng-star-inserted"><div _ngcontent-ng-c4007627397=""> Use code with caution. <a _ngcontent-ng-c4007627397="" href="/faq#coding" target="_blank" rel="noopener noreferrer" aria-label="Learn more (opens in a new window)" class="disclaimer-suffix">Learn more</a></div><!----></div><!----></div><!----></code-block><span>
-            </span><p data-sourcepos="39:1-39:48"><strong>3. Retrieve User Input and Encrypt Password:</strong></p><span>
-            </span><code-block _nghost-ng-c4007627397="" ng-version="0.0.0-PLACEHOLDER" class=""><!----><div _ngcontent-ng-c4007627397="" class="code-block ng-star-inserted"><div _ngcontent-ng-c4007627397="" class="code-block-decoration header gmat-subhead-2 ng-star-inserted"></div><!----><pre _ngcontent-ng-c4007627397=""><code _ngcontent-ng-c4007627397="" role="text" class="code-container"><span class="hljs-comment">// Retrieve username and password from the form</span>
-            <span class="hljs-variable">$username</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">'username'</span>];
-            <span class="hljs-variable">$password</span> = md5(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">'password'</span>]);  <span class="hljs-comment">// Encrypt password using MD5</span>
-            </code></pre><div _ngcontent-ng-c4007627397="" hide-from-message-actions="" class="code-block-decoration footer gmat-overline hide-from-message-actions ng-star-inserted"><div _ngcontent-ng-c4007627397=""> Use code with caution. <a _ngcontent-ng-c4007627397="" href="/faq#coding" target="_blank" rel="noopener noreferrer" aria-label="Learn more (opens in a new window)" class="disclaimer-suffix">Learn more</a></div><!----></div><!----></div><!----></code-block><span>
-            </span><p data-sourcepos="47:1-47:26"><strong>4. Query the Database:</strong></p><span>
-            </span><code-block _nghost-ng-c4007627397="" ng-version="0.0.0-PLACEHOLDER" class=""><!----><div _ngcontent-ng-c4007627397="" class="code-block ng-star-inserted"><div _ngcontent-ng-c4007627397="" class="code-block-decoration header gmat-subhead-2 ng-star-inserted"></div><!----><pre _ngcontent-ng-c4007627397=""><code _ngcontent-ng-c4007627397="" role="text" class="code-container"><span class="hljs-variable">$sql</span> = <span class="hljs-string">"SELECT * FROM users WHERE username='<span class="hljs-subst">$username</span>' AND password='<span class="hljs-subst">$password</span>'"</span>;
-            <span class="hljs-variable">$result</span> = <span class="hljs-variable">$conn</span>-&gt;query(<span class="hljs-variable">$sql</span>);
-            </code></pre><div _ngcontent-ng-c4007627397="" hide-from-message-actions="" class="code-block-decoration footer gmat-overline hide-from-message-actions ng-star-inserted"><div _ngcontent-ng-c4007627397=""> Use code with caution. <a _ngcontent-ng-c4007627397="" href="/faq#coding" target="_blank" rel="noopener noreferrer" aria-label="Learn more (opens in a new window)" class="disclaimer-suffix">Learn more</a></div><!----></div><!----></div><!----></code-block><span>
-            </span><p data-sourcepos="54:1-54:25"><strong>5. Authenticate User:</strong></p><span>
-            </span><code-block _nghost-ng-c4007627397="" ng-version="0.0.0-PLACEHOLDER" class=""><!----><div _ngcontent-ng-c4007627397="" class="code-block ng-star-inserted"><div _ngcontent-ng-c4007627397="" class="code-block-decoration header gmat-subhead-2 ng-star-inserted"></div><!----><pre _ngcontent-ng-c4007627397=""><code _ngcontent-ng-c4007627397="" role="text" class="code-container"><span class="hljs-keyword">if</span> (<span class="hljs-variable">$result</span>-&gt;num_rows &gt; <span class="hljs-number">0</span>) {
-                <span class="hljs-comment">// User found, start session and redirect to protected page</span>
-                session_start();
-                <span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">'username'</span>] = <span class="hljs-variable">$username</span>;
-                header(<span class="hljs-string">"Location: protected_page.php"</span>);
-            } <span class="hljs-keyword">else</span> {
-                <span class="hljs-comment">// User not found, display error message</span>
-                <span class="hljs-keyword">echo</span> <span class="hljs-string">"Invalid username or password"</span>;
-            }
-            </code></pre><div _ngcontent-ng-c4007627397="" hide-from-message-actions="" class="code-block-decoration footer gmat-overline hide-from-message-actions ng-star-inserted"><div _ngcontent-ng-c4007627397=""> Use code with caution. <a _ngcontent-ng-c4007627397="" href="/faq#coding" target="_blank" rel="noopener noreferrer" aria-label="Learn more (opens in a new window)" class="disclaimer-suffix">Learn more</a></div><!----></div><!----></div><!----></code-block><span>
-            </span><p data-sourcepos="68:1-68:33"><strong>6. Close Database Connection:</strong></p><span>
-            </span><code-block _nghost-ng-c4007627397="" ng-version="0.0.0-PLACEHOLDER" class=""><!----><div _ngcontent-ng-c4007627397="" class="code-block ng-star-inserted"><div _ngcontent-ng-c4007627397="" class="code-block-decoration header gmat-subhead-2 ng-star-inserted"></div><!----><pre _ngcontent-ng-c4007627397=""><code _ngcontent-ng-c4007627397="" role="text" class="code-container"><span class="hljs-variable">$conn</span>-&gt;close();
-            </code></pre><div _ngcontent-ng-c4007627397="" hide-from-message-actions="" class="code-block-decoration footer gmat-overline hide-from-message-actions ng-star-inserted"><div _ngcontent-ng-c4007627397=""> Use code with caution. <a _ngcontent-ng-c4007627397="" href="/faq#coding" target="_blank" rel="noopener noreferrer" aria-label="Learn more (opens in a new window)" class="disclaimer-suffix">Learn more</a></div><!----></div><!----></div><!----></code-block><span>
-            </span><p data-sourcepos="74:1-74:4"><strong>7. Create the Protected Page:</strong></p><span>
-            </span><ul data-sourcepos="76:1-77:0"><span>
-            </span><li data-sourcepos="76:1-77:0"><strong>protected_page.php file:</strong></li><span>
-            </span></ul><span>
-            </span><code-block _nghost-ng-c4007627397="" ng-version="0.0.0-PLACEHOLDER" class=""><!----><div _ngcontent-ng-c4007627397="" class="code-block ng-star-inserted"><div _ngcontent-ng-c4007627397="" class="code-block-decoration header gmat-subhead-2 ng-star-inserted"></div><!----><pre _ngcontent-ng-c4007627397=""><code _ngcontent-ng-c4007627397="" role="text" class="code-container"><span class="hljs-meta">&lt;?php</span>
-            session_start();
-            <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">'username'</span>])) {
-                header(<span class="hljs-string">"Location: index.php"</span>);  <span class="hljs-comment">// Redirect to login if not logged in</span>
-            } <span class="hljs-keyword">else</span> {
-                <span class="hljs-keyword">echo</span> <span class="hljs-string">"Welcome, "</span> . <span class="hljs-variable">$_SESSION</span>[<span class="hljs-string">'username'</span>] . <span class="hljs-string">"!"</span>;
-            }
-            <span class="hljs-meta">?&gt;</span>
-            </code></pre><div _ngcontent-ng-c4007627397="" hide-from-message-actions="" class="code-block-decoration footer gmat-overline hide-from-message-actions ng-star-inserted"><div _ngcontent-ng-c4007627397=""> Use code with caution. <a _ngcontent-ng-c4007627397="" href="/faq#coding" target="_blank" rel="noopener noreferrer" aria-label="Learn more (opens in a new window)" class="disclaimer-suffix">Learn more</a></div><!----></div><!----></div><!----></code-block><span>
-            </span><span>
-            </span></div>
+            <h2>Here are the steps to create a login form with MD5 encryption and MySQL database authentication in PHP, incorporating images for clarity:</h2>
+            <br><br>
+            <img class="img-fluid" src="header.jpg">
+            <br><br>
+            <div>
+                <div data-message-author-role="assistant" data-message-id="8e1f888c-b296-4835-a324-f37bdb1b7b88" class="min-h-[20px] text-message flex flex-col items-start gap-3 whitespace-pre-wrap break-words [.text-message+&amp;]:mt-5 overflow-x-auto"><div class="markdown prose w-full break-words dark:prose-invert light"><p>Here's a simple example of how you can create a username and password login form, encrypt the password using the MD5 function in PHP, and store the credentials in a MySQL database. Please note that MD5 is considered outdated for password hashing, and you should use more secure algorithms like bcrypt or Argon2. However, for educational purposes, I'll demonstrate using MD5.</p><ol><li><strong>HTML Form (login_form.php):</strong></li></ol><pre><div class="bg-black rounded-md"><div class="p-4 overflow-y-auto"><code class="!whitespace-pre hljs language-html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1.0"</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Login Form<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Login Form<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">"login_process.php"</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"post"</span>&gt;</span>
+                            <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"username"</span>&gt;</span>Username:<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+                            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"username"</span> <span class="hljs-attr">required</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span>
+                    
+                            <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"password"</span>&gt;</span>Password:<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+                            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"password"</span> <span class="hljs-attr">required</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span>
+                    
+                            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Login"</span>&gt;</span>
+                        <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+                    </code></div></div></pre><ol start="2"><li><strong>PHP Process (login_process.php):</strong></li></ol><pre><div class="bg-black rounded-md"><div class="p-4 overflow-y-auto"><code class="!whitespace-pre hljs language-php"><span class="hljs-meta">&lt;?php</span>
+                    <span class="hljs-comment">// Establish database connection (replace placeholders)</span>
+                    <span class="hljs-variable">$host</span> = <span class="hljs-string">"your_host"</span>;
+                    <span class="hljs-variable">$username</span> = <span class="hljs-string">"your_username"</span>;
+                    <span class="hljs-variable">$password</span> = <span class="hljs-string">"your_password"</span>;
+                    <span class="hljs-variable">$database</span> = <span class="hljs-string">"your_database"</span>;
+                    
+                    <span class="hljs-variable">$conn</span> = <span class="hljs-keyword">new</span> <span class="hljs-title function_ invoke__">mysqli</span>(<span class="hljs-variable">$host</span>, <span class="hljs-variable">$username</span>, <span class="hljs-variable">$password</span>, <span class="hljs-variable">$database</span>);
+                    
+                    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$conn</span>-&gt;connect_error) {
+                        <span class="hljs-keyword">die</span>(<span class="hljs-string">"Connection failed: "</span> . <span class="hljs-variable">$conn</span>-&gt;connect_error);
+                    }
+                    
+                    <span class="hljs-comment">// Retrieve user input</span>
+                    <span class="hljs-variable">$username</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">'username'</span>];
+                    <span class="hljs-variable">$password</span> = <span class="hljs-title function_ invoke__">md5</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">'password'</span>]); <span class="hljs-comment">// Use a more secure hashing algorithm in production</span>
+                    
+                    <span class="hljs-comment">// Check user credentials</span>
+                    <span class="hljs-variable">$sql</span> = <span class="hljs-string">"SELECT * FROM users WHERE username='<span class="hljs-subst">$username</span>' AND password='<span class="hljs-subst">$password</span>'"</span>;
+                    <span class="hljs-variable">$result</span> = <span class="hljs-variable">$conn</span>-&gt;<span class="hljs-title function_ invoke__">query</span>(<span class="hljs-variable">$sql</span>);
+                    
+                    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$result</span>-&gt;num_rows &gt; <span class="hljs-number">0</span>) {
+                        <span class="hljs-comment">// Authentication successful</span>
+                        <span class="hljs-keyword">echo</span> <span class="hljs-string">"Login successful!"</span>;
+                    } <span class="hljs-keyword">else</span> {
+                        <span class="hljs-comment">// Authentication failed</span>
+                        <span class="hljs-keyword">echo</span> <span class="hljs-string">"Login failed. Please check your username and password."</span>;
+                    }
+                    
+                    <span class="hljs-variable">$conn</span>-&gt;<span class="hljs-title function_ invoke__">close</span>();
+                    <span class="hljs-meta">?&gt;</span>
+                    </code></div></div></pre><ol start="3"><li><strong>MySQL Database (users table):</strong></li></ol><pre><div class="bg-black rounded-md"><div class="p-4 overflow-y-auto"><code class="!whitespace-pre hljs language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> users (
+                        id <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY</span> KEY AUTO_INCREMENT,
+                        username <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+                        password <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">32</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>
+                    );
+                    </code></div></div></pre></div></div>
+            </div>
         </div>
     </div>
 
