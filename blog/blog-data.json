@@ -1,0 +1,155 @@
+[
+    {
+      "BlogID": 1,
+      "BlogDate": "2024-01-01",
+      "BlogHeadline": "What is DevOps",
+      "IconImagePath": "./what-is-devops/index.png",
+      "BlogDescription": "Empowering Development and Operations: Navigating the World of DevOps.",
+      "ReadTime":"80", "BlogUrl": "./what-is-devops/index.html"
+    },
+    {
+      "BlogID": 2,
+      "BlogDate": "2024-01-05",
+      "BlogHeadline": "Introducing the new IHostedLifecycleService Interface in .NET 8",
+      "IconImagePath": "../articles/DotNetCore/introducing-the-new-ihostedlifecycleservice-interface-in-dotnet-8/index.jpg",
+      "BlogDescription": "Revolutionizing Application Lifecycle: Unveiling the IHostedLifecycleService Interface in .NET 8.",
+      "ReadTime":"80", "BlogUrl": "../articles/DotNetCore/introducing-the-new-ihostedlifecycleservice-interface-in-dotnet-8/index.html"
+    },
+    {
+      "BlogID": 3,
+      "BlogDate": "2024-01-10",
+      "BlogHeadline": "How to use SQL",
+      "IconImagePath": "./data-analytics/01_how-to-use-sql.jpg",
+      "BlogDescription": "Unlock the Power of SQL: A Beginner's Guide to Database Mastery",
+      "ReadTime":"80", "BlogUrl": "./data-analytics/01_how-to-use-sql.html"
+    },
+    {
+      "BlogID": 4,
+      "BlogDate": "2024-01-10",
+      "BlogHeadline": "Advanced SQL",
+      "IconImagePath": "./data-analytics/02_advanced-sql.jpg",
+      "BlogDescription": "Mastering Advanced SQL: Elevate Your Database Skills to the Next Level.",
+      "ReadTime":"80", "BlogUrl": "./data-analytics/02_advanced-sql.html"
+    },
+    {
+      "BlogID": 5,
+      "BlogDate": "2024-01-10",
+      "BlogHeadline": "Concurrent Hosted Service Start and Stop in .NET 8",
+      "IconImagePath": "../articles/DotNetCore/concurrent-hosted-service-start-and-stop-in-dotnet-8/index.jpg",
+      "BlogDescription": "Seamless Concurrent Operations: Exploring Hosted Service Start and Stop in .NET 8.",
+      "ReadTime":"80", "BlogUrl": "../articles/DotNetCore/concurrent-hosted-service-start-and-stop-in-dotnet-8/index.html"
+    },
+    {
+      "BlogID": 6,
+      "BlogDate": "2024-01-10",
+      "BlogHeadline": "Accessing State in&nbsp;System.Text.Json&nbsp;Custom Converters",
+      "IconImagePath": "../articles/DotNetCore/accessing-state-in-system-text-json-custom-converters/index.jpg",
+      "BlogDescription": "Demystifying System.Text.Json: Unraveling State Access in Custom Converters.",
+      "ReadTime":"80", "BlogUrl": "../articles/DotNetCore/accessing-state-in-system-text-json-custom-converters/index.html"
+    },
+    {
+      "BlogID": 7,
+      "BlogDate": "2024-01-10",
+      "BlogHeadline": "",
+      "IconImagePath": "",
+      "BlogDescription": "",
+      "ReadTime":"80", "BlogUrl": ""
+    },
+    {
+      "BlogID": 8,
+      "BlogDate": "2024-01-10",
+      "BlogHeadline": "",
+      "IconImagePath": "",
+      "BlogDescription": "",
+      "ReadTime":"80", "BlogUrl": ""
+    },
+    {
+      "BlogID": 9,
+      "BlogDate": "2024-01-10",
+      "BlogHeadline": "",
+      "IconImagePath": "",
+      "BlogDescription": "",
+      "ReadTime":"80", "BlogUrl": ""
+    },
+    {
+      "BlogID": 10,
+      "BlogDate": "2024-01-10",
+      "BlogHeadline": "",
+      "IconImagePath": "",
+      "BlogDescription": "",
+      "ReadTime":"80", "BlogUrl": ""
+    },
+    {
+      "BlogID": 11,
+      "BlogDate": "2024-01-10",
+      "BlogHeadline": "",
+      "IconImagePath": "",
+      "BlogDescription": "",
+      "ReadTime":"80", "BlogUrl": ""
+    },
+    {
+      "BlogID": 12,
+      "BlogDate": "2024-01-10",
+      "BlogHeadline": "",
+      "IconImagePath": "",
+      "BlogDescription": "",
+      "ReadTime":"80", "BlogUrl": ""
+    },
+    {
+      "BlogID": 13,
+      "BlogDate": "2024-01-10",
+      "BlogHeadline": "",
+      "IconImagePath": "",
+      "BlogDescription": "",
+      "ReadTime":"80", "BlogUrl": ""
+    },
+    {
+      "BlogID": 14,
+      "BlogDate": "2024-01-10",
+      "BlogHeadline": "",
+      "IconImagePath": "",
+      "BlogDescription": "",
+      "ReadTime":"80", "BlogUrl": ""
+    },
+    {
+      "BlogID": 15,
+      "BlogDate": "2024-01-10",
+      "BlogHeadline": "",
+      "IconImagePath": "",
+      "BlogDescription": "",
+      "ReadTime":"80", "BlogUrl": ""
+    },
+    {
+      "BlogID": 16,
+      "BlogDate": "2024-01-10",
+      "BlogHeadline": "",
+      "IconImagePath": "",
+      "BlogDescription": "",
+      "ReadTime":"80", "BlogUrl": ""
+    },
+    {
+      "BlogID": 17,
+      "BlogDate": "2024-01-10",
+      "BlogHeadline": "",
+      "IconImagePath": "",
+      "BlogDescription": "",
+      "ReadTime":"80", "BlogUrl": ""
+    },
+    {
+      "BlogID": 18,
+      "BlogDate": "2024-01-10",
+      "BlogHeadline": "",
+      "IconImagePath": "",
+      "BlogDescription": "",
+      "ReadTime":"80", "BlogUrl": ""
+    },
+    {
+      "BlogID": 19,
+      "BlogDate": "2024-01-10",
+      "BlogHeadline": "",
+      "IconImagePath": "",
+      "BlogDescription": "",
+      "ReadTime":"80", "BlogUrl": ""
+    }
+  ]
+  
