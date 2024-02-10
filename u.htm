@@ -137,6 +137,7 @@
         </div>
         </form>
         <br/>
+<a id="gotolink"></a>
 			</div>
 		</section>
 
@@ -179,12 +180,6 @@
 	<!-- Style Switcher (REMOVE ON YOUR PRODUCTION SITE) -->
 	<script src="./blog/assets/js/demo/style-switcher.js"></script>
 
-	<script>
-		$(document).ready(function () {
-			$(".navbar-toggler").click();
-		});
-	</script>
-
 <script>
   const urlParams = new URLSearchParams(window.location.search);
   const id = urlParams.get('id');
@@ -196,8 +191,9 @@
         const urlData = data.find(item => item.id === id);
         if (urlData) {
           // Redirect to the URL associated with the ID
-          window.location.href = urlData.url;
+          // window.location.href = urlData.url;
 return;
+$("#gotolink").html(urlData.url).attr("href",urlData.url);
         } else {
           // Handle case where ID is not found
           console.log('URL not found for the given ID.');
@@ -236,6 +232,12 @@ return;
     return id;
   }
 </script>
+
+	<script>
+		$(document).ready(function () {
+			$(".navbar-toggler").click();
+		});
+	</script>
 </body>
 
 </html>
