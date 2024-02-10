@@ -117,9 +117,9 @@
 
 		<section>
 			<div class="container">
-<div class="row">
+<div class="row" style="text-align:center">
 <div class="col-md-12">
-<a id="gotolink" class="btn btn-primary"></a>
+<a id="gotolink" class="btn btn-primary">Click Here</a>
 </div>
 </div>
         <form id="urlForm" class="form" style="display:none">
@@ -196,7 +196,7 @@
         if (urlData) {
           // Redirect to the URL associated with the ID
           // window.location.href = urlData.url;
-$("#gotolink").html(urlData.url).attr("href",urlData.url);
+$("#gotolink").html("Click Here -").attr("href",urlData.url);
 return;
         } else {
           // Handle case where ID is not found
