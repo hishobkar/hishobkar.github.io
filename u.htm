@@ -122,7 +122,7 @@
 <a id="gotolink" class="btn btn-primary"></a>
 </div>
 </div>
-        <form id="urlForm" class="form hidden">
+        <form id="urlForm" class="form" style="display:none">
         <div class="row">
           <div class="col-md-2">URL : </div>
           <div class="col-md-10"><input type="text" id="url" name="url" class="form-control"></div>
@@ -197,11 +197,14 @@
           // Redirect to the URL associated with the ID
           // window.location.href = urlData.url;
 $("#gotolink").html(urlData.url).attr("href",urlData.url);
+return;
         } else {
           // Handle case where ID is not found
           console.log('URL not found for the given ID.');
+$("#urlForm").removeAttr("style");
         }
       }).catch(error => console.error('Error fetching URL data:', error));
+$("#urlForm").removeAttr("style");
   }
 
   document.getElementById('urlForm').addEventListener('submit', function(event) {
