@@ -373,70 +373,79 @@
                 <br><br>
                 <div class="intro"></div>
                 <div class="row" id="params">
-                    <table border=0 cellpading=0 cellspacing=0>
-                        <!-- <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr> -->
-                        <tr>
-                            <th>Barcode Type:</th>
-                            <td><select id="symbol" class="form-control"></select></td>
-                            <th>Render As:</th>
-                            <td>
-                                <label for="render-canvas"><input type="radio" name="render-as" id="render-canvas"
-                                        checked>Canvas</label> | 
-                                <label for="render-svg"><input type="radio" name="render-as" id="render-svg">SVG</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Bar Text:</th>
-                            <td><input id="symtext" type="text" spellcheck="false" class="form-control"></td>
-                            <th>Scale X,Y:</th>
-                            <td>
-                                <input type="number" min=1 max=9 step=1 id="scaleX" value=2>
-                                <input type="number" min=1 max=9 step=1 id="scaleY" value=2>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Alt Text:</th>
-                            <td><input id="symaltx" type="text" spellcheck="false" class="form-control"></td>
-                            <th>Image Rotation:</th>
-                            <td>
-                                <label for="rotateN"><input type="radio" name="rotate" value="N" id="rotateN"
-                                        checked>Normal</label> | 
-                                <label for="rotateR"><input type="radio" name="rotate" value="R"
-                                        id="rotateR">Right</label> | 
-                                <label for="rotateL"><input type="radio" name="rotate" value="L"
-                                        id="rotateL">Left</label> | 
-                                <label for="rotateI"><input type="radio" name="rotate" value="I"
-                                        id="rotateI">Invert</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Options:</th>
-                            <td><input id="symopts" type="text" spellcheck="false" class="form-control"></td>
-                            <td colspan="2" style="text-align: center;">
-                                <div id="saveas">
-                                    <a class="saveas btn btn-secondary" style="color: #fff;" href="javascript:saveCanvas('image/png','.png')"><i class="fas fa-download"></i> PNG</a>
-                                    <a class="saveas btn btn-secondary" style="color: #fff;" href="javascript:saveCanvas('image/jpeg','.jpg')"><i class="fas fa-download"></i> JPEG</a>
-                                    <a class="saveas" id="apiurl" href="" style="display: none;"> Goto URL</a>
-                                </div>
-                                <button style="margin-top:1ex" id="render" class="btn btn-primary">Generate Barcode</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" style="text-align: center;">
-                                <div id="stats" style="display: none;"></div>
-                                <div id="content">
-                                    <canvas id="canvas" width=1 height=1 style="display:none"></canvas>
-                                    <div id="svgdiv" style="display:none"></div>
-                                    <div id="output" style="white-space:pre"></div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="col">
+                        <div class="table-responsive">
+                        <table border=0 cellpading=0 cellspacing=0 class="table table-bordered">
+                            <tr>
+                                <th>Barcode Type:</th>
+                                <td><select id="symbol" class="form-control"></select></td>
+                            </tr>
+                            <tr>
+                                <th>Bar Text:</th>
+                                <td><input id="symtext" type="text" spellcheck="false" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <th>Alt Text:</th>
+                                <td><input id="symaltx" type="text" spellcheck="false" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <th>Options:</th>
+                                <td><input id="symopts" type="text" spellcheck="false" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <th>Render As:</th>
+                                <td>
+                                    <label for="render-canvas"><input type="radio" name="render-as" id="render-canvas"
+                                            checked>Canvas</label> | 
+                                    <label for="render-svg"><input type="radio" name="render-as" id="render-svg">SVG</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Image Rotation:</th>
+                                <td>
+                                    <label for="rotateN"><input type="radio" name="rotate" value="N" id="rotateN"
+                                            checked>Normal</label> | 
+                                    <label for="rotateR"><input type="radio" name="rotate" value="R"
+                                            id="rotateR">Right</label> | 
+                                    <label for="rotateL"><input type="radio" name="rotate" value="L"
+                                            id="rotateL">Left</label> | 
+                                    <label for="rotateI"><input type="radio" name="rotate" value="I"
+                                            id="rotateI">Invert</label>
+                                </td>
+                            </tr>
+                            <tr>                          
+                                <th>Scale X,Y:</th>
+                                <td>
+                                    <input type="number" min=1 max=9 step=1 id="scaleX" value=2>
+                                    <input type="number" min=1 max=9 step=1 id="scaleY" value=2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="text-align: center;">
+                                    <button style="margin-top:1ex" id="render" class="btn btn-primary">Generate Barcode</button>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td colspan="4" style="text-align: center;">
+                                    
+                                    <div id="saveas">
+                                        <a class="saveas btn btn-secondary" style="color: #fff;" href="javascript:saveCanvas('image/png','.png')"><i class="fas fa-download"></i> PNG</a>
+                                        <a class="saveas btn btn-secondary" style="color: #fff;" href="javascript:saveCanvas('image/jpeg','.jpg')"><i class="fas fa-download"></i> JPEG</a>
+                                        <a class="saveas" id="apiurl" href="" style="display: none;"> Goto URL</a>
+                                    </div>
+                                    <hr/>
+                                    <div id="stats" style="display: none;"></div>
+                                    <div id="content">
+                                        <canvas id="canvas" width=1 height=1 style="display:none"></canvas>
+                                        <div id="svgdiv" style="display:none"></div>
+                                        <div id="output" style="white-space:pre"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        </div>
+                    </div>
                 </div>
                 <!-- <form class="signup-form form-inline justify-content-center pt-3">
 					<div class="form-group">
@@ -491,9 +500,16 @@
     <script src="../../blog/assets/js/demo/style-switcher.js"></script>
 
     <script>
-        $(document).ready(function(){
+		$(document).ready(function () {
+            
             $("#symbol").val("datamatrix");
-        });
+
+			$(".navbar-toggler").click();
+			// Set the interval for automatic sliding (5 seconds in this example)
+			setInterval(function () {
+				$('#carouselExampleIndicators').carousel('next');
+			}, 1500);
+		});
     </script>
 
 </body>
