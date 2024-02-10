@@ -117,6 +117,11 @@
 
 		<section>
 			<div class="container">
+<div class="row">
+<div class="col-md-12">
+<a id="gotolink"></a>
+</div>
+</div>
         <form id="urlForm" class="form">
         <div class="row">
           <div class="col-md-2">URL : </div>
@@ -137,7 +142,6 @@
         </div>
         </form>
         <br/>
-<a id="gotolink"></a>
 			</div>
 		</section>
 
@@ -192,7 +196,6 @@
         if (urlData) {
           // Redirect to the URL associated with the ID
           // window.location.href = urlData.url;
-return;
 $("#gotolink").html(urlData.url).attr("href",urlData.url);
         } else {
           // Handle case where ID is not found
