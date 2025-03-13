@@ -1,0 +1,1575 @@
+<html>
+
+<head>
+  <title>Abhijeet. Hishobkar</title>
+
+  <!-- Meta -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Blog Template">
+  <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
+  <link rel="shortcut icon" href="../../../blog/favicon.ico">
+
+  <!-- FontAwesome JS-->
+  <script defer src="../../../blog/assets/js/fontawsome_v5.7.1_all.js"></script>
+
+  <!-- Theme CSS -->
+  <link id="theme-style" rel="stylesheet" href="../../../blog/assets/css/theme-3.css">
+
+  <script src="../../js/qrcode.min.js"></script>
+</head>
+
+<body data-spy="scroll" data-target=".navbar-collapse">
+  <!-- preloader section -->
+  <div class="preloader">
+    <div class="sk-spinner sk-spinner-wordpress">
+      <span class="sk-inner-circle"></span>
+    </div>
+  </div>
+
+  <header class="header text-center">
+    <h1 class="blog-name pt-lg-4 mb-0"><a href="../../../blog/index.html">Abhijeet's Blog</a></h1>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+        aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div id="navigation" class="collapse navbar-collapse flex-column">
+        <div class="profile-section pt-3 pt-lg-0">
+          <img class="profile-image mb-3 rounded-circle mx-auto" src="../../../blog/assets/images/profile.png"
+            alt="image">
+
+          <div class="bio mb-3">Hi, my name is Abhijeet. Hishobkar.<br>My skillset extends beyond just coding.
+          </div>
+          <!--//bio-->
+          <ul class="social-list list-inline py-3 mx-auto">
+            <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+            <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
+            <li class="list-inline-item"><a href="#"><i class="fab fa-github-alt fa-fw"></i></a></li>
+            <li class="list-inline-item"><a href="#"><i class="fab fa-stack-overflow fa-fw"></i></a></li>
+            <li class="list-inline-item"><a href="#"><i class="fab fa-codepen fa-fw"></i></a></li>
+          </ul><!--//social-list-->
+          <hr>
+        </div><!--//profile-section-->
+
+        <ul class="navbar-nav flex-column text-left">
+          <li class="nav-item">
+            <a class="nav-link" href="../../../blog/index.html"><i class="fas fa-home fa-fw mr-2"></i>Blog Home</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="../../../blog/blog-post.html"><i class="fas fa-bookmark fa-fw mr-2"></i>Blog
+              Post <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../../../blog/blog-list.html"><i class="fas fa-list fa-fw mr-2"></i>Blog
+              List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../../../blog/../../index.html#home"><i class="fas fa-user fa-fw mr-2"></i>About
+              Me</a>
+          </li>
+        </ul>
+
+        <div class="my-2 my-md-3">
+          <a class="btn btn-primary" href="../../../blog/../../index.html#contact" target="_blank">Get in Touch</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+
+  <div class="main-wrapper">
+
+    <article class="blog-post px-3 py-5 p-md-5">
+      <div class="container">
+        <div class="">
+          <header class="post__header">
+            <h1 class="entry-title ds-typography__h1 ds-color__static-content-primary">Introducing the new
+              IHostedLifecycleService Interface in .NET 8</h1>
+            <div class="author"><label class="post_info ds-implicit"> by <a href="https://www.linkedin.com/in/hishobkar"
+                  target="_blank">Abhijeet. Hishobkar</a>, UPDATED ON <time class="ENTRY-DATE PUBLISHED UPDATED"
+                  datetime="2023-07-27T09:48:11+02:00">Dec 31, 2023</time> </label> <label class="read_time">60 mins
+                read</label></div>
+            <div id="qrcode" class="mt-1"></div>
+          </header><br>
+          <!-- .entry-header -->
+
+          <div class="entry-content">
+            <!-- PRyC WP: Add custom content to bottom of post/page: Standard Content START -->
+            <div id="pryc-wp-acctp-original-content">
+              <p>
+                As regular readers will be aware, an area of .NET which I follow
+                closely is Microsoft.Extensions.Hosting. There is a change in .NET 8, where new concurrency options have
+                been
+                introduced to support parallel running of the StartAsync and
+                StopAsync across multiple IHostedServices.
+              </p>
+              <p>
+                In this post, we’ll look at some new lifecycle events introduced
+                for hosted services in .NET 8. Note that this post relates to .NET
+                8, which is currently in preview at the time of writing. The types
+                and the implementation may change before the final release of .NET
+                8 in November.
+              </p>
+              <h2>Introducing IHostedLifecycleService</h2>
+              <p>
+                The main change is the inclusion of a new interface in the
+                Microsoft.Extensions.Hosting namespace named
+                IHostedLifecycleService. This interface inherits from the existing
+                IHostedService interface, extending it to add methods for new
+                lifecycle events which occur before or after the existing
+                StartAsync and StopAsync methods. These provide a way to hook into
+                more specific application lifetime events for some advanced
+                scenarios.
+              </p>
+              <p>The interface is defined as follows:</p>
+
+              <div class="wp-block-syntaxhighlighter-code">
+                <div>
+                  <div id="highlighter_91811" class="syntaxhighlighter csharp">
+                    <table border="0" cellpadding="0" cellspacing="0">
+                      <tbody>
+                        <tr>
+                          <td class="gutter">
+                            <div class="line number1 index0 alt2">1</div>
+                            <div class="line number2 index1 alt1">2</div>
+                            <div class="line number3 index2 alt2">3</div>
+                            <div class="line number4 index3 alt1">4</div>
+                            <div class="line number5 index4 alt2">5</div>
+                            <div class="line number6 index5 alt1">6</div>
+                            <div class="line number7 index6 alt2">7</div>
+                          </td>
+                          <td class="code">
+                            <div class="container">
+                              <div class="line number1 index0 alt2">
+                                <code class="csharp keyword">public</code>
+                                <code class="csharp keyword">partial</code>
+                                <code class="csharp keyword">interface</code>
+                                <code class="csharp plain">IHostedLifecycleService :
+                                Microsoft.Extensions.Hosting.IHostedService</code>
+                              </div>
+                              <div class="line number2 index1 alt1">
+                                <code class="csharp plain">{</code>
+                              </div>
+                              <div class="line number3 index2 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">Task StartingAsync(CancellationToken
+                                cancellationToken);</code>
+                              </div>
+                              <div class="line number4 index3 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">Task StartedAsync(CancellationToken
+                                cancellationToken);</code>
+                              </div>
+                              <div class="line number5 index4 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">Task StoppingAsync(CancellationToken
+                                cancellationToken);</code>
+                              </div>
+                              <div class="line number6 index5 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">Task StoppedAsync(CancellationToken
+                                cancellationToken);&nbsp;&nbsp;&nbsp;
+                              </code>
+                              </div>
+                              <div class="line number7 index6 alt2">
+                                <code class="csharp plain">}</code>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <p>
+                The StartingAsync method for all registered hosted services that
+                implement this interface will run very early in the application
+                lifecycle before StartAsync (from the IHostedService) is called on
+                any registered hosted services. This may be used to perform some
+                very early validation checks before an application is started,
+                such as checking for critical requirements or dependencies being
+                available. This allows an application to potentially fail startup
+                before any hosted services have begun executing their primary
+                workload. Other uses include “pre-heating” and initialising
+                singletons and other state the application uses.
+              </p>
+              <p>
+                StartedAsync will be invoked on implementations after the
+                completion of all StartAsync (from IHostedService) methods for
+                registered hosted services. This may be used to validate the
+                application state or conditions just before marking the
+                application as started successfully.
+              </p>
+              <p>
+                StoppingAsync and StoppedAsync work similarly during application
+                shutdown and provide advanced hooks for pre-shutdown and
+                post-shutdown verifications.
+              </p>
+              <p>
+                Before moving onto the finer details, it’s worth discussing why
+                Microsoft has created a new derived interface rather than taking
+                advantage of default interface implementations
+                to update the existing IHostedService interface. This indeed would
+                have been a good case for default interface implementations to add
+                these to IHostedService with a default no-op implementation. The
+                reason is apparent when we look at the runtime targets for this
+                library. The hosting packages multitarget various target
+                frameworks. This includes netstandard2.0, which was locked down
+                before the default interface implementation feature was
+                introduced. Therefore, in order to continue supporting this
+                target, the derived interface design was used instead.
+              </p>
+              <p>
+                As part of the PR to introduce this interface, a new option,
+                StartupTimeout, has also been added to HostOptions. This allows a
+                TimeSpan to be provided that will control the maximum time allowed
+                for the startup of all hosted services. When configured with a
+                non-infinite value (the default), the cancellation token passed to
+                the startup lifecycle events be linked to a
+                CancellationTokenSource configured with the provided value.
+              </p>
+              <h2>Using the New Interface</h2>
+              <p>
+                Using .NET 8 preview 7, we can look at a general example of how
+                this new interface might be utilised. One fairly common piece of
+                startup work I see in applications is to initialise databases.
+              </p>
+              <p>
+                While in production, we can expect such databases to be online,
+                available and seeded; in other environments, such as CI, we may
+                require a dummy database to be created and seeded with sample
+                data. Various solutions exist to deal with this, but one potential
+                choice is to use a hosted service to perform the work
+                conditionally. This can be more complicated when other hosted
+                services depend on an available database since those must then be
+                started in the correct order after the database is ready. In .NET
+                7, this is achievable since hosted services start in sequence and
+                in their registration order.
+              </p>
+              <p>
+                Therefore, in .NET 7, we can achieve something along these lines:
+              </p>
+
+              <div class="wp-block-syntaxhighlighter-code">
+                <div>
+                  <div id="highlighter_28411" class="syntaxhighlighter csharp">
+                    <table border="0" cellpadding="0" cellspacing="0">
+                      <tbody>
+                        <tr>
+                          <td class="gutter">
+                            <div class="line number1 index0 alt2">1</div>
+                            <div class="line number2 index1 alt1">2</div>
+                            <div class="line number3 index2 alt2">3</div>
+                            <div class="line number4 index3 alt1">4</div>
+                            <div class="line number5 index4 alt2">5</div>
+                            <div class="line number6 index5 alt1">6</div>
+                            <div class="line number7 index6 alt2">7</div>
+                            <div class="line number8 index7 alt1">8</div>
+                            <div class="line number9 index8 alt2">9</div>
+                            <div class="line number10 index9 alt1">10</div>
+                            <div class="line number11 index10 alt2">11</div>
+                            <div class="line number12 index11 alt1">12</div>
+                            <div class="line number13 index12 alt2">13</div>
+                            <div class="line number14 index13 alt1">14</div>
+                            <div class="line number15 index14 alt2">15</div>
+                            <div class="line number16 index15 alt1">16</div>
+                            <div class="line number17 index16 alt2">17</div>
+                            <div class="line number18 index17 alt1">18</div>
+                            <div class="line number19 index18 alt2">19</div>
+                            <div class="line number20 index19 alt1">20</div>
+                            <div class="line number21 index20 alt2">21</div>
+                          </td>
+                          <td class="code">
+                            <div class="container">
+                              <div class="line number1 index0 alt2">
+                                <code class="csharp keyword">public</code>
+                                <code class="csharp keyword">class</code>
+                                <code class="csharp plain">ServiceA : IHostedService</code>
+                              </div>
+                              <div class="line number2 index1 alt1">
+                                <code class="csharp plain">{</code>
+                              </div>
+                              <div class="line number3 index2 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">public</code>
+                                <code class="csharp plain">Task StartAsync(CancellationToken
+                                cancellationToken)</code>
+                              </div>
+                              <div class="line number4 index3 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">{</code>
+                              </div>
+                              <div class="line number5 index4 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp comments">// INIT DB</code>
+                              </div>
+                              <div class="line number6 index5 alt1">
+                                <code class="csharp spaces">&nbsp;</code>&nbsp;
+                              </div>
+                              <div class="line number7 index6 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">return</code>
+                                <code class="csharp plain">Task.CompletedTask;</code>
+                              </div>
+                              <div class="line number8 index7 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">}</code>
+                              </div>
+                              <div class="line number9 index8 alt2">
+                                <code class="csharp spaces">&nbsp;</code>&nbsp;
+                              </div>
+                              <div class="line number10 index9 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">public</code>
+                                <code class="csharp plain">Task StopAsync(CancellationToken
+                                cancellationToken) =&gt;
+                                Task.CompletedTask;</code>
+                              </div>
+                              <div class="line number11 index10 alt2">
+                                <code class="csharp plain">}</code>
+                              </div>
+                              <div class="line number12 index11 alt1">
+                                <code class="csharp spaces">&nbsp;</code>&nbsp;
+                              </div>
+                              <div class="line number13 index12 alt2">
+                                <code class="csharp keyword">public</code>
+                                <code class="csharp keyword">class</code>
+                                <code class="csharp plain">ServiceB : BackgroundService</code>
+                              </div>
+                              <div class="line number14 index13 alt1">
+                                <code class="csharp plain">{</code>
+                              </div>
+                              <div class="line number15 index14 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">protected</code>
+                                <code class="csharp keyword">override</code>
+                                <code class="csharp plain">Task ExecuteAsync(CancellationToken
+                                stoppingToken)</code>
+                              </div>
+                              <div class="line number16 index15 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">{</code>
+                              </div>
+                              <div class="line number17 index16 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp comments">// USE DB</code>
+                              </div>
+                              <div class="line number18 index17 alt1">
+                                <code class="csharp spaces">&nbsp;</code>&nbsp;
+                              </div>
+                              <div class="line number19 index18 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">return</code>
+                                <code class="csharp plain">Task.CompletedTask;</code>
+                              </div>
+                              <div class="line number20 index19 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">}</code>
+                              </div>
+                              <div class="line number21 index20 alt2">
+                                <code class="csharp plain">}</code>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <p>
+                To register these services with the DI container so that the Host
+                executes them, we must ensure we specifically add them in the
+                correct order.
+              </p>
+
+              <div class="wp-block-syntaxhighlighter-code">
+                <div>
+                  <div id="highlighter_847525" class="syntaxhighlighter csharp">
+                    <table border="0" cellpadding="0" cellspacing="0">
+                      <tbody>
+                        <tr>
+                          <td class="gutter">
+                            <div class="line number1 index0 alt2">1</div>
+                            <div class="line number2 index1 alt1">2</div>
+                          </td>
+                          <td class="code">
+                            <div class="container">
+                              <div class="line number1 index0 alt2">
+                                <code class="csharp plain">builder.Services.AddHostedService&lt;ServiceA&gt;();</code>
+                              </div>
+                              <div class="line number2 index1 alt1">
+                                <code class="csharp plain">builder.Services.AddHostedService&lt;ServiceB&gt;();</code>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <p>
+                Because .NET 7 executes the StartAsync method of each service in
+                sequence rather than concurrently, we know that by the time
+                ServiceB.StartAsync is invoked, the database should have completed
+                initialising in ServiceA.
+              </p>
+              <p>
+                While this behaviour is also true in .NET 8 by default, it is now
+                also possible to configure the Host to start them concurrently. If
+                we wanted to change this option, our application may break, as
+                ServiceB would be triggered at the same time as ServiceA. This may
+                not be a significant concern, but if there are other hosted
+                services in the application, by switching to concurrent execution,
+                we could reduce the overall startup time of the application.
+              </p>
+              <p>
+                With the introduction of the new IHostedLifecycleService in .NET
+                8, we could move the database initialisation work earlier in the
+                lifecycle while also taking advantage of concurrent hosted service
+                startup.
+              </p>
+
+              <div class="wp-block-syntaxhighlighter-code">
+                <div>
+                  <div id="highlighter_611800" class="syntaxhighlighter csharp">
+                    <table border="0" cellpadding="0" cellspacing="0">
+                      <tbody>
+                        <tr>
+                          <td class="gutter">
+                            <div class="line number1 index0 alt2">1</div>
+                            <div class="line number2 index1 alt1">2</div>
+                            <div class="line number3 index2 alt2">3</div>
+                            <div class="line number4 index3 alt1">4</div>
+                            <div class="line number5 index4 alt2">5</div>
+                            <div class="line number6 index5 alt1">6</div>
+                            <div class="line number7 index6 alt2">7</div>
+                            <div class="line number8 index7 alt1">8</div>
+                            <div class="line number9 index8 alt2">9</div>
+                            <div class="line number10 index9 alt1">10</div>
+                            <div class="line number11 index10 alt2">11</div>
+                            <div class="line number12 index11 alt1">12</div>
+                            <div class="line number13 index12 alt2">13</div>
+                            <div class="line number14 index13 alt1">14</div>
+                            <div class="line number15 index14 alt2">15</div>
+                            <div class="line number16 index15 alt1">16</div>
+                            <div class="line number17 index16 alt2">17</div>
+                            <div class="line number18 index17 alt1">18</div>
+                            <div class="line number19 index18 alt2">19</div>
+                            <div class="line number20 index19 alt1">20</div>
+                            <div class="line number21 index20 alt2">21</div>
+                            <div class="line number22 index21 alt1">22</div>
+                            <div class="line number23 index22 alt2">23</div>
+                            <div class="line number24 index23 alt1">24</div>
+                            <div class="line number25 index24 alt2">25</div>
+                            <div class="line number26 index25 alt1">26</div>
+                            <div class="line number27 index26 alt2">27</div>
+                            <div class="line number28 index27 alt1">28</div>
+                            <div class="line number29 index28 alt2">29</div>
+                          </td>
+                          <td class="code">
+                            <div class="container">
+                              <div class="line number1 index0 alt2">
+                                <code class="csharp keyword">public</code>
+                                <code class="csharp keyword">class</code>
+                                <code class="csharp plain">ServiceA : IHostedService,
+                                IHostedLifecycleService</code>
+                              </div>
+                              <div class="line number2 index1 alt1">
+                                <code class="csharp plain">{</code>
+                              </div>
+                              <div class="line number3 index2 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">public</code>
+                                <code class="csharp plain">Task StartingAsync(CancellationToken
+                                cancellationToken)</code>
+                              </div>
+                              <div class="line number4 index3 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">{</code>
+                              </div>
+                              <div class="line number5 index4 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp comments">// INIT DB</code>
+                              </div>
+                              <div class="line number6 index5 alt1">
+                                <code class="csharp spaces">&nbsp;</code>&nbsp;
+                              </div>
+                              <div class="line number7 index6 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">return</code>
+                                <code class="csharp plain">Task.CompletedTask;</code>
+                              </div>
+                              <div class="line number8 index7 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">}</code>
+                              </div>
+                              <div class="line number9 index8 alt2">
+                                <code class="csharp spaces">&nbsp;</code>&nbsp;
+                              </div>
+                              <div class="line number10 index9 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">public</code>
+                                <code class="csharp plain">Task StartAsync(CancellationToken
+                                cancellationToken) =&gt;
+                                Task.CompletedTask;</code>
+                              </div>
+                              <div class="line number11 index10 alt2">
+                                <code class="csharp spaces">&nbsp;</code>&nbsp;
+                              </div>
+                              <div class="line number12 index11 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">public</code>
+                                <code class="csharp plain">Task StartedAsync(CancellationToken
+                                cancellationToken) =&gt;
+                                Task.CompletedTask;</code>
+                              </div>
+                              <div class="line number13 index12 alt2">
+                                <code class="csharp spaces">&nbsp;</code>&nbsp;
+                              </div>
+                              <div class="line number14 index13 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">public</code>
+                                <code class="csharp plain">Task StoppingAsync(CancellationToken
+                                cancellationToken) =&gt;
+                                Task.CompletedTask;</code>
+                              </div>
+                              <div class="line number15 index14 alt2">
+                                <code class="csharp spaces">&nbsp;</code>&nbsp;
+                              </div>
+                              <div class="line number16 index15 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">public</code>
+                                <code class="csharp plain">Task StopAsync(CancellationToken
+                                cancellationToken) =&gt;
+                                Task.CompletedTask;</code>
+                              </div>
+                              <div class="line number17 index16 alt2">
+                                <code class="csharp spaces">&nbsp;</code>&nbsp;
+                              </div>
+                              <div class="line number18 index17 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">public</code>
+                                <code class="csharp plain">Task StoppedAsync(CancellationToken
+                                cancellationToken) =&gt;
+                                Task.CompletedTask;</code>
+                              </div>
+                              <div class="line number19 index18 alt2">
+                                <code class="csharp plain">}</code>
+                              </div>
+                              <div class="line number20 index19 alt1">
+                                <code class="csharp spaces">&nbsp;</code>&nbsp;
+                              </div>
+                              <div class="line number21 index20 alt2">
+                                <code class="csharp keyword">public</code>
+                                <code class="csharp keyword">class</code>
+                                <code class="csharp plain">ServiceB : BackgroundService</code>
+                              </div>
+                              <div class="line number22 index21 alt1">
+                                <code class="csharp plain">{</code>
+                              </div>
+                              <div class="line number23 index22 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">protected</code>
+                                <code class="csharp keyword">override</code>
+                                <code class="csharp plain">Task ExecuteAsync(CancellationToken
+                                stoppingToken)</code>
+                              </div>
+                              <div class="line number24 index23 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">{</code>
+                              </div>
+                              <div class="line number25 index24 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp comments">// USE DB</code>
+                              </div>
+                              <div class="line number26 index25 alt1">
+                                <code class="csharp spaces">&nbsp;</code>&nbsp;
+                              </div>
+                              <div class="line number27 index26 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">return</code>
+                                <code class="csharp plain">Task.CompletedTask;</code>
+                              </div>
+                              <div class="line number28 index27 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">}</code>
+                              </div>
+                              <div class="line number29 index28 alt2">
+                                <code class="csharp plain">}</code>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <p>
+                In the sample code above, we define two hosted services. ServiceA
+                implements the new IHostedLifecycleService in addition to
+                IHostedService. We want to perform our database initialisation
+                very early in the app lifecycle, before any of the primary
+                workloads. Therefore, we can include our database setup code
+                inside the StartingAsync method.
+              </p>
+              <p>
+                ServiceB, which derives from BackgroundService, can now safely use
+                the database inside its ExecuteAsync method, since ExecuteAsync is
+                invoked by the underlying implementation of StartAsync defined in
+                the IHostedService interface. As a result, it isn’t invoked until
+                all StartingAsync methods for registered services have completed.
+              </p>
+              <p>
+                We would register these services with the DI container in the same
+                way as in .NET, but it no longer matters what order we add them.
+              </p>
+
+              <div class="wp-block-syntaxhighlighter-code">
+                <div>
+                  <div id="highlighter_934656" class="syntaxhighlighter csharp">
+                    <table border="0" cellpadding="0" cellspacing="0">
+                      <tbody>
+                        <tr>
+                          <td class="gutter">
+                            <div class="line number1 index0 alt2">1</div>
+                            <div class="line number2 index1 alt1">2</div>
+                          </td>
+                          <td class="code">
+                            <div class="container">
+                              <div class="line number1 index0 alt2">
+                                <code class="csharp plain">builder.Services.AddHostedService&lt;ServiceB&gt;();</code>
+                              </div>
+                              <div class="line number2 index1 alt1">
+                                <code class="csharp plain">builder.Services.AddHostedService&lt;ServiceA&gt;();</code>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <p>
+                Even in this order, the StartingAsync of ServiceA will be executed
+                before ServiceB.StartAsync. We can even configure the concurrent
+                start and stop behaviour without breaking our logic.
+              </p>
+
+              <div class="wp-block-syntaxhighlighter-code">
+                <div>
+                  <div id="highlighter_711702" class="syntaxhighlighter csharp">
+                    <table border="0" cellpadding="0" cellspacing="0">
+                      <tbody>
+                        <tr>
+                          <td class="gutter">
+                            <div class="line number1 index0 alt2">1</div>
+                            <div class="line number2 index1 alt1">2</div>
+                            <div class="line number3 index2 alt2">3</div>
+                            <div class="line number4 index3 alt1">4</div>
+                            <div class="line number5 index4 alt2">5</div>
+                          </td>
+                          <td class="code">
+                            <div class="container">
+                              <div class="line number1 index0 alt2">
+                                <code class="csharp plain">builder.Services.Configure&lt;HostOptions&gt;(options
+                                =&gt;</code>
+                              </div>
+                              <div class="line number2 index1 alt1">
+                                <code class="csharp plain">{</code>
+                              </div>
+                              <div class="line number3 index2 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">options.ServicesStartConcurrently = </code><code
+                                  class="csharp keyword">true</code><code class="csharp plain">;</code>
+                              </div>
+                              <div class="line number4 index3 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">options.ServicesStopConcurrently = </code><code
+                                  class="csharp keyword">true</code><code class="csharp plain">;</code>
+                              </div>
+                              <div class="line number5 index4 alt2">
+                                <code class="csharp plain">});</code>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <h2>Diving into the Details</h2>
+              <p>
+                After introducing the new interface, most core changes are
+                implemented inside the internal Host class, which implements the
+                IHost interface. This class defines the main Host, built when
+                creating new applications from templates such as ASP.NET Core and
+                Worker Service. The IHost interface defines a StartAsync and
+                StopAsync method invoked when applications start or stop.
+              </p>
+              <p>
+                The first meaningful change introduces extra logic at the
+                beginning of the StartAsync method to implement the new
+                StartupTimeout feature.
+              </p>
+
+              <div class="wp-block-syntaxhighlighter-code">
+                <div>
+                  <div id="highlighter_444681" class="syntaxhighlighter csharp">
+                    <table border="0" cellpadding="0" cellspacing="0">
+                      <tbody>
+                        <tr>
+                          <td class="gutter">
+                            <div class="line number1 index0 alt2">1</div>
+                            <div class="line number2 index1 alt1">2</div>
+                            <div class="line number3 index2 alt2">3</div>
+                            <div class="line number4 index3 alt1">4</div>
+                            <div class="line number5 index4 alt2">5</div>
+                            <div class="line number6 index5 alt1">6</div>
+                            <div class="line number7 index6 alt2">7</div>
+                            <div class="line number8 index7 alt1">8</div>
+                            <div class="line number9 index8 alt2">9</div>
+                            <div class="line number10 index9 alt1">10</div>
+                            <div class="line number11 index10 alt2">11</div>
+                          </td>
+                          <td class="code">
+                            <div class="container">
+                              <div class="line number1 index0 alt2">
+                                <code class="csharp plain">CancellationTokenSource? cts = </code><code
+                                  class="csharp keyword">null</code><code class="csharp plain">;</code>
+                              </div>
+                              <div class="line number2 index1 alt1">
+                                <code class="csharp plain">CancellationTokenSource linkedCts;</code>
+                              </div>
+                              <div class="line number3 index2 alt2">
+                                <code class="csharp keyword">if</code>
+                                <code class="csharp plain">(_options.StartupTimeout !=
+                                Timeout.InfiniteTimeSpan)</code>
+                              </div>
+                              <div class="line number4 index3 alt1">
+                                <code class="csharp plain">{</code>
+                              </div>
+                              <div class="line number5 index4 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">cts = </code><code class="csharp keyword">new</code>
+                                <code class="csharp plain">CancellationTokenSource(_options.StartupTimeout);</code>
+                              </div>
+                              <div class="line number6 index5 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">linkedCts =
+                                CancellationTokenSource.CreateLinkedTokenSource(cts.Token,
+                                cancellationToken,
+                                _applicationLifetime.ApplicationStopping);</code>
+                              </div>
+                              <div class="line number7 index6 alt2">
+                                <code class="csharp plain">}</code>
+                              </div>
+                              <div class="line number8 index7 alt1">
+                                <code class="csharp keyword">else</code>
+                              </div>
+                              <div class="line number9 index8 alt2">
+                                <code class="csharp plain">{</code>
+                              </div>
+                              <div class="line number10 index9 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">linkedCts =
+                                CancellationTokenSource.CreateLinkedTokenSource(cancellationToken,
+                                _applicationLifetime.ApplicationStopping);</code>
+                              </div>
+                              <div class="line number11 index10 alt2">
+                                <code class="csharp plain">}</code>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <p>
+                As we can see from this updated code, in all cases, the
+                cancellation token passed into StartAsync can cause cancellation,
+                as can the ApplicationStopping token exposed on
+                IHostApplicationLifetime, which will be marked as cancelled if a
+                shutdown has been triggered.
+              </p>
+              <p>
+                When HostOptions.StartupTimeout is not equal to InfiniteTimeSpan a
+                CancellationTokenSource is created, passing the TimeSpan into the
+                constructor. Its token can then be added to a linked token source
+                to ensure this third condition can also trigger aborting the
+                startup. This new option allows application developers to provide
+                an expected upper time limit for an expected “normal” startup,
+                such that in exceptional circumstances, a long delay can
+                proactively trigger the abortion of the startup. Such situations,
+                potentially caused by unavailable external dependencies, should be
+                tracked and logged so that they can be investigated.
+              </p>
+              <p>
+                After the linkedCts is created, it will be used to access the
+                CancellationToken that is then passed into any subsequent
+                asynchronous methods invoked during the startup process.
+              </p>
+
+              <div class="wp-block-syntaxhighlighter-code">
+                <div>
+                  <div id="highlighter_880104" class="syntaxhighlighter csharp">
+                    <table border="0" cellpadding="0" cellspacing="0">
+                      <tbody>
+                        <tr>
+                          <td class="gutter">
+                            <div class="line number1 index0 alt2">1</div>
+                          </td>
+                          <td class="code">
+                            <div class="container">
+                              <div class="line number1 index0 alt2">
+                                <code class="csharp plain">CancellationToken token =
+                                linkedCts.Token;</code>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <p>
+                The first of these async methods is the invocation of
+                IHostLifetime.WaitForStartAsync, which is an early hook in the
+                hosting lifetime, is awaited at this point. This is another
+                advanced hook that can potentially delay startup until signalled
+                by an external event. This concept has been available since .NET
+                Core 3.0.
+              </p>
+
+              <div class="wp-block-syntaxhighlighter-code">
+                <div>
+                  <div id="highlighter_737149" class="syntaxhighlighter csharp">
+                    <table border="0" cellpadding="0" cellspacing="0">
+                      <tbody>
+                        <tr>
+                          <td class="gutter">
+                            <div class="line number1 index0 alt2">1</div>
+                            <div class="line number2 index1 alt1">2</div>
+                            <div class="line number3 index2 alt2">3</div>
+                            <div class="line number4 index3 alt1">4</div>
+                          </td>
+                          <td class="code">
+                            <div class="container">
+                              <div class="line number1 index0 alt2">
+                                <code class="csharp comments">// This may not catch exceptions.</code>
+                              </div>
+                              <div class="line number2 index1 alt1">
+                                <code class="csharp keyword">await</code>
+                                <code
+                                  class="csharp plain">_hostLifetime.WaitForStartAsync(token).ConfigureAwait(</code><code
+                                  class="csharp keyword">false</code><code class="csharp plain">);</code>
+                              </div>
+                              <div class="line number3 index2 alt2">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;
+                              </div>
+                              <div class="line number4 index3 alt1">
+                                <code class="csharp plain">token.ThrowIfCancellationRequested();</code>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <p>
+                The next lines in the implementation prepare some variables and
+                fields.
+              </p>
+
+              <div class="wp-block-syntaxhighlighter-code">
+                <div>
+                  <div id="highlighter_176053" class="syntaxhighlighter csharp">
+                    <table border="0" cellpadding="0" cellspacing="0">
+                      <tbody>
+                        <tr>
+                          <td class="gutter">
+                            <div class="line number1 index0 alt2">1</div>
+                            <div class="line number2 index1 alt1">2</div>
+                            <div class="line number3 index2 alt2">3</div>
+                            <div class="line number4 index3 alt1">4</div>
+                            <div class="line number5 index4 alt2">5</div>
+                          </td>
+                          <td class="code">
+                            <div class="container">
+                              <div class="line number1 index0 alt2">
+                                <code class="csharp plain">List&lt;Exception&gt; exceptions = </code><code
+                                  class="csharp keyword">new</code><code class="csharp plain">();</code>
+                              </div>
+                              <div class="line number2 index1 alt1">
+                                <code class="csharp plain">_hostedServices =
+                                Services.GetRequiredService&lt;IEnumerable&lt;IHostedService&gt;&gt;();</code>
+                              </div>
+                              <div class="line number3 index2 alt2">
+                                <code class="csharp plain">_hostedLifecycleServices =
+                                GetHostLifecycles(_hostedServices);</code>
+                              </div>
+                              <div class="line number4 index3 alt1">
+                                <code class="csharp keyword">bool</code>
+                                <code class="csharp plain">concurrent =
+                                _options.ServicesStartConcurrently;</code>
+                              </div>
+                              <div class="line number5 index4 alt2">
+                                <code class="csharp keyword">bool</code>
+                                <code class="csharp plain">abortOnFirstException = !concurrent;</code>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <p>
+                After setting up a list to contain any exceptions during startup,
+                all registered IHostedServices are retrieved from the container.
+                The GetHostLifecycles method is used to loop over the
+                IHostedService implementations and determine which, if any, also
+                implement IHostedLifecycleService.
+              </p>
+              <p>
+                The next piece of code executes the StartingAsync method for each
+                IHostedLifecycleService.
+              </p>
+
+              <div class="wp-block-syntaxhighlighter-code">
+                <div>
+                  <div id="highlighter_845983" class="syntaxhighlighter csharp">
+                    <table border="0" cellpadding="0" cellspacing="0">
+                      <tbody>
+                        <tr>
+                          <td class="gutter">
+                            <div class="line number1 index0 alt2">1</div>
+                            <div class="line number2 index1 alt1">2</div>
+                            <div class="line number3 index2 alt2">3</div>
+                            <div class="line number4 index3 alt1">4</div>
+                            <div class="line number5 index4 alt2">5</div>
+                            <div class="line number6 index5 alt1">6</div>
+                          </td>
+                          <td class="code">
+                            <div class="container">
+                              <div class="line number1 index0 alt2">
+                                <code class="csharp keyword">if</code>
+                                <code class="csharp plain">(_hostedLifecycleServices </code><code
+                                  class="csharp keyword">is</code>
+                                <code class="csharp plain">not </code><code class="csharp keyword">null</code><code
+                                  class="csharp plain">)</code>
+                              </div>
+                              <div class="line number2 index1 alt1">
+                                <code class="csharp plain">{</code>
+                              </div>
+                              <div class="line number3 index2 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp comments">// Call StartingAsync().</code>
+                              </div>
+                              <div class="line number4 index3 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">await</code>
+                                <code class="csharp plain">ForeachService(_hostedLifecycleServices, token,
+                                concurrent, abortOnFirstException,
+                                exceptions,</code>
+                              </div>
+                              <div class="line number5 index4 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">(service, token) =&gt;
+                                service.StartingAsync(token)).ConfigureAwait(</code><code
+                                  class="csharp keyword">false</code><code class="csharp plain">);</code>
+                              </div>
+                              <div class="line number6 index5 alt1">
+                                <code class="csharp plain">}</code>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <p>
+                ForeachService is a helper method that executes the services
+                concurrently or sequentially based on the HostOptions setting
+                passed in as an argument.
+              </p>
+
+              <div class="wp-block-syntaxhighlighter-code">
+                <div>
+                  <div id="highlighter_222281" class="syntaxhighlighter csharp">
+                    <table border="0" cellpadding="0" cellspacing="0">
+                      <tbody>
+                        <tr>
+                          <td class="gutter">
+                            <div class="line number1 index0 alt2">1</div>
+                            <div class="line number2 index1 alt1">2</div>
+                            <div class="line number3 index2 alt2">3</div>
+                            <div class="line number4 index3 alt1">4</div>
+                            <div class="line number5 index4 alt2">5</div>
+                            <div class="line number6 index5 alt1">6</div>
+                            <div class="line number7 index6 alt2">7</div>
+                            <div class="line number8 index7 alt1">8</div>
+                            <div class="line number9 index8 alt2">9</div>
+                            <div class="line number10 index9 alt1">10</div>
+                            <div class="line number11 index10 alt2">11</div>
+                            <div class="line number12 index11 alt1">12</div>
+                            <div class="line number13 index12 alt2">13</div>
+                            <div class="line number14 index13 alt1">14</div>
+                            <div class="line number15 index14 alt2">15</div>
+                            <div class="line number16 index15 alt1">16</div>
+                            <div class="line number17 index16 alt2">17</div>
+                            <div class="line number18 index17 alt1">18</div>
+                            <div class="line number19 index18 alt2">19</div>
+                            <div class="line number20 index19 alt1">20</div>
+                            <div class="line number21 index20 alt2">21</div>
+                            <div class="line number22 index21 alt1">22</div>
+                            <div class="line number23 index22 alt2">23</div>
+                            <div class="line number24 index23 alt1">24</div>
+                            <div class="line number25 index24 alt2">25</div>
+                            <div class="line number26 index25 alt1">26</div>
+                            <div class="line number27 index26 alt2">27</div>
+                            <div class="line number28 index27 alt1">28</div>
+                            <div class="line number29 index28 alt2">29</div>
+                            <div class="line number30 index29 alt1">30</div>
+                            <div class="line number31 index30 alt2">31</div>
+                            <div class="line number32 index31 alt1">32</div>
+                            <div class="line number33 index32 alt2">33</div>
+                            <div class="line number34 index33 alt1">34</div>
+                            <div class="line number35 index34 alt2">35</div>
+                            <div class="line number36 index35 alt1">36</div>
+                            <div class="line number37 index36 alt2">37</div>
+                            <div class="line number38 index37 alt1">38</div>
+                            <div class="line number39 index38 alt2">39</div>
+                            <div class="line number40 index39 alt1">40</div>
+                            <div class="line number41 index40 alt2">41</div>
+                            <div class="line number42 index41 alt1">42</div>
+                            <div class="line number43 index42 alt2">43</div>
+                            <div class="line number44 index43 alt1">44</div>
+                            <div class="line number45 index44 alt2">45</div>
+                            <div class="line number46 index45 alt1">46</div>
+                            <div class="line number47 index46 alt2">47</div>
+                            <div class="line number48 index47 alt1">48</div>
+                            <div class="line number49 index48 alt2">49</div>
+                            <div class="line number50 index49 alt1">50</div>
+                            <div class="line number51 index50 alt2">51</div>
+                            <div class="line number52 index51 alt1">52</div>
+                            <div class="line number53 index52 alt2">53</div>
+                            <div class="line number54 index53 alt1">54</div>
+                            <div class="line number55 index54 alt2">55</div>
+                            <div class="line number56 index55 alt1">56</div>
+                            <div class="line number57 index56 alt2">57</div>
+                            <div class="line number58 index57 alt1">58</div>
+                            <div class="line number59 index58 alt2">59</div>
+                            <div class="line number60 index59 alt1">60</div>
+                            <div class="line number61 index60 alt2">61</div>
+                            <div class="line number62 index61 alt1">62</div>
+                            <div class="line number63 index62 alt2">63</div>
+                            <div class="line number64 index63 alt1">64</div>
+                            <div class="line number65 index64 alt2">65</div>
+                            <div class="line number66 index65 alt1">66</div>
+                            <div class="line number67 index66 alt2">67</div>
+                            <div class="line number68 index67 alt1">68</div>
+                            <div class="line number69 index68 alt2">69</div>
+                            <div class="line number70 index69 alt1">70</div>
+                            <div class="line number71 index70 alt2">71</div>
+                            <div class="line number72 index71 alt1">72</div>
+                            <div class="line number73 index72 alt2">73</div>
+                            <div class="line number74 index73 alt1">74</div>
+                            <div class="line number75 index74 alt2">75</div>
+                            <div class="line number76 index75 alt1">76</div>
+                            <div class="line number77 index76 alt2">77</div>
+                          </td>
+                          <td class="code">
+                            <div class="container">
+                              <div class="line number1 index0 alt2">
+                                <code class="csharp keyword">private</code>
+                                <code class="csharp keyword">static</code>
+                                <code class="csharp keyword">async</code>
+                                <code class="csharp plain">Task ForeachService&lt;T&gt;(</code>
+                              </div>
+                              <div class="line number2 index1 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">IEnumerable&lt;T&gt; services,</code>
+                              </div>
+                              <div class="line number3 index2 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">CancellationToken token,</code>
+                              </div>
+                              <div class="line number4 index3 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">bool</code>
+                                <code class="csharp plain">concurrent,</code>
+                              </div>
+                              <div class="line number5 index4 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">bool</code>
+                                <code class="csharp plain">abortOnFirstException,</code>
+                              </div>
+                              <div class="line number6 index5 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">List&lt;Exception&gt; exceptions,</code>
+                              </div>
+                              <div class="line number7 index6 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">Func&lt;T, CancellationToken, Task&gt;
+                                operation)</code>
+                              </div>
+                              <div class="line number8 index7 alt1">
+                                <code class="csharp plain">{</code>
+                              </div>
+                              <div class="line number9 index8 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">if</code>
+                                <code class="csharp plain">(concurrent)</code>
+                              </div>
+                              <div class="line number10 index9 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">{</code>
+                              </div>
+                              <div class="line number11 index10 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp comments">// The beginning synchronous portions of the
+                                implementations are run serially in registration
+                                order for</code>
+                              </div>
+                              <div class="line number12 index11 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp comments">// performance since it is common to return
+                                Task.Completed as a noop.</code>
+                              </div>
+                              <div class="line number13 index12 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp comments">// Any subsequent asynchronous portions are
+                                grouped together run concurrently.</code>
+                              </div>
+                              <div class="line number14 index13 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">List&lt;Task&gt;? tasks = </code><code
+                                  class="csharp keyword">null</code><code class="csharp plain">;</code>
+                              </div>
+                              <div class="line number15 index14 alt2">&nbsp;</div>
+                              <div class="line number16 index15 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">foreach</code>
+                                <code class="csharp plain">(T service </code><code class="csharp keyword">in</code>
+                                <code class="csharp plain">services)</code>
+                              </div>
+                              <div class="line number17 index16 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">{</code>
+                              </div>
+                              <div class="line number18 index17 alt1">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">Task task;</code>
+                              </div>
+                              <div class="line number19 index18 alt2">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">try</code>
+                              </div>
+                              <div class="line number20 index19 alt1">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">{</code>
+                              </div>
+                              <div class="line number21 index20 alt2">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">task = operation(service, token);</code>
+                              </div>
+                              <div class="line number22 index21 alt1">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">}</code>
+                              </div>
+                              <div class="line number23 index22 alt2">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">catch</code>
+                                <code class="csharp plain">(Exception ex)</code>
+                              </div>
+                              <div class="line number24 index23 alt1">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">{</code>
+                              </div>
+                              <div class="line number25 index24 alt2">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">exceptions.Add(ex); </code><code
+                                  class="csharp comments">// Log exception from sync method.</code>
+                              </div>
+                              <div class="line number26 index25 alt1">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">continue</code><code class="csharp plain">;</code>
+                              </div>
+                              <div class="line number27 index26 alt2">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">}</code>
+                              </div>
+                              <div class="line number28 index27 alt1">&nbsp;</div>
+                              <div class="line number29 index28 alt2">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">if</code>
+                                <code class="csharp plain">(task.IsCompleted)</code>
+                              </div>
+                              <div class="line number30 index29 alt1">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">{</code>
+                              </div>
+                              <div class="line number31 index30 alt2">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">if</code>
+                                <code class="csharp plain">(task.Exception </code><code class="csharp keyword">is</code>
+                                <code class="csharp plain">not </code><code class="csharp keyword">null</code><code
+                                  class="csharp plain">)</code>
+                              </div>
+                              <div class="line number32 index31 alt1">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">{</code>
+                              </div>
+                              <div class="line number33 index32 alt2">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;
+                              </div>
+                              <div class="line number34 index33 alt1">
+                                <code
+                                  class="csharp plain">exceptions.AddRange(task.Exception.InnerExceptions); </code><code
+                                  class="csharp comments">// Log exception from async method.</code>
+                              </div>
+                              <div class="line number35 index34 alt2">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">}</code>
+                              </div>
+                              <div class="line number36 index35 alt1">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">}</code>
+                              </div>
+                              <div class="line number37 index36 alt2">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">else</code>
+                              </div>
+                              <div class="line number38 index37 alt1">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">{</code>
+                              </div>
+                              <div class="line number39 index38 alt2">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">tasks ??= </code><code class="csharp keyword">new</code><code
+                                  class="csharp plain">();</code>
+                              </div>
+                              <div class="line number40 index39 alt1">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">tasks.Add(Task.Run(() =&gt; task,
+                                token));</code>
+                              </div>
+                              <div class="line number41 index40 alt2">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">}</code>
+                              </div>
+                              <div class="line number42 index41 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">}</code>
+                              </div>
+                              <div class="line number43 index42 alt2">&nbsp;</div>
+                              <div class="line number44 index43 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">if</code>
+                                <code class="csharp plain">(tasks </code><code class="csharp keyword">is</code>
+                                <code class="csharp plain">not </code><code class="csharp keyword">null</code><code
+                                  class="csharp plain">)</code>
+                              </div>
+                              <div class="line number45 index44 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">{</code>
+                              </div>
+                              <div class="line number46 index45 alt1">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">Task groupedTasks = Task.WhenAll(tasks);</code>
+                              </div>
+                              <div class="line number47 index46 alt2">&nbsp;</div>
+                              <div class="line number48 index47 alt1">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">try</code>
+                              </div>
+                              <div class="line number49 index48 alt2">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">{</code>
+                              </div>
+                              <div class="line number50 index49 alt1">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">await</code>
+                                <code class="csharp plain">groupedTasks.ConfigureAwait(</code><code
+                                  class="csharp keyword">false</code><code class="csharp plain">);</code>
+                              </div>
+                              <div class="line number51 index50 alt2">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">}</code>
+                              </div>
+                              <div class="line number52 index51 alt1">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">catch</code>
+                                <code class="csharp plain">(Exception ex)</code>
+                              </div>
+                              <div class="line number53 index52 alt2">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">{</code>
+                              </div>
+                              <div class="line number54 index53 alt1">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;
+                              </div>
+                              <div class="line number55 index54 alt2">
+                                <code class="csharp plain">exceptions.AddRange(groupedTasks.Exception?.InnerExceptions
+                                ?? </code><code class="csharp keyword">new</code><code
+                                  class="csharp plain">[] { ex }.AsEnumerable());</code>
+                              </div>
+                              <div class="line number56 index55 alt1">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">}</code>
+                              </div>
+                              <div class="line number57 index56 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">}</code>
+                              </div>
+                              <div class="line number58 index57 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">}</code>
+                              </div>
+                              <div class="line number59 index58 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">else</code>
+                              </div>
+                              <div class="line number60 index59 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">{</code>
+                              </div>
+                              <div class="line number61 index60 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">foreach</code>
+                                <code class="csharp plain">(T service </code><code class="csharp keyword">in</code>
+                                <code class="csharp plain">services)</code>
+                              </div>
+                              <div class="line number62 index61 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">{</code>
+                              </div>
+                              <div class="line number63 index62 alt2">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">try</code>
+                              </div>
+                              <div class="line number64 index63 alt1">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">{</code>
+                              </div>
+                              <div class="line number65 index64 alt2">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">await</code>
+                                <code class="csharp plain">operation(service, token).ConfigureAwait(</code><code
+                                  class="csharp keyword">false</code><code class="csharp plain">);</code>
+                              </div>
+                              <div class="line number66 index65 alt1">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">}</code>
+                              </div>
+                              <div class="line number67 index66 alt2">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">catch</code>
+                                <code class="csharp plain">(Exception ex)</code>
+                              </div>
+                              <div class="line number68 index67 alt1">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">{</code>
+                              </div>
+                              <div class="line number69 index68 alt2">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">exceptions.Add(ex);</code>
+                              </div>
+                              <div class="line number70 index69 alt1">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">if</code>
+                                <code class="csharp plain">(abortOnFirstException)</code>
+                              </div>
+                              <div class="line number71 index70 alt2">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">{</code>
+                              </div>
+                              <div class="line number72 index71 alt1">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp keyword">return</code><code class="csharp plain">;</code>
+                              </div>
+                              <div class="line number73 index72 alt2">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">}</code>
+                              </div>
+                              <div class="line number74 index73 alt1">
+                                <code
+                                  class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">}</code>
+                              </div>
+                              <div class="line number75 index74 alt2">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">}</code>
+                              </div>
+                              <div class="line number76 index75 alt1">
+                                <code class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                                  class="csharp plain">}</code>
+                              </div>
+                              <div class="line number77 index76 alt2">
+                                <code class="csharp plain">}</code>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <p>
+                The code branches based on the boolean concurrent parameter. Let’s
+                focus on the code used to invoke the functions of each service
+                concurrently.
+              </p>
+              <p>
+                As the comments state, the implementation first invokes the
+                operation delegate, in this case, StartingAsync, on each service.
+                It’s entirely possible that many of the IHostedLifecycleService
+                implementations no-op on most of their methods by returning a
+                cached Task.CompletedTask. In these cases, the code runs
+                synchronously as the is nothing to await. The above code special
+                cases this and checks if any tasks return immediately as completed
+                or throw synchronous exceptions. For these completed tasks, any
+                exceptions thrown within them are added to the exceptions list.
+              </p>
+              <p>
+                For any tasks which are not completed at this point, they are
+                running asynchronously. These tasks are added to the list of
+                tasks. Once all tasks have been started, they are awaited with
+                WhenAll, meaning they run concurrently until all registered
+                services have completed their work. Any exceptions are also
+                captured here.
+              </p>
+              <p>
+                In the non-concurrent path, the code is simpler since it can
+                simply await each operation in order. In this configuration, each
+                service must complete its work before the next is invoked.
+              </p>
+              <p>
+                Returning to the Host.StartAsync method, the process is repeated
+                for IHostedService.StartAsync and
+                IHostedLifecycleService.StartedAsync. The method concludes by
+                logging and rethrowing any captured exceptions before triggering
+                the notification that the hosted application has now started.
+              </p>
+              <p>
+                The implementation for the new lifecycle events for Stopping and
+                Stopped is almost identical, so we need not dive into that here.
+              </p>
+              <h2>Summary</h2>
+              <p>
+                Microsoft continues to refine and enhance the hosting concepts in
+                .NET in each release. In .NET 8, focus has been put on introducing
+                more control over the startup behaviour of hosted services. In
+                this latest piece of work, they have introduced advanced,
+                fine-grain control over code which runs before, during and after
+                startup and shutdown. The new IHostedLifecycleService interface
+                arrived in
+                <a href="https://devblogs.microsoft.com/dotnet/announcing-dotnet-8-preview-7/">.NET 8 preview 7</a>,
+                which
+                is now available.
+              </p>
+              <!-- PRyC WP: Add custom content to bottom of post/page: Standard Content START -->
+            </div>
+          </div>
+          <!-- /PRyC WP: Add custom content to bottom of post/page -->
+        </div>
+        <!-- .entry-content -->
+      </div>
+    </article>
+  </div>
+
+  <!-- footer section -->
+
+  <footer class="footer text-center py-2 theme-bg-dark">
+    <small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a
+        href="http://hishobkar.github.io" target="_blank">Abhijeet. Hishobkar</a> for developers</small>
+
+  </footer>
+
+  <!-- footer ends -->
+
+  <!-- Javascript -->
+  <script src="../../../blog/assets/plugins/jquery-3.3.1.min.js"></script>
+  <script src="../../../blog/assets/plugins/popper.min.js"></script>
+  <script src="../../../blog/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+  <!-- Style Switcher (REMOVE ON YOUR PRODUCTION SITE) -->
+  <script src="../../../blog/assets/js/demo/style-switcher.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $(".navbar-toggler").click();
+    });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,183 @@
+<html>
+
+<head>
+    <title>Abhijeet. Hishobkar</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog Template">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <!-- FontAwesome JS-->
+    <script defer src="../assets/js/fontawsome_v5.7.1_all.js"></script>
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="../assets/css/theme-3.css">
+
+    <script src="../../js/qrcode.min.js"></script>
+    
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="./assets/css/monokai-sublime.min.css">
+
+</head>
+
+<body data-spy="scroll" data-target=".navbar-collapse">
+    <!-- preloader section -->
+    <div class="preloader">
+        <div class="sk-spinner sk-spinner-wordpress">
+            <span class="sk-inner-circle"></span>
+        </div>
+    </div>
+
+    <header class="header text-center">
+        <h1 class="blog-name pt-lg-4 mb-0"><a href="index.html">Abhijeet's Blog</a></h1>
+
+        <nav class="navbar navbar-expand-lg navbar-dark">
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="navigation" class="collapse navbar-collapse flex-column">
+                <div class="profile-section pt-3 pt-lg-0">
+                    <img class="profile-image mb-3 rounded-circle mx-auto" src="../assets/images/profile.png"
+                        alt="image">
+
+                    <div class="bio mb-3">Hi, my name is Abhijeet. Hishobkar.<br>My skillset extends beyond just coding.
+                    </div>
+                    <!--//bio-->
+                    <ul class="social-list list-inline py-3 mx-auto">
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-github-alt fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-stack-overflow fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-codepen fa-fw"></i></a></li>
+                    </ul><!--//social-list-->
+                    <hr>
+                </div><!--//profile-section-->
+
+                <ul class="navbar-nav flex-column text-left">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html"><i class="fas fa-home fa-fw mr-2"></i>Blog Home</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="../blog-post.html"><i class="fas fa-bookmark fa-fw mr-2"></i>Blog
+                            Post <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../blog-list.html"><i class="fas fa-list fa-fw mr-2"></i>Blog
+                            List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../index.html#home"><i class="fas fa-user fa-fw mr-2"></i>About
+                            Me</a>
+                    </li>
+                </ul>
+
+                <div class="my-2 my-md-3">
+                    <a class="btn btn-primary" href="../../index.html#contact" target="_blank">Get in Touch</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-wrapper">
+        <div class="container" style="font-size: 25px;">
+            
+            <h2>Here are the steps to create a login form with MD5 encryption and MySQL database authentication in PHP, incorporating images for clarity:</h2>
+            <br><br>
+            <img class="img-fluid" src="header.jpg">
+            <br><br>
+            <div>
+                <div data-message-author-role="assistant" data-message-id="8e1f888c-b296-4835-a324-f37bdb1b7b88" class="min-h-[20px] text-message flex flex-col items-start gap-3 whitespace-pre-wrap break-words [.text-message+&amp;]:mt-5 overflow-x-auto"><div class="markdown prose w-full break-words dark:prose-invert light"><p>Here's a simple example of how you can create a username and password login form, encrypt the password using the MD5 function in PHP, and store the credentials in a MySQL database. Please note that MD5 is considered outdated for password hashing, and you should use more secure algorithms like bcrypt or Argon2. However, for educational purposes, I'll demonstrate using MD5.</p><ol><li><strong>HTML Form (login_form.php):</strong></li></ol><pre><div class="bg-black rounded-md"><div class="p-4 overflow-y-auto"><code class="!whitespace-pre hljs language-html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1.0"</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Login Form<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Login Form<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">"login_process.php"</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"post"</span>&gt;</span>
+                            <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"username"</span>&gt;</span>Username:<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+                            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"username"</span> <span class="hljs-attr">required</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span>
+                    
+                            <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"password"</span>&gt;</span>Password:<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+                            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"password"</span> <span class="hljs-attr">required</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span>
+                    
+                            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Login"</span>&gt;</span>
+                        <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+                    </code></div></div></pre><ol start="2"><li><strong>PHP Process (login_process.php):</strong></li></ol><pre><div class="bg-black rounded-md"><div class="p-4 overflow-y-auto"><code class="!whitespace-pre hljs language-php"><span class="hljs-meta">&lt;?php</span>
+                    <span class="hljs-comment">// Establish database connection (replace placeholders)</span>
+                    <span class="hljs-variable">$host</span> = <span class="hljs-string">"your_host"</span>;
+                    <span class="hljs-variable">$username</span> = <span class="hljs-string">"your_username"</span>;
+                    <span class="hljs-variable">$password</span> = <span class="hljs-string">"your_password"</span>;
+                    <span class="hljs-variable">$database</span> = <span class="hljs-string">"your_database"</span>;
+                    
+                    <span class="hljs-variable">$conn</span> = <span class="hljs-keyword">new</span> <span class="hljs-title function_ invoke__">mysqli</span>(<span class="hljs-variable">$host</span>, <span class="hljs-variable">$username</span>, <span class="hljs-variable">$password</span>, <span class="hljs-variable">$database</span>);
+                    
+                    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$conn</span>-&gt;connect_error) {
+                        <span class="hljs-keyword">die</span>(<span class="hljs-string">"Connection failed: "</span> . <span class="hljs-variable">$conn</span>-&gt;connect_error);
+                    }
+                    
+                    <span class="hljs-comment">// Retrieve user input</span>
+                    <span class="hljs-variable">$username</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">'username'</span>];
+                    <span class="hljs-variable">$password</span> = <span class="hljs-title function_ invoke__">md5</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">'password'</span>]); <span class="hljs-comment"></span>
+                    
+                    <span class="hljs-comment">// Check user credentials</span>
+                    <span class="hljs-variable">$sql</span> = <span class="hljs-string">"SELECT * FROM users WHERE username='<span class="hljs-subst">$username</span>' AND password='<span class="hljs-subst">$password</span>'"</span>;
+                    <span class="hljs-variable">$result</span> = <span class="hljs-variable">$conn</span>-&gt;<span class="hljs-title function_ invoke__">query</span>(<span class="hljs-variable">$sql</span>);
+                    
+                    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$result</span>-&gt;num_rows &gt; <span class="hljs-number">0</span>) {
+                        <span class="hljs-comment">// Authentication successful</span>
+                        <span class="hljs-keyword">echo</span> <span class="hljs-string">"Login successful!"</span>;
+                    } <span class="hljs-keyword">else</span> {
+                        <span class="hljs-comment">// Authentication failed</span>
+                        <span class="hljs-keyword">echo</span> <span class="hljs-string">"Login failed. Please check your username and password."</span>;
+                    }
+                    
+                    <span class="hljs-variable">$conn</span>-&gt;<span class="hljs-title function_ invoke__">close</span>();
+                    <span class="hljs-meta">?&gt;</span>
+                    </code></div></div></pre><ol start="3"><li><strong>MySQL Database (users table):</strong></li></ol><pre><div class="bg-black rounded-md"><div class="p-4 overflow-y-auto"><code class="!whitespace-pre hljs language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> users (
+                        id <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY</span> KEY AUTO_INCREMENT,
+                        username <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+                        password <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">32</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>
+                    );
+                    </code></div></div></pre></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer section -->
+
+    <footer class="footer text-center py-2 theme-bg-dark">
+        <small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a
+                href="http://hishobkar.github.io" target="_blank">Abhijeet. Hishobkar</a> for developers</small>
+
+    </footer>
+
+    <!-- footer ends -->
+
+    <!-- Javascript -->
+    <script src="../assets/plugins/jquery-3.3.1.min.js"></script>
+    <script src="../assets/plugins/popper.min.js"></script>
+    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Style Switcher (REMOVE ON YOUR PRODUCTION SITE) -->
+    <script src="../assets/js/demo/style-switcher.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".navbar-toggler").click();
+        });
+    </script>
+
+</body>
+
+</html>

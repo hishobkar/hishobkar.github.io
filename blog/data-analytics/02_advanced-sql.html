@@ -1,0 +1,547 @@
+<html>
+
+<head>
+	<title>Abhijeet. Hishobkar</title>
+
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Blog Template">
+	<meta name="author" content="Xiaoying Riley at 3rd Wave Media">
+	<link rel="shortcut icon" href="../favicon.ico">
+
+	<!-- FontAwesome JS-->
+	<script defer src="../assets/js/fontawsome_v5.7.1_all.js"></script>
+
+	<!-- Theme CSS -->
+	<link id="theme-style" rel="stylesheet" href="../assets/css/theme-3.css">
+
+	<script src="../../js/qrcode.min.js"></script>
+</head>
+
+<body data-spy="scroll" data-target=".navbar-collapse">
+	<!-- preloader section -->
+	<div class="preloader">
+		<div class="sk-spinner sk-spinner-wordpress">
+			<span class="sk-inner-circle"></span>
+		</div>
+	</div>
+
+	<header class="header text-center">
+		<h1 class="blog-name pt-lg-4 mb-0"><a href="index.html">Abhijeet's Blog</a></h1>
+
+		<nav class="navbar navbar-expand-lg navbar-dark">
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+				aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div id="navigation" class="collapse navbar-collapse flex-column">
+				<div class="profile-section pt-3 pt-lg-0">
+					<img class="profile-image mb-3 rounded-circle mx-auto" src="../assets/images/profile.png"
+						alt="image">
+
+					<div class="bio mb-3">Hi, my name is Abhijeet. Hishobkar.<br>My skillset extends beyond just coding.
+					</div>
+					<!--//bio-->
+					<ul class="social-list list-inline py-3 mx-auto">
+						<li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+						<li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
+						<li class="list-inline-item"><a href="#"><i class="fab fa-github-alt fa-fw"></i></a></li>
+						<li class="list-inline-item"><a href="#"><i class="fab fa-stack-overflow fa-fw"></i></a></li>
+						<li class="list-inline-item"><a href="#"><i class="fab fa-codepen fa-fw"></i></a></li>
+					</ul><!--//social-list-->
+					<hr>
+				</div><!--//profile-section-->
+
+				<ul class="navbar-nav flex-column text-left">
+					<li class="nav-item">
+						<a class="nav-link" href="../index.html"><i class="fas fa-home fa-fw mr-2"></i>Blog Home</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="../blog-post.html"><i class="fas fa-bookmark fa-fw mr-2"></i>Blog
+							Post <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="../blog-list.html"><i class="fas fa-list fa-fw mr-2"></i>Blog
+							List</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="../../index.html#home"><i class="fas fa-user fa-fw mr-2"></i>About
+							Me</a>
+					</li>
+				</ul>
+
+				<div class="my-2 my-md-3">
+					<a class="btn btn-primary" href="../../index.html#contact" target="_blank">Get in Touch</a>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+
+	<div class="main-wrapper">
+
+		<article class="blog-post px-3 py-5 p-md-5">
+
+			<div class="container">
+				<main class="post post__container">
+					<header class="post__header">
+						<h1 class="entry-title ds-typography__h1 ds-color__static-content-primary">Advanced SQL For Data
+							Analytics (Step-by-Step Tutorial)</h1>
+						<div class="author">
+							<label class="post_info ds-implicit"> by
+								<a href="https://www.linkedin.com/in/hishobkar">Abhijeet Hishobkar</a>, UPDATED ON
+								<time class="ENTRY-DATE PUBLISHED UPDATED" datetime="2022-12-01T12:05:38+01:00">DECEMBER
+									1,
+									2022</time> </label> <label class="read_time">10 mins read</label>
+						</div>
+						<div class="mt-1">
+							<img src="02_header.jpg" class="img-fluid" />
+						</div>
+					</header><br>
+					<div class="entry-content post__content ds-implicit">
+						<p><span style="font-weight: 400;">As a data analyst, advanced SQL is an important skill to
+								have,
+								because you need to go beyond just accessing data. You’ll have to deliver insights that
+								help
+								users take action or help data scientists transform data for machine learning. At my
+								job, I’m
+								constantly digging into data with advanced SQL techniques like aggregate functions,
+								complex
+								table joins, and common table expressions so that I can better understand how users are
+								interacting with our products and help design features our customers need.&nbsp;</span>
+						</p>
+						<p><a href="./01_how-to-use-sql.html"><span style="font-weight: 400;">In my previous SQL
+									article</span></a><span style="font-weight: 400;">, I walked through all of the SQL
+								basics
+								to teach you how to create a database and table, insert records, and select records.
+								This
+								tutorial is a continuation of that article and builds on the skills and examples we
+								previously
+								covered. If you’re new to SQL or data analytics, check out the beginner’s guide before
+								working
+								through this advanced SQL tutorial.&nbsp;</span></p>
+						<p><span style="font-weight: 400;">In this tutorial, we’ll cover the following concepts and look
+								at
+								examples that will prepare you for writing advanced SQL queries for data
+								analysis:</span></p>
+						<ol>
+							<li style="font-weight: 400;" aria-level="1"><a href="#creating-data"><span
+										style="font-weight: 400;">Creating data for advanced SQL examples</span></a>
+							</li>
+							<li style="font-weight: 400;" aria-level="1"><a href="#creating-tables"><span
+										style="font-weight: 400;">Creating tables using normalization
+										concepts</span></a></li>
+							<li style="font-weight: 400;" aria-level="1"><a href="#joining-tables"><span
+										style="font-weight: 400;">Joining tables</span></a></li>
+							<li style="font-weight: 400;" aria-level="1"><a href="#writing-advanced-sql-joins"><span
+										style="font-weight: 400;">Writing advanced SQL joins</span></a></li>
+							<li style="font-weight: 400;" aria-level="1"><a href="#aliasing-tables-and-columns"><span
+										style="font-weight: 400;">Aliasing tables and columns</span></a></li>
+							<li style="font-weight: 400;" aria-level="1"><a href="#counting-records"><span
+										style="font-weight: 400;">Counting records</span></a></li>
+							<li style="font-weight: 400;" aria-level="1"><a href="#aggregating-averages"><span
+										style="font-weight: 400;">Aggregating averages in advanced SQL</span></a></li>
+							<li style="font-weight: 400;" aria-level="1"><a href="#summary"><span
+										style="font-weight: 400;">Summary</span></a></li>
+						</ol>
+						<p><span style="font-weight: 400;">You can use the clickable menu to skip ahead to any section.
+								Let’s
+								get started!</span></p>
+						<h2 id="creating-data" class="intext-cta__blog-title"><span style="font-weight: 400;">1.
+								Creating data
+								for advanced SQL examples</span></h2>
+						<p><span style="font-weight: 400;">If you’re already familiar with inserting records into a
+								database
+								table and want to skip the beginner’s SQL tutorial and start with these advanced SQL
+								concepts,
+								run the following script to create the dataset we used </span><a
+								href="./01_how-to-use-sql.html"><span style="font-weight: 400;">in the previous
+									tutorial</span></a><span style="font-weight: 400;">.</span></p>
+						<pre><code>CREATE DATABASE exampleDatabase;
+
+CREATE TABLE client (
+	clientID int not null  
+	, firstName varchar(50)
+	, lastName varchar(50)
+	, gender varchar(1)
+	, yearsServiced int
+	, discountRate float
+);
+
+INSERT INTO client
+values (2, 'Kristen', 'Moss', 'F', 1, 0.01)
+
+INSERT INTO client
+values (3, 'Johnny', 'Carson', 'm', 4, 0.05)
+
+INSERT INTO client
+values (3, 'Alex', 'Porter', null, 4, 0.05</code></pre>
+						<p>We’ll use this for the other tutorials in this article.</p>
+						<h2 id="creating-tables" class="intext-cta__blog-title"><span style="font-weight: 400;">2.
+								Creating
+								tables using normalization concepts</span></h2>
+						<p><span style="font-weight: 400;">We briefly covered the concept of normalization for
+								relational data
+								in the previous article. To build on that concept, let’s create a new table with two new
+								SQL
+								keywords that every advanced SQL analyst should know: </span><b>IDENTITY </b><span
+								style="font-weight: 400;">and </span><b>FOREIGN KEY.</b></p>
+						<p><span style="font-weight: 400;">Run the following scripts to create a new table and insert
+								data into
+								it:</span></p>
+						<pre><code> CREATE TABLE orders (
+	orderID int IDENTITY(1,1) PRIMARY KEY
+	, clientID int FOREIGN KEY REFERENCES client(clientID)
+	, orderType varchar(3)
+	, billed float
+)
+
+INSERT INTO orders (clientID, orderType, billed)
+values (2, 'new', 300.00)
+INSERT INTO orders (clientID, orderType, billed)
+values (3, 'new', 2564.49)
+INSERT INTO orders (clientID, orderType, billed)
+values (1, 'new', 139.99)
+INSERT INTO orders (clientID, orderType, billed)
+values (2, 'new', 299.95)
+INSERT INTO orders (clientID, orderType, billed)
+values (3, 'rmk', 99.95)
+INSERT INTO orders (clientID, orderType, billed)
+values (4, 'new', 139.99)
+
+SELECT * FROM orders</code></pre>
+						<p><img decoding="async" class="alignnone size-full wp-image-19899 lazy-loaded"
+								src="./images/advanced-sql.png" data-lazy-type="image" alt="advanced sql" width="269"
+								height="170" title="advanced sql"></p>
+						<p><span style="font-weight: 400;">Notice in our Insert statements we didn’t include the
+							</span><i><span style="font-weight: 400;">orderID </span></i><span
+								style="font-weight: 400;">column. Using
+							</span><b>IDENTITY(1,1) </b><span style="font-weight: 400;">&nbsp;forces the variable
+								orderID to
+								automatically increment. That way we don’t need to specify an orderID when inserting our
+								records. This is typically used with the PRIMARY KEY constraint.</span></p>
+						<p><span style="font-weight: 400;">To help keep our data normalized, we use </span><b>FOREIGN
+								KEY
+								REFERENCES. </b><span style="font-weight: 400;">It creates a constraint on a table by
+								referring
+								to a primary key in another table. It prevents SQL commands from breaking the link
+								between the
+								two tables. For example, I can’t delete client records if they are referenced by the key
+								relationship in the </span><b>orders</b> <span style="font-weight: 400;">table. By using
+								a
+								foreign key relationship, we don’t need to duplicate information about the client in the
+								orders
+								table. If we need client data with the orders data, we use the primary key/foreign key
+								relationship to join the tables. This helps keep the data normalized in the
+								database.&nbsp;</span></p>
+						<h2 id="joining-tables" class="intext-cta__blog-title"><span style="font-weight: 400;">3.
+								Joining
+								tables</span></h2>
+						<p><span style="font-weight: 400;">The first concept you need to master to write advanced SQL
+								queries is
+								the JOIN. In the real world, companies often store data in silos, separating things like
+								customer data, application user data, and corporate financial data. To construct an
+								insightful
+								dataset, a data analyst will often need to pull data from various silos and join the
+								records
+								together into a data model that makes it easy to group records and calculate
+								statistics.</span>
+						</p>
+						<p><span style="font-weight: 400;">Use a </span><b>JOIN </b><span
+								style="font-weight: 400;">clause to
+								combine the output from more than one table. Typically, tables are joined based on a
+								related
+								column between them like a primary key/ foreign key relationship.</span></p>
+						<p><span style="font-weight: 400;">We can join our </span><b>ORDERS</b> <span
+								style="font-weight: 400;">and </span><b>CLIENT</b> <span
+								style="font-weight: 400;">tables using
+								the </span><b>INNER JOIN</b><span style="font-weight: 400;"> clause based on the
+								clientID field
+								like this:</span></p>
+						<pre><code>SELECT * FROM client
+
+INNER JOIN orders ON orders.clientID = client.clientID</code></pre>
+						<p><img decoding="async" class="alignnone size-full wp-image-19900 lazy-loaded"
+								src="./images/advanced-sql-1.png" data-lazy-type="image" alt="advanced sql 1"
+								width="650" height="171" title="advanced sql 1" data-srcset=""
+								sizes="(max-width: 650px) 100vw, 650px"></p>
+						<p><span style="font-weight: 400;">Notice our results are a combination of fields from both
+								tables,
+								appearing in the order the tables were joined. Since we’re selecting from
+							</span><b>CLIENT</b><span style="font-weight: 400;"> first, the fields from that table
+								appear
+								first.&nbsp;</span></p>
+						<p><span style="font-weight: 400;">Think about INNER JOIN like you would a Venn diagram. The
+								circle on
+								the left is table 1, the circle on the right is table 2, and where the two overlap is
+								the
+								records that return when using an inner join. Any record from table 1 or table 2 that
+								doesn’t
+								share the common field, won’t output in the result-set. Only the records that exist in
+								the
+								overlapping space will be retrieved by the INNER JOIN.</span></p>
+						<p><span style="font-weight: 400;"><img loading="lazy" decoding="async"
+									class="alignnone size-full wp-image-19901 lazy-loaded"
+									src="./images/advanced-sql-2.png" data-lazy-type="image" alt="advanced sql 2"
+									width="384" height="225" title="advanced sql 2" data-srcset=""
+									sizes="(max-width: 384px) 100vw, 384px">&nbsp;</span></p>
+						<p><span style="font-weight: 400;">There are different types of joins that allow you to return
+								data from
+								different circles in the Venn diagram. For example, the </span><b>LEFT OUTER
+								JOIN</b><span style="font-weight: 400;"> would return all records from table 1. If the
+								shared field does not
+								exist in table 2, the row still outputs from table 1 with nulls in each field of column
+								2. Check
+								out the </span><a
+								href="https://learn.microsoft.com/en-us/sql/relational-databases/performance/joins?view=sql-server-ver16"
+								rel="noopener"><span style="font-weight: 400;">official Microsoft
+									documentation</span></a><span style="font-weight: 400;"> for an in-depth look at all
+								of the possible join types available in
+								SQL Server:</span></p>
+						<ul>
+							<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Inner
+									join</span></li>
+							<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Left outer
+									join</span>
+							</li>
+							<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Right outer
+									join</span>
+							</li>
+							<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Full outer
+									join</span>
+							</li>
+							<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">Cross
+									join</span></li>
+						</ul>
+						<p><span style="font-weight: 400;">In my experience, inner join and left outer join are the most
+								common
+								joins in SQL queries. However, when working with advanced SQL data types like strings,
+								JSON or
+								XML, cross joins become necessary.</span></p>
+						<h2 id="writing-advanced-sql-joins" class="intext-cta__blog-title"><span
+								style="font-weight: 400;">4.
+								Writing advanced SQL joins</span></h2>
+						<p><span style="font-weight: 400;">Complex advanced SQL queries will use different join
+								techniques that
+								you should know are possible. For example, we can write a subquery in a JOIN clause like
+								this:</span></p>
+						<pre><code>SELECT t1.column_a, t2.column_b
+FROM table_1 t1
+INNER JOIN (SELECT column_a, column_b from table_2) t2 ON t2.column_a = t1.column_a</code></pre>
+						<p><span style="font-weight: 400;">Joining on a subquery can be very handy in situations where
+								it’s less
+								resource intensive to calculate statistics on the smaller dataset than trying to do it
+								on the
+								larger dataset.</span></p>
+						<p><span style="font-weight: 400;">There are also <strong>nested joins</strong>, which are joins
+								within
+								joins. For example:</span></p>
+						<pre><code>SELECT t1.column_a, t2.column_b, t3.column_c
+FROM table_1 t1
+INNER JOIN (table_2 t2 
+          INNER JOIN table_3 t3 on t3.column_c = t2.column_c) z on z.t2_column_a = t1.column_a</code></pre>
+						<p><span style="font-weight: 400;">Nested joins are useful for when you need fields joined to
+								one table,
+								without impacting the joins on other tables. In the example above, we see table_2 has a
+								nested
+								join with table_3, and then that joined data is joined to table_1.</span></p>
+						<h2 id="aliasing-tables-and-columns" class="intext-cta__blog-title"><span
+								style="font-weight: 400;">5.
+								Aliasing tables and columns</span></h2>
+						<p><span style="font-weight: 400;">Getting into advanced SQL, you’ll notice the queries can get
+								quite
+								long. In SQL we can alias our tables and fields to make our code shorter and easier to
+								read. An
+								alias is a temporary name. Additionally, SQL is </span><b><i>not case
+									sensitive</i></b><span style="font-weight: 400;"> when it comes to commands or
+								fields. The following SQL query produces
+								the same results as the above query:</span></p>
+						<pre><code>select * from client c
+inner join orders o on o.clientID = c.clientID</code></pre>
+						<p><span style="font-weight: 400;">Using aliases for our tables makes writing SQL much simpler
+								and is a
+								best practice when creating complex queries. Just make sure to use an alias that makes
+								sense,
+								and they must be unique. When aliasing fields, it is typical to use the
+							</span><b>AS</b><span style="font-weight: 400;"> keyword like this:</span></p>
+						<pre><code>SELECT clientID AS clientIDfromClientTable FROM client</code></pre>
+						<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-19902 lazy-loaded"
+								src="./images/advanced-sql-3.png" data-lazy-type="image" alt="advanced sql 3"
+								width="168" height="128" title="advanced sql 3"></p>
+						<p><span style="font-weight: 400;">The aliased column name returns in the results-set; however,
+								when
+								referencing the field in the query we’d still use the original field name. For example,
+								if we
+								INNER JOIN the </span><b>ORDERS</b> <span style="font-weight: 400;">table on clientID,
+								we’d use
+								the fieldname </span><b>clientID</b><span style="font-weight: 400;">, not the aliased
+								name
+							</span><b>clientIDfromClientTable</b><span style="font-weight: 400;">.</span></p>
+						<h2 id="counting-records" class="intext-cta__blog-title"><span style="font-weight: 400;">6.
+								Counting
+								records</span></h2>
+						<p><span style="font-weight: 400;">Relational databases (RDBMS) often support mathematical and
+								statistical operations that can be executed using SQL, like addition, subtraction,
+								multiplication, division, finding an average, summing numbers, counting records,
+								calculating
+								variance and standard deviation, and manipulating dates. By learning advanced SQL
+								concepts,
+								you’ll be able to transform data into summary statistics which is an effective way to
+								begin
+								understanding how your data can help you make decisions.&nbsp; Here are some of the
+								commonly
+								used aggregate functions for data analysis:</span></p>
+						<ul>
+							<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">COUNT()</span>
+							</li>
+							<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">AVG()</span>
+							</li>
+							<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">MIN()</span>
+							</li>
+							<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">MAX()</span>
+							</li>
+							<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">SUM()</span>
+							</li>
+							<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">StDEV()</span>
+							</li>
+							<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">VAR()</span>
+							</li>
+						</ul>
+						<p><span style="font-weight: 400;">The </span><b>COUNT()</b><span style="font-weight: 400;">
+								function
+								allows us to count the number of records in a table. There are two ways to use
+								COUNT():</span>
+						</p>
+						<ul>
+							<li style="font-weight: 400;" aria-level="1"><span style="font-weight: 400;">COUNT(*)
+									returns a
+									count of rows that includes null values.</span></li>
+							<li style="font-weight: 400;" aria-level="1"><span
+									style="font-weight: 400;">COUNT(column_name)
+									returns a count of records excluding the null values.</span></li>
+						</ul>
+						<p><span style="font-weight: 400;">If we want to count how many records are in the
+							</span><b>CLIENT</b>
+							<span style="font-weight: 400;">table, we use a query like this:</span>
+						</p>
+						<pre><code>SELECT COUNT(*) AS records FROM client</code></pre>
+						<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-19903 lazy-loaded"
+								src="./images/advanced-sql-5.png" data-lazy-type="image" alt="advanced sql 5"
+								width="106" height="71" title="advanced sql 5"></p>
+						<p><span style="font-weight: 400;">As expected, a count of four returns since we have four
+								records in
+								the client table.&nbsp;</span></p>
+						<p><span style="font-weight: 400;">If we want to count how many records have a value in the
+							</span><b>gender</b> <span style="font-weight: 400;">field, we use a query like this:</span>
+						</p>
+						<pre><code>SELECT COUNT(gender) as genderCount FROM client</code></pre>
+						<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-19904 lazy-loaded"
+								src="./images/advanced-sql-6.png" data-lazy-type="image" alt="advanced sql 6"
+								width="127" height="70" title="advanced sql 6"></p>
+						<p><span style="font-weight: 400;">Notice we only count 3 records with a value in the gender
+								field
+								because Alex Porter’s gender is NULL. A Null means the field is empty; it contains no
+								value.&nbsp;</span></p>
+						<h2 id="aggregating-averages" class="intext-cta__blog-title"><span style="font-weight: 400;">7.
+								Aggregating averages in advanced SQL</span></h2>
+						<p><span style="font-weight: 400;">The last aggregate function we’ll look at is</span><b>
+								AVG()</b><span style="font-weight: 400;">, which is used a lot in advanced sql queries
+								in data analytics. The
+							</span><b>AVG()</b><span style="font-weight: 400;"> function returns the calculated average
+								of a
+								numeric column. Aggregate functions are also used in window functions, which is an
+								advanced SQL
+								concept that builds on functionality not covered in this tutorial.</span></p>
+						<p><span style="font-weight: 400;">When using aggregate functions, remember to declare an alias
+								for the
+								aggregation or the column will not return a name. Columns without names can sometimes
+								cause
+								problems in complex queries.</span></p>
+						<p><span style="font-weight: 400;">Let’s say we want to calculate the average amount billed from
+								our
+							</span><b>orders</b> <span style="font-weight: 400;">table. Our query would look like
+								this:</span>
+						</p>
+						<pre><code>SELECT AVG(billed) as averageBilled FROM orders</code></pre>
+						<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-19905 lazy-loaded"
+								src="./images/advanced-sql-7.png" data-lazy-type="image" alt="advanced sql 7"
+								width="157" height="71" title="advanced sql 7"></p>
+						<p><span style="font-weight: 400;">Calculating an overall average is easy; however, we sometimes
+								need to
+								figure the average value based on specified groups within our dataset. For example, say
+								we
+								wanted to find the average billed </span><b>per client</b><span
+								style="font-weight: 400;">. For
+								that we need to use the </span><b>GROUP BY</b><span style="font-weight: 400;">
+								command.&nbsp;</span></p>
+						<p><span style="font-weight: 400;">Using </span><b>GROUP BY</b><span style="font-weight: 400;">
+								groups
+								records that have the same value. When using GROUP BY, we must include all the fields in
+								our
+								select statement except the ones being aggregated. Let’s combined what we’ve learned in
+								this
+								article and write a query that includes client information and calculates the average
+								billed per
+								client:</span></p>
+						<pre><code>SELECT c.clientID, c.firstName, c.lastName, avg(o.billed) as AverageBilledPerClient
+FROM client c
+INNER JOIN orders o on o.clientID = c.clientID
+GROUP BY c.clientID, c.firstName, c.lastName</code></pre>
+						<p><img loading="lazy" decoding="async" class="alignnone size-full wp-image-19906 lazy-loaded"
+								src="./images/advanced-sql-8.png" data-lazy-type="image" alt="advanced sql 8"
+								width="338" height="123" title="advanced sql 8" data-srcset=""
+								sizes="(max-width: 338px) 100vw, 338px"></p>
+						<h2 id="summary" class="intext-cta__blog-title" data-gtm-vis-first-on-screen781550_382="422175"
+							data-gtm-vis-total-visible-time781550_382="100"><span style="font-weight: 400;">8.
+								Summary</span>
+						</h2>
+						<p><span style="font-weight: 400;">While retrieving data using SQL can be simple, cleaning and
+								aggregating the data requires skills that need to be practiced in order to master. In
+								this
+								tutorial we learned several concepts that will bring to you an advanced SQL skill level
+								including table joins, aliasing variables, counting records, and applying aggregate
+								functions
+								and grouping.&nbsp;</span></p>
+						<p><span style="font-weight: 400;">These concepts are important to know because companies often
+								keep
+								data in different systems or database tables, leaving it up to data analysts to join
+								them
+								together and make sense of it all.&nbsp;</span></p>
+					</div>
+				</main>
+			</div>
+
+		</article>
+	</div>
+
+	<!-- footer section -->
+
+	<footer class="footer text-center py-2 theme-bg-dark">
+		<small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a
+				href="http://hishobkar.github.io" target="_blank">Abhijeet. Hishobkar</a> for developers</small>
+
+	</footer>
+
+	<!-- footer ends -->
+
+	<!-- Javascript -->
+	<script src="../assets/plugins/jquery-3.3.1.min.js"></script>
+	<script src="../assets/plugins/popper.min.js"></script>
+	<script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+	<!-- Style Switcher (REMOVE ON YOUR PRODUCTION SITE) -->
+	<script src="../assets/js/demo/style-switcher.js"></script>
+
+	<script>
+		$(document).ready(function () {
+			$(".navbar-toggler").click();
+		});
+	</script>
+
+</body>
+
+</html>

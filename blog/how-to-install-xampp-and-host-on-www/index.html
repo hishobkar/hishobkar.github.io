@@ -1,0 +1,178 @@
+<html>
+
+<head>
+    <title>Abhijeet. Hishobkar</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog Template">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <!-- FontAwesome JS-->
+    <script defer src="../assets/js/fontawsome_v5.7.1_all.js"></script>
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="../assets/css/theme-3.css">
+
+    <script src="../../js/qrcode.min.js"></script>
+</head>
+
+<body data-spy="scroll" data-target=".navbar-collapse">
+    <!-- preloader section -->
+    <div class="preloader">
+        <div class="sk-spinner sk-spinner-wordpress">
+            <span class="sk-inner-circle"></span>
+        </div>
+    </div>
+
+    <header class="header text-center">
+        <h1 class="blog-name pt-lg-4 mb-0"><a href="index.html">Abhijeet's Blog</a></h1>
+
+        <nav class="navbar navbar-expand-lg navbar-dark">
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="navigation" class="collapse navbar-collapse flex-column">
+                <div class="profile-section pt-3 pt-lg-0">
+                    <img class="profile-image mb-3 rounded-circle mx-auto" src="../assets/images/profile.png"
+                        alt="image">
+
+                    <div class="bio mb-3">Hi, my name is Abhijeet. Hishobkar.<br>My skillset extends beyond just coding.
+                    </div>
+                    <!--//bio-->
+                    <ul class="social-list list-inline py-3 mx-auto">
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-github-alt fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-stack-overflow fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-codepen fa-fw"></i></a></li>
+                    </ul><!--//social-list-->
+                    <hr>
+                </div><!--//profile-section-->
+
+                <ul class="navbar-nav flex-column text-left">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html"><i class="fas fa-home fa-fw mr-2"></i>Blog Home</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="../blog-post.html"><i class="fas fa-bookmark fa-fw mr-2"></i>Blog
+                            Post <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../blog-list.html"><i class="fas fa-list fa-fw mr-2"></i>Blog
+                            List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../index.html#home"><i class="fas fa-user fa-fw mr-2"></i>About
+                            Me</a>
+                    </li>
+                </ul>
+
+                <div class="my-2 my-md-3">
+                    <a class="btn btn-primary" href="../../index.html#contact" target="_blank">Get in Touch</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <div class="main-wrapper">
+        <div class="container">
+            <div style=""><!----><message-content style="">
+                    <div style=""> <br> <br>
+                        <h2><strong>A guide on hosting a PHP website using XAMPP on a Windows server and making it
+                                accessible on the www</strong></h2> <br> <img src="header.jpg" class="img-fluid"> <br> <br>
+                        <p><strong>1. Install XAMPP on Windows Server:</strong></p>
+                        <ul>
+                            <li>Download the XAMPP installer from <a
+                                    href="https://www.apachefriends.org/index.html">https://www.apachefriends.org/index.html</a>.
+                            </li>
+                            <li>Run the installer and follow the on-screen instructions.</li>
+                            <li>Choose the components you need (Apache, MySQL, PHP).</li>
+                            <li>Install XAMPP in a directory with write permissions (e.g., C:\xampp).</li>
+                        </ul>
+                        <p><strong>2. Start XAMPP Services:</strong></p>
+                        <ul>
+                            <li>Open the XAMPP Control Panel.</li>
+                            <li>Start the Apache and MySQL services.</li>
+                        </ul>
+                        <p><strong>3. Place Website Files:</strong></p>
+                        <ul>
+                            <li>Copy your website files into the <code>htdocs</code> directory within your XAMPP
+                                installation (e.g., C:\xampp\htdocs).</li>
+                        </ul>
+                        <p><strong>4. Configure Virtual Host (Optional):</strong></p>
+                        <ul>
+                            <li>
+                                <p>If you want to use a domain name instead of the server's IP address:</p>
+                                <ul>
+                                    <li>Open the <code>httpd-vhosts.conf</code> file in a text editor (usually found in
+                                        C:\xampp\apache\conf\extra).</li>
+                                    <li>Add a virtual host entry like this:</li>
+                                </ul> <code-block><!---->
+                                    <div><!---->
+                                        <pre><code _ngcontent-ng-c4007627397="" role="text" class="code-container no-decoration-radius"><virtualhost *:80=""> DocumentRoot "C:/xampp/htdocs/your-website-folder" ServerName your-domain-name.com </virtualhost> </code></pre>
+                                        <!---->
+                                    </div><!---->
+                                </code-block>
+                            </li>
+                        </ul>
+                        <p><strong>5. Port Forwarding (Essential for External Access):</strong> </p>
+                        <ul>
+                            <li>Access your router's configuration panel.</li>
+                            <li>Find port forwarding settings.</li>
+                            <li>Create a rule to forward port 80 (HTTP) to the server's internal IP address.</li>
+                        </ul>
+                        <p><strong>6. Test Website Locally:</strong></p>
+                        <ul>
+                            <li>Open a web browser on the server or a local network computer. </li>
+                            <li>Access your website using either <code>http://localhost</code> or
+                                <code>http://server-ip-address</code>. </li>
+                        </ul>
+                        <p><strong>7. Access Website from Anywhere (www):</strong></p>
+                        <ul>
+                            <li>Use your domain name (if configured) or the server's public IP address to access the
+                                website from any device connected to the internet.</li>
+                        </ul>
+                    </div>
+                </message-content><!----><!---->
+                <div> <!----><!----><sources-list style="">
+                        <div><!----></div><!----><!---->
+                    </sources-list> </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer section -->
+
+    <footer class="footer text-center py-2 theme-bg-dark">
+        <small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a
+                href="http://hishobkar.github.io" target="_blank">Abhijeet. Hishobkar</a> for developers</small>
+
+    </footer>
+
+    <!-- footer ends -->
+
+    <!-- Javascript -->
+    <script src="../assets/plugins/jquery-3.3.1.min.js"></script>
+    <script src="../assets/plugins/popper.min.js"></script>
+    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Style Switcher (REMOVE ON YOUR PRODUCTION SITE) -->
+    <script src="../assets/js/demo/style-switcher.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".navbar-toggler").click();
+        });
+    </script>
+
+</body>
+
+</html>

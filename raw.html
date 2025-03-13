@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Processor</title>
+    <script src="./js/jquery.js"></script>
+</head>
+
+<body>
+
+    <hr>
+    <textarea id="htmlInput" rows="20" cols="100" style="width: 100%;"></textarea>
+    <hr>
+    <button onclick="processHTML()" style="width: 100%;">Process HTML</button>
+    <hr>
+    <textarea id="output" rows="20" cols="100" style="width: 100%;"></textarea>
+    <hr>
+    <script>
+        function processHTML() {
+            var rawHtml = $('#htmlInput').val();
+            var processedHtml = sanitizeHTML(rawHtml);
+            $('#output').html(processedHtml);
+        }
+
+        function sanitizeHTML(rawHtml) {
+            // Replace all double spaces with a single space until there are none left
+            while (rawHtml.includes('  ') || rawHtml.includes('\t') || rawHtml.includes('\n') || rawHtml.includes('\r')) {
+                rawHtml = rawHtml.replace(/  |\t/g, ' ');
+                rawHtml = rawHtml.replace(/  |\n/g, ' ');
+                rawHtml = rawHtml.replace(/  |\r/g, ' ');
+            }
+
+            var $temp = $('<div>').html(rawHtml);
+
+            $temp.find('*').each(function () {
+                var allowedAttributes = ['src', 'href'];
+
+                // all elements
+                var element = $(this);
+
+                // omits the <code> element
+                var element = $(this).closest('code').length === 0 ? $(this) : null;
+
+                // var element = $(this).prop("tagName").toLowerCase() !== 'code' ? $(this) : null;
+                if (element == null)
+                    return;
+
+                // Remove specific attributes
+                var attributesToRemove = ['data-message-id','_nghost-ng-c3652678316','ng-version','_ngcontent-ng-c4007627397','_nghost-ng-c493169085', 'class'];
+                $.each(attributesToRemove, function (index, attributeName) {
+                    element.removeAttr(attributeName);
+                });
+
+                // Remove all attributes except allowed ones
+                $.each(this.attributes, function (i, attrib) {
+                    if (attrib != undefined) {
+                        if (attrib.name !== 'style' && allowedAttributes.indexOf(attrib.name) === -1) {
+                            element.removeAttr(attrib.name);
+                        }
+                    }
+                });
+
+                // Process style attribute to keep background-image
+                if (element.attr('style')) {
+                    var styleArray = element.attr('style').split(';');
+                    var newStyle = '';
+
+                    $.each(styleArray, function (index, style) {
+                        if (style.toLowerCase().includes('background-image')) {
+                            newStyle += style + ';';
+                        }
+                    });
+
+                    element.attr('style', newStyle);
+                }
+            });
+
+            return $temp.html();
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1128 @@
+<html>
+
+<head>
+    <title>Abhijeet. Hishobkar</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog Template">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <!-- FontAwesome JS-->
+    <script defer src="../assets/js/fontawsome_v5.7.1_all.js"></script>
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="../assets/css/theme-3.css">
+
+    <script src="../../js/qrcode.min.js"></script>
+    <style>
+        #myModal {
+            z-index: 1050;
+            /* Adjust the value as needed */
+        }
+    </style>
+</head>
+
+<body data-spy="scroll" data-target=".navbar-collapse">
+    <!-- preloader section -->
+    <div class="preloader">
+        <div class="sk-spinner sk-spinner-wordpress">
+            <span class="sk-inner-circle"></span>
+        </div>
+    </div>
+
+    <header class="header text-center">
+        <h1 class="blog-name pt-lg-4 mb-0"><a href="index.html">Abhijeet's Blog</a></h1>
+
+        <nav class="navbar navbar-expand-lg navbar-dark">
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="navigation" class="collapse navbar-collapse flex-column">
+                <div class="profile-section pt-3 pt-lg-0">
+                    <img class="profile-image mb-3 rounded-circle mx-auto" src="../assets/images/profile.png"
+                        alt="image">
+
+                    <div class="bio mb-3">Hi, my name is Abhijeet. Hishobkar.<br>My skillset extends beyond just coding.
+                    </div>
+                    <!--//bio-->
+                    <ul class="social-list list-inline py-3 mx-auto">
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-github-alt fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-stack-overflow fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-codepen fa-fw"></i></a></li>
+                    </ul><!--//social-list-->
+                    <hr>
+                </div><!--//profile-section-->
+
+                <ul class="navbar-nav flex-column text-left">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html"><i class="fas fa-home fa-fw mr-2"></i>Blog Home</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="../blog-post.html"><i class="fas fa-bookmark fa-fw mr-2"></i>Blog
+                            Post <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../blog-list.html"><i class="fas fa-list fa-fw mr-2"></i>Blog
+                            List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../index.html#home"><i class="fas fa-user fa-fw mr-2"></i>About
+                            Me</a>
+                    </li>
+                </ul>
+
+                <div class="my-2 my-md-3">
+                    <a class="btn btn-primary" href="../../index.html#contact" target="_blank">Get in Touch</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <div class="main-wrapper">
+
+        <article class="blog-post px-3 py-5 p-md-5">
+            <div class="container">
+
+                <div class="tutorial-content" id="mainContent">
+                    <h1>1. Objective - Understand SQL RDBMS Concepts</h1>
+
+                    <div class="table-of-content-wrapper">
+                        <div class="table-of-content">
+                            <header class="table-of-content__header">
+                                Table of content
+                            </header>
+                            <ul class="table-of-content__content">
+                                <li><a href="#what_is_rdbms">What is RDBMS?</a></li>
+                                <li><a href="#what_is_a_table">What is a Table?</a></li>
+                                <li><a href="#what_is_a_field">What is a Field?</a></li>
+                                <li><a href="#what_is_a_record">What is a Record or a Row?</a></li>
+                                <li><a href="#what_is_a_column">What is a Column?</a></li>
+                                <li><a href="#what_is_a_null_value">What is a NULL Value?</a></li>
+                                <li><a href="#sql_constraints">SQL Constraints</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div class="clearer"></div>
+                    <h2 id="what_is_rdbms">What is RDBMS?</h2>
+                    <p>RDBMS stands for <b>R</b>elational <b>D</b>atabase <b>M</b>anagement <b>S</b>ystem. RDBMS is the
+                        basis for SQL, and for all modern database systems like MS SQL Server, IBM DB2, Oracle, MySQL,
+                        and Microsoft Access.</p>
+                    <p>A Relational database management system (RDBMS) is a database management system (DBMS) that is
+                        based on the relational model as introduced by E. F. Codd in 1970.</p>
+                    <h2 id="what_is_a_table">What is a Table?</h2>
+                    <p>The data in an RDBMS is stored in database objects known as <b>tables</b>. This table is
+                        basically a collection of related data entries and it consists of numerous columns and rows.</p>
+                    <p>Remember, a table is the most common and simplest form of data storage in a relational database.
+                        Following is an example of a CUSTOMERS table which stores customer's ID, Name, Age, Salary, City
+                        and Country −</p>
+                    <div class="table-wrapper">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>Salary</th>
+                                    <th>City</th>
+                                    <th>Country</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Ramesh</td>
+                                    <td>32</td>
+                                    <td>2000.00</td>
+                                    <td>Hyderabad</td>
+                                    <td>India</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Mukesh</td>
+                                    <td>40</td>
+                                    <td>5000.00</td>
+                                    <td>New York</td>
+                                    <td>USA</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Sumit</td>
+                                    <td>45</td>
+                                    <td>4500.00</td>
+                                    <td>Muscat</td>
+                                    <td>Oman</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Kaushik</td>
+                                    <td>25</td>
+                                    <td>2500.00</td>
+                                    <td>Kolkata</td>
+                                    <td>India</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Hardik</td>
+                                    <td>29</td>
+                                    <td>3500.00</td>
+                                    <td>Bhopal</td>
+                                    <td>India</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Komal</td>
+                                    <td>38</td>
+                                    <td>3500.00</td>
+                                    <td>Saharanpur</td>
+                                    <td>India</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Ayush</td>
+                                    <td>25</td>
+                                    <td>3500.00</td>
+                                    <td>Delhi</td>
+                                    <td>India</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Javed</td>
+                                    <td>29</td>
+                                    <td>3700.00</td>
+                                    <td>Delhi</td>
+                                    <td>India</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h2 id="what_is_a_field">What is a Field?</h2>
+                    <p>Every table is broken up into smaller entities called fields. A field is a column in a table that
+                        is designed to maintain specific information about every record in the table.</p>
+                    <p>For example, our CUSTOMERS table consists of different fields like ID, Name, Age, Salary, City
+                        and Country.</p>
+                    <h2 id="what_is_a_record">What is a Record or a Row?</h2>
+                    <p>A record is also called as a row of data is each individual entry that exists in a table. For
+                        example, there are 7 records in the above CUSTOMERS table. Following is a single row of data or
+                        record in the CUSTOMERS table −</p>
+                    <div class="table-wrapper">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>Salary</th>
+                                    <th>City</th>
+                                    <th>Country</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Ramesh</td>
+                                    <td>32</td>
+                                    <td>2000.00</td>
+                                    <td>Hyderabad</td>
+                                    <td>India</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>A record is a horizontal entity in a table.</p>
+                    <h2 id="what_is_a_column">What is a Column?</h2>
+                    <p>A column is a vertical entity in a table that contains all information associated with a specific
+                        field in a table.</p>
+                    <p>For example, our CUSTOMERS table have different columns to represent ID, Name, Age, Salary, City
+                        and Country.</p>
+                    <h2 id="what_is_a_null_value">What is a NULL Value?</h2>
+                    <p>A NULL value in a table is a value in a field that appears to be blank, which means a field with
+                        a NULL value is a field with no value.</p>
+                    <p>It is very important to understand that a NULL value is different than a zero value or a field
+                        that contains spaces. A field with a NULL value is the one that has been left blank during a
+                        record creation. Following table has three records where first record has NULL value for the
+                        salary and second record has a zero value for the salary.</p>
+                    <div class="table-wrapper">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>Salary</th>
+                                    <th>City</th>
+                                    <th>Country</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Ramesh</td>
+                                    <td>32</td>
+                                    <td></td>
+                                    <td>Hyderabad</td>
+                                    <td>India</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Mukesh</td>
+                                    <td>40</td>
+                                    <td>00.00</td>
+                                    <td>New York</td>
+                                    <td>USA</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Sumit</td>
+                                    <td>45</td>
+                                    <td>4500.00</td>
+                                    <td>Muscat</td>
+                                    <td>Oman</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h2 id="sql_constraints">SQL Constraints</h2>
+                    <p>Constraints are the rules enforced on data columns on a table. These are used to limit the type
+                        of data that can go into a table. This ensures the accuracy and reliability of the data in the
+                        database.</p>
+                    <p>Constraints can either be column level or table level. Column level constraints are applied only
+                        to one column whereas, table level constraints are applied to the entire table.</p>
+                    <p>Following are some of the most commonly used constraints available in SQL −</p>
+                    <div class="table-wrapper">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th style="width:6%">S.No.</th>
+                                    <th style="text-align:center;">Constraints</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td><a><b>NOT NULL Constraint</b></a>
+                                        <p>Ensures that a column cannot have a NULL value.</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td><a><b>DEFAULT Constraint</b></a>
+                                        <p>Provides a default value for a column when none is specified.</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td><a><b>UNIQUE Key</b></a>
+                                        <p>Ensures that all the values in a column are different.</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td><a><b>PRIMARY Key</b></a>
+                                        <p>Uniquely identifies each row/record in a database table.</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td><a><b>FOREIGN Key</b></a>
+                                        <p>Uniquely identifies a row/record in any another database table.</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td><a><b>CHECK Constraint</b></a>
+                                        <p>Ensures that all values in a column satisfy certain conditions.</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td><a><b>INDEX Constraint</b></a>
+                                        <p>Used to create and retrieve data from the database very quickly.</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <hr />
+                <h1>2. Objective to install SQL and SSMS on your PC.</h1>
+                <hr />
+                <div>
+                    <h2 id="how-to-download-sql-server-setup">How to download SQL Server Setup</h2>
+                    <p>Below is a step by step process on how to download SQL server on Windows 10:</p>
+                    <p><strong>Step 1) </strong>Go to URL<strong>:</strong> <a
+                            href="https://www.microsoft.com/en-in/sql-server/sql-server-downloads"
+                            data-lasso-id="188927" target="_blank"
+                            rel="noopener">https://www.microsoft.com/en-in/sql-server/sql-server-downloads</a> for
+                        download
+                        Microsoft SQL server.</p>
+                    <p>Microsoft provides <strong>two specialized free SQL download editions</strong> to work on MS SQL
+                        server:</p>
+                    <ol>
+                        <li><strong>Developer</strong> – It has all feature which MS SQL server offers but we cannot use
+                            it
+                            in production. From the learning perspective, is it an ideal candidate to start.</li>
+                        <li><strong>Express</strong>: This is also a free SQL server download version but with the
+                            limited
+                            set of features with no <a>business intelligence</a> applications.</li>
+                    </ol>
+                    <p>We will select the <strong>Developer edition</strong> to download the Microsoft SQL server for
+                        installation.</p>
+                    <div class="code-block code-block-2" style="margin: 8px 0; clear: both;">
+                        <!-- Tag ID: guru99_incontent_1 -->
+                        <div align="center" data-freestar-ad="__728x250" id="guru99_incontent_1"
+                            name="guru99_incontent_1" data-google-query-id="CLD2pqCQ4IMDFatAnQkdwuQBvg">
+
+                        </div>
+                    </div>
+
+                    <p><strong>Step 2) </strong>Click on <strong>“Download now”</strong></p>
+                    <p style="text-align:center;"><a href="https://www.guru99.com/images/1/030119_0948_HowtoDownlo1.png"
+                            data-lasso-id="493651" class="nohover kt-lightbox"><img decoding="async"
+                                fetchpriority="high" width="982" height="304"
+                                src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo1.png"
+                                alt="Download SQL Server Setup"
+                                data-lazy-src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo1.png"
+                                data-ll-status="loaded" class="entered lazyloaded"><noscript><img decoding="async"
+                                    fetchpriority="high" width="982" height="304"
+                                    src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo1.png"
+                                    alt="Download SQL Server Setup"></noscript></a></p>
+                    <p>We will get <a href="/sql-server-introduction.html" data-lasso-id="532396">SQL server</a>
+                        installation set up as <strong>‘SQLServer2017-SSEI-Dev.exe’</strong> on a Windows environment,
+                        ensuring compatibility and optimized performance for SQL Server Windows applications.</p>
+                    <p style="text-align:center;"><a href="https://www.guru99.com/images/1/030119_0948_HowtoDownlo2.png"
+                            data-lasso-id="493652" class="nohover kt-lightbox"><img decoding="async" width="326"
+                                height="115" src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo2.png"
+                                alt="Download SQL Server Setup"
+                                data-lazy-src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo2.png"
+                                data-ll-status="loaded" class="entered lazyloaded"><noscript><img decoding="async"
+                                    width="326" height="115"
+                                    src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo2.png"
+                                    alt="Download SQL Server Setup"></noscript></a></p>
+                    <h2 id="how-to-install-microsoft-sql-server">How to Install Microsoft SQL Server</h2>
+                    <p>Here is a step by step process on how to install SQL in Windows 10:</p>
+                    <p><strong>Step 1) Open the .exe file</strong></p>
+                    <p>Double click on <strong>“SQLServer2017-SSEI-Dev.exe”. </strong>Below screen will appear with
+                        three
+                        options: Basic, Custom and Download files.</p>
+                    <p style="text-align:center;"><a href="https://www.guru99.com/images/1/030119_0948_HowtoDownlo3.png"
+                            data-lasso-id="493653" class="nohover kt-lightbox"><img decoding="async" width="656"
+                                height="510" src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo3.png"
+                                alt="Install SQL Server"
+                                data-lazy-src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo3.png"
+                                data-ll-status="loaded" class="entered lazyloaded"><noscript><img decoding="async"
+                                    width="656" height="510"
+                                    src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo3.png"
+                                    alt="Install SQL Server"></noscript></a></p>
+                    <div class="code-block code-block-3" style="margin: 8px 0; clear: both;">
+                        <!-- Tag ID: guru99_static_3 -->
+                        <div data-freestar-ad="__300x250 __336x280" id="guru99_incontent_2" name="guru99_incontent_2"
+                            data-google-query-id="CMaCqKCQ4IMDFatAnQkdwuQBvg">
+                            <div id="google_ads_iframe_/24132379/guru99_incontent_2_0__container__/CMaCqKCQ4IMDFatAnQkdwuQBvg"
+                                style="border: 0pt none;"><iframe id="google_ads_iframe_/24132379/guru99_incontent_2_0"
+                                    name="google_ads_iframe_/24132379/guru99_incontent_2_0" title="3rd party ad content"
+                                    width="336" height="280" scrolling="no" marginwidth="0" marginheight="0"
+                                    frameborder="0" aria-label="Advertisement" tabindex="0"
+                                    allow="attribution-reporting" style="border: 0px; vertical-align: bottom;"
+                                    data-load-complete="true" data-google-container-id="3"></iframe></div>
+                        </div>
+                    </div>
+
+                    <p><strong>Step 2) Choose the version</strong></p>
+                    <p>Choose the basic version by clicking on the <strong>‘Basic’ option</strong>, as it has all
+                        default
+                        configuration required to learn MS SQL.</p>
+                    <p style="text-align:center;"><a href="https://www.guru99.com/images/1/030119_0948_HowtoDownlo4.png"
+                            data-lasso-id="493654" class="nohover kt-lightbox"><img decoding="async" width="622"
+                                height="494" src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo4.png"
+                                alt="Install SQL Server"
+                                data-lazy-src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo4.png"
+                                data-ll-status="loaded" class="entered lazyloaded"><noscript><img decoding="async"
+                                    width="622" height="494"
+                                    src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo4.png"
+                                    alt="Install SQL Server"></noscript></a></p>
+                    <p><strong>Step 3) Accept the terms</strong></p>
+                    <p>‘Microsoft Server License Terms’ screen will appear. Read the License Terms and then click
+                        <strong>‘Accept.’</strong>
+                    </p>
+                    <p style="text-align:center;"><a href="https://www.guru99.com/images/1/030119_0948_HowtoDownlo5.png"
+                            data-lasso-id="493655" class="nohover kt-lightbox"><img decoding="async" width="793"
+                                height="626" src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo5.png"
+                                alt="Install SQL Server"
+                                data-lazy-src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo5.png"
+                                data-ll-status="loaded" class="entered lazyloaded"><noscript><img decoding="async"
+                                    width="793" height="626"
+                                    src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo5.png"
+                                    alt="Install SQL Server"></noscript></a></p>
+                    <p><strong>Step 4) Choose the location</strong></p>
+                    <p>Below <strong>‘SQL server install location’</strong> window will appear, which is a crucial step
+                        in
+                        the Microsoft SQL Server install process.</p>
+                    <ol>
+                        <li> The Default location is <strong>C:\Program Files\Microsoft SQL Server. </strong></li>
+                        <li> Optionally, we canalso change the installation location by clicking on
+                            <strong>Browse.</strong>3. Once the location is selected, click <strong>the
+                                ‘Install’</strong>
+                            button<strong> to start SQL installation Windows 10.</strong>
+                        </li>
+                    </ol>
+                    <p style="text-align:center;"><a href="https://www.guru99.com/images/1/030119_0948_HowtoDownlo6.png"
+                            data-lasso-id="493656" class="nohover kt-lightbox"><img decoding="async" width="792"
+                                height="626" src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo6.png"
+                                alt="Install SQL Server"
+                                data-lazy-src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo6.png"
+                                data-ll-status="loaded" class="entered lazyloaded"><noscript><img decoding="async"
+                                    width="792" height="626"
+                                    src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo6.png"
+                                    alt="Install SQL Server"></noscript></a></p>
+                    <p>Below <strong>‘Downloading install package’</strong> progress screen will be displayed. Wait
+                        until
+                        the SQL software download is complete.</p>
+                    <p style="text-align:center;"><a href="https://www.guru99.com/images/1/030119_0948_HowtoDownlo7.png"
+                            data-lasso-id="493657" class="nohover kt-lightbox"><img decoding="async" width="665"
+                                height="201" src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo7.png"
+                                alt="Install SQL Server"
+                                data-lazy-src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo7.png"
+                                data-ll-status="loaded" class="entered lazyloaded"><noscript><img decoding="async"
+                                    width="665" height="201"
+                                    src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo7.png"
+                                    alt="Install SQL Server"></noscript></a></p>
+                    <p>Once, the download is complete; the system will initiate installing developer edition.</p>
+                    <p style="text-align:center;"><a href="https://www.guru99.com/images/1/030119_0948_HowtoDownlo8.png"
+                            data-lasso-id="493658" class="nohover kt-lightbox"><img decoding="async" width="735"
+                                height="364" src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo8.png"
+                                alt="Install SQL Server"
+                                data-lazy-src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo8.png"
+                                data-ll-status="loaded" class="entered lazyloaded"><noscript><img decoding="async"
+                                    width="735" height="364"
+                                    src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo8.png"
+                                    alt="Install SQL Server"></noscript></a></p>
+                    <p>Below screen show <strong>installation progress.</strong></p>
+                    <p style="text-align:center;"><a href="https://www.guru99.com/images/1/030119_0948_HowtoDownlo9.png"
+                            data-lasso-id="493659" class="nohover kt-lightbox"><img decoding="async" width="731"
+                                height="408" src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo9.png"
+                                alt="Install SQL Server"
+                                data-lazy-src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo9.png"
+                                data-ll-status="loaded" class="entered lazyloaded"><noscript><img decoding="async"
+                                    width="731" height="408"
+                                    src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo9.png"
+                                    alt="Install SQL Server"></noscript></a></p>
+                    <p><strong>Step 5) Finish the installation process</strong></p>
+                    <p>Once installation is completed successfully, below screen will appear.</p>
+                    <p style="text-align:center;"><a
+                            href="https://www.guru99.com/images/1/030119_0948_HowtoDownlo10.png" data-lasso-id="493660"
+                            class="nohover kt-lightbox"><img decoding="async" width="816" height="641"
+                                src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo10.png"
+                                alt="Install SQL Server"
+                                data-lazy-src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo10.png"
+                                data-ll-status="loaded" class="entered lazyloaded"><noscript><img decoding="async"
+                                    width="816" height="641"
+                                    src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo10.png"
+                                    alt="Install SQL Server"></noscript></a></p>
+                    <p>This setup is <strong>self-sufficient for proceeding further</strong> with learning SQL server,
+                        and
+                        we can ‘Close’ this window.</p>
+
+                    <ol>
+                        <li><strong>Instance name:</strong> This is by default labeled as MSSQLSERVER.</li>
+                        <li><strong>Connect now:</strong> This will open a separate command line window for connection
+                            testing of what we have just installed.The system will run by default <strong>‘select
+                                @@Version’
+                            </strong>statement to confirm that we can connect to new MSSQLSERVER instance successfully.
+                        </li>
+                        <p style="text-align:center;"><a
+                                href="https://www.guru99.com/images/1/030119_0948_HowtoDownlo11.png"
+                                data-lasso-id="493661" class="nohover kt-lightbox"><img decoding="async" width="798"
+                                    height="526" src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo11.png"
+                                    alt="Install SQL Server"
+                                    data-lazy-src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo11.png"
+                                    data-ll-status="loaded" class="entered lazyloaded"><noscript><img decoding="async"
+                                        width="798" height="526"
+                                        src="https://www.guru99.com/images/1/030119_0948_HowtoDownlo11.png"
+                                        alt="Install SQL Server"></noscript></a></p>
+                        <ol start="3">
+                            <li><strong>Customize:</strong> This will open the <strong>SQL Installation center</strong>
+                                to
+                                customize further and add feature other than which are there as a part of the BASIC
+                                installation.</li>
+                            <li><strong>Install SSMS:</strong> This is IDE which will take us to Microsoft SSMS download
+                                link. We will cover SSMS in detail in our SSMS tutorial.</li>
+                            <li><strong>Close:</strong> This will close this window. The user is now ready to install
+                                SSMS
+                                IDE as instructed in SSMS tutorial.</li>
+                        </ol>
+                    </ol>
+                    <!-- AI CONTENT END 1 -->
+                </div>
+
+                <hr />
+                <h1>3. Objective - To Install AdventureWorks Database into your system.</h1>
+                <div>
+                    <div class="text">
+                        <p>AdventureWorks is a database provided by <strong>Microsoft </strong>for free on online
+                            platforms. It is a product sample database originally published by Microsoft to demonstrate
+                            the supposed design of a SQL server database using SQL server 2008. Here are some key points
+                            to know about AdventureWorks:</p>
+                        <ul>
+                            <li>AdventureWorks database supports a manufacturing MNC named <strong>Adventure Works
+                                    Cycles.</strong></li>
+                            <li>It is a sample <strong>Online Transaction Processing</strong> database, which is a
+                                type of data processing where multiple transactions occur concurrently. These are
+                                shipped by Microsoft with all of their SQL server products.</li>
+                            <li>This sample database has also been used in the code snippets of the documentation of the
+                                SQL server.</li>
+                            <li>There have not been many changes in AdventureWorks since the version of 2012, except for
+                                some database compatibility levels.</li>
+                        </ul>
+                        <h2>Downloading and Installation of AdventureWorks Database in SQL</h2>
+                        <p>AdventureWorks can be downloaded and installed in the SQL server by the following steps:</p>
+                        <div id="GFG_AD_gfg_mobile_336x280"></div>
+                        <p><strong>Step 1: </strong>Go to the link: <a target="_blank"
+                                rel="noopener noreferrer nofollow"
+                                href="https://github.com/Microsoft/sql-server-samples/releases/tag/adventureworks">https://github.com/Microsoft/sql-server-samples/releases/tag/adventureworks</a>.
+                            In the <strong>Additional OLTP backups and samples </strong>section, download the file:
+                            <strong>AdventureWorks2019.bak.</strong>
+                        </p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220728204734/2019bakmin.jpg"
+                                alt="Downloading-adventure-works-">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p><strong>Step 2: </strong>From the <strong>Downloads </strong>folder, copy the downloaded
+                            <strong>.bak </strong>file of AdventureWorks2019 to the path: <strong>C:\Program
+                                Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\Backup.</strong>
+                        </p>
+
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220728205459/filePath.png"
+                                alt="Copying-file-from-downloads-folders">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p><strong>Step 3: </strong>Open<strong> </strong><a><strong>Microsoft
+                                    Server SQL Management Studio</strong></a><strong>, </strong>in the object explorer,
+                            –&gt; <strong>Databases, </strong>right click on the Databases folder and choose the option
+                            <strong>Restore Database.</strong>
+                        </p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220728210142/restoreDB.png"
+                                alt="Restoring-database">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p><strong>Step 4: </strong>Inside the <strong>Source </strong>section, switch to the
+                            <strong>Device </strong>option<strong> </strong>from <strong>Database.</strong>
+                        </p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220728211044/Device.jpg"
+                                alt="Switching-to-device-section">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p><strong>Step 5: </strong>Browse the <strong>AdventureWorks.bak</strong> file path and add it.
+                        </p>
+                        <p></p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220803200801/step5.png"
+                                width="872" alt="Browsing-AdventureWorks.bak-file">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220803200932/step51.png"
+                                width="878" alt="AdventureWorks2019.back-chosen">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220803201243/step52.png"
+                                width="875" alt="Backing-up-media">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p></p>
+                        <p><strong>Step 6: </strong>Click OK and proceed.</p>
+                        <p></p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220803201452/step6.png"
+                                width="879" alt="Restoring-database">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220803201618/step61.png"
+                                width="880" alt="Restoring-process-completed">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p></p>
+                        <p><strong>Step 7: </strong>Now AdventureWorks has been restored, we can check this by running a
+                            query through one of the tables in the <strong>tables </strong>folder of AdventureWorks.</p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220803202839/step7arrowed.png"
+                                width="824" alt="Running-query">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p>The query run above displays the data, indicating the successful installation of
+                            AdventureWorks in the SQL server.&nbsp;</p>
+
+                    </div>
+                </div>
+                <hr />
+                <h1>4. Warmup session on SSMS.</h1>
+                <div>
+                    <h4>
+                        <ol>
+                            <li class="mt2">
+                                <a>To retrieve all rows and columns from the employee table</a><br />
+                                <code>
+                                SELECT * FROM humanresources.employee ORDER BY jobtitle;
+                                </code>
+                            </li>
+                            <li class="mt-5">
+                                <a>To retrieve all rows and columns from the employee table using table
+                                    aliasing</a><br />
+                                <code>SELECT e.*  
+                                    FROM person.person AS e  
+                                    ORDER BY LastName;</code>
+                            </li>
+                            <li class="mt-5">
+                                <a>To return all rows and a subset of the columns (FirstName, LastName,
+                                    businessentityid) from the person table.</a><br />
+                                <code>SELECT firstname, lastname, businessentityid as Employee_id  
+                                    FROM person.person AS e  
+                                    ORDER BY lastname;</code>
+                            </li>
+                        </ol>
+                    </h4>
+                </div>
+                <hr />
+                <h1><a href="task.html">Take Up Session Assignement</a></h1>
+                <hr />
+                <hr />
+                <h1>5. Objective - To Execute CURD Operations on SQL SERVER.</h1>
+                <div>
+                    <div class="text">
+                        <p style="text-align:justify">Transact SQL Statements can be classified into DDL, DML, and DCL
+                            Statements and in terms of Computer Programming, DML statements can be referred to as CRUD
+                            operations. In this article, we can see in more detail the CRUD operations and how we can
+                            use those statements in SQL Server with examples.</p>
+                        <h3 style="text-align:justify"><strong>CRUD Operations:</strong></h3>
+                        <p style="text-align:justify">CRUD is an acronym for CREATE, READ(SELECT), UPDATE, and DELETE
+                            statements in SQL Server. CRUD in database terms can be mentioned as Data Manipulation
+                            Language (DML) Statements as well. Data Manipulation Language is used to manage or
+                            manipulate the data present inside database Tables. Even though CRUD operations are
+                            supported on Database object View, Views have several restrictions and hence in this
+                            article, we can test the CRUD operations on Tables. Before diving into the individual CRUD
+                            Operations or DML Statements in more detail, we can create a table named Employee in the
+                            geek’s database to test our various CRUD operation-related queries.</p>
+                        <div id="GFG_AD_gfg_mobile_336x280"></div>
+                        <p style="text-align:justify">Let’s first create a database named geeks using the below command
+                            in SQL Server Management Studio by opening a new query window:</p>
+                        <p style="text-align:justify"><strong>Query:</strong></p>
+                        <pre>CREATE DATABASE ExampleCompany;</pre>
+                        
+                        
+                        <p style="text-align:justify"><strong>Query:</strong></p>
+                        <div id="GFG_AD_Desktop_InContent_ATF_336x280" style="text-align:center;max-height: 280px;">
+                        </div>
+                        <pre>USE ExampleCompany</pre>
+                        <p style="text-align:justify">Now, create a test table named Employee using the below command.
+                        </p>
+                        <p style="text-align:justify"><strong>Query:</strong></p>
+                        <pre> CREATE TABLE Employee (EMPId Int Identity NOT NULL,
+EmpNo varchar (10), SSN varchar (10), DOB DATE, 
+CreatedDt Datetime, CreatedBy varchar(10));</pre>
+                        <h3 style="text-align:justify">CREATE:</h3>
+                        <p style="text-align:justify">CREATE often refers to the INSERT statement which is used to
+                            insert new data to any of the SQL Server tables. To INSERT records into a table, we need to
+                            use the INSERT command and the syntax for the INSERT command would be:</p>
+                        <p style="text-align:justify"><strong>Query:</strong></p>
+                        <pre>INSERT INTO TABLE_NAME (COLUMNS_NAMES_LIST)
+VALUES (COLUMNS_VALUES_LIST);</pre>
+                        <p style="text-align:justify">In the above INSERT command syntax, we need to specify the Table
+                            Name along with the list of Column Names and a few things to note:</p>
+                        <ul>
+                            <li style="text-align:justify">The list of Column names provided should match the order of
+                                the Column values provided.</li>
+                            <li style="text-align:justify">The list of Column names specified need not match with the
+                                order of the Column names available in the Table.</li>
+                            <li style="text-align:justify">If the Columns names list includes the Identity Columns, then
+                                we need to specify the SET IDENTITY_INSERT option set to ON before trying to insert
+                                values for Identity columns.</li>
+                            <li style="text-align:justify">For string and date datatype columns, we need to specify the
+                                values within Single quotes.</li>
+                            <li style="text-align:justify">In the INSERT command, the Column names list need not be
+                                mandatorily specified, however, if not specified, then the values should be specified in
+                                the order the columns are available in the table.</li>
+                        </ul>
+                        <p style="text-align:justify">Now, let’s try to INSERT some values into the Employee table
+                            created above with various possible scenarios as listed below. Default scenarios specifying
+                            values in the order columns are present excluding the Identity Datatype column EmpId.</p>
+                        <div style="text-align:center;margin:20px 0;max-height: 280px;"
+                            id="GFG_AD_gfg_outstream_incontent" data-google-query-id="CNue5aec4IMDFbRRnQkd1REHlQ">
+                            <div id="google_ads_iframe_/27823234/gfg_outstream_incontent_0__container__"
+                                style="border: 0pt none; width: 300px; height: 0px;"></div>
+                        </div>
+                        <p style="text-align:justify"><strong>Query:</strong>&nbsp;</p>
+                        <pre>INSERT INTO Employee (EmpNO, SSN, DOB, CreatedDt, CreatedBy)
+VALUES (1,'1234567890','2000-01-01', GETDATE(), 'system');</pre>
+                        <p style="text-align:justify"><strong>Output:</strong></p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220522171137/Insert.jpg"
+                                width="1100">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p style="text-align:justify">Let’s try Inserting records into the table in a different column
+                            order with EmpNo at the end as shown below.</p>
+                        <p style="text-align:justify"><strong>Query:</strong></p>
+                        <pre>INSERT INTO Employee (SSN, DOB, CreatedDt, CreatedBy, EmpNO)
+VALUES ('0123456789','1999-01-01', GETDATE(), 'system', 2);</pre>
+                        <p style="text-align:justify"><strong>Output:</strong></p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220522172005/Insert2.jpg"
+                                width="1100">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p style="text-align:justify">To insert records into the table for the Identity datatype column,
+                            we need to use the SET IDENTITY_INSERT option as shown below:</p>
+                        <p style="text-align:justify"><strong>Query:</strong></p>
+                        <pre>SET IDENTITY_INSERT Employee ON;
+INSERT INTO Employee (EmpId, SSN, DOB, CreatedDt, CreatedBy, EmpNO)
+VALUES (3, '0123456789','1999-01-01', GETDATE(), 'system', 2);
+SET IDENTITY_INSERT Employee OFF;</pre>
+                        <p style="text-align:justify"><strong>Output:</strong></p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220522172126/Insert3.jpg"
+                                width="1100">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p style="text-align:justify">To Insert Multiple values into the Employee column with a single
+                            INSERT statement, we need to use the below syntax:</p>
+                        <p style="text-align:justify"><strong>Query:</strong></p>
+                        <div style="text-align:center;margin:20px 0;max-height:280px"
+                            id="GFG_AD_gfg_outstream_incontent-1"></div>
+                        <pre>INSERT INTO Employee (EmpNo, SSN, DOB)
+VALUES&nbsp;
+('4', '1231544984', '2000-02-01')
+,('5', '5487946598', '2001-01-01')
+,('6', '8789453115', '2002-01-01');</pre>
+                        <p style="text-align:justify"><strong>Output:</strong></p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220522172237/Insert4.jpg"
+                                width="784">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p style="text-align:justify">To Insert records from some other table, we can also use the
+                            SELECT statement as shown below:</p>
+                        <p style="text-align:justify"><strong>Query:</strong></p>
+                        <pre>INSERT INTO Employee (EmpNo, SSN, DOB)
+SELECT EmpNo, SSN, DOB
+FROM Employee_history;
+</pre>
+                        <p style="text-align:justify"><strong>Output:</strong></p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220522172343/Insert5.jpg"
+                                width="764">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p style="text-align:justify">While selecting records from some other table, we can also use the
+                            TOP Clause or DISTINCT clause, or other criteria.</p>
+                        <p style="text-align:justify">We can also insert records into a table by passing the results
+                            from the execution of Stored Procedure let’s say sp_Employee_History using the below syntax:
+                        </p>
+                        <p style="text-align:justify"><strong>Query:</strong></p>
+                        <pre>INSERT INTO Employee (EmpNo, SSN, DOB)
+EXEC sp_Employee_History;
+</pre>
+                        <p style="text-align:justify"><strong>Output:</strong></p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220522172435/Insert6.jpg"
+                                width="912">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <h3 style="text-align:justify"><strong>READ:</strong></h3>
+                        <p style="text-align:justify">READ often refers to SELECT statement or Data Retrieval operation
+                            from Tables or Views. The default syntax of a SELECT statement would be:</p>
+                        <p style="text-align:justify"><strong>Query:</strong></p>
+                        
+                        <pre>SELECT *&nbsp;
+FROM object_name;
+</pre>
+                        <p style="text-align:justify">Where object_name can be a Table or View or functions. We need to
+                            specify the braces while trying to SELECT records from functions. The SELECT statement can
+                            be combined with various possible operations like:</p>
+                        <ul>
+                            <li style="text-align:justify">Aggregate operations like MIN, MAX, SUM, and COUNT operations
+                                with GROUP BY operation.</li>
+                            <li style="text-align:justify">SELECT TOP number of records</li>
+                            <li style="text-align:justify">SELECT DISTINCT result sets</li>
+                            <li style="text-align:justify">SELECT filtered records using WHERE conditions</li>
+                            <li style="text-align:justify">HAVING clause to filter records based upon Aggregated
+                                columns.</li>
+                            <li style="text-align:justify">ORDER BY Clause to sort the result set based upon Selected
+                                columns.<br>&nbsp;</li>
+                        </ul>
+                        <p style="text-align:justify">To SELECT records from Employee Table, we can use the below
+                            syntax.<br><strong>Query:</strong>&nbsp;</p>
+                        <pre>SELECT *&nbsp;
+FROM Employee;</pre>
+                        <p style="text-align:justify"><strong>Output:</strong></p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220522172711/Select.jpg"
+                                width="1100">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p style="text-align:justify">Even though using the * symbol in the SELECT clause returns all
+                            columns in the table, it is recommended to explicitly specify the required column names in
+                            the SELECT clause to avoid any Application code breakages later due to any changes in Table
+                            structure or columns. To SELECT specific columns like EmpNo, SSN, and DOB alone from the
+                            Employee table, we can use the below query:</p>
+                        <p style="text-align:justify"><strong>Query:</strong></p>
+                        <pre>SELECT EmpNo, SSN, DOB
+FROM Employee;</pre>
+                        <p style="text-align:justify"><strong>Output:</strong></p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220522172812/Select1.jpg"
+                                width="592">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p style="text-align:justify">To SELECT TOP 5 records from Employee Table, we can use the below
+                            query.</p>
+                        <p style="text-align:justify"><strong>Query:</strong></p>
+                        <pre>SELECT TOP 5 EmpNo, SSN, DOB
+FROM Employee;</pre>
+                        <p style="text-align:justify"><strong>Output:</strong></p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220522172924/Select3.jpg"
+                                width="602">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p style="text-align:justify">To SELECT a unique combination of records from the Employee table
+                            for certain columns, we can use the DISTINCT clause along with the columns where we need to
+                            fetch the unique values as shown below:</p>
+                        <div style="text-align:center;margin:20px 0;max-height:280px"
+                            id="GFG_AD_gfg_outstream_incontent-3"></div>
+                        <p style="text-align:justify"><strong>Query:</strong></p>
+                        <pre>SELECT DISTINCT EmpNo, SSN
+FROM Employee;</pre>
+                        <p style="text-align:justify"><strong>Output:</strong></p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220522173009/Select4.jpg"
+                                width="569">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p style="text-align:justify">To SELECT specific records from Employee Table, we can use the
+                            WHERE clause as shown below:</p>
+                        <p style="text-align:justify"><strong>Query:</strong></p>
+                        <pre>SELECT EmpNo, SSN, DOB
+FROM Employee
+WHERE EmpNo = '1';</pre>
+                        <p style="text-align:justify"><strong>Output:</strong></p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220522173102/Select5.jpg"
+                                width="598">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p style="text-align:justify">To Aggregate the result set using any Aggregate operation, we
+                            would need to use the syntax below:</p>
+                        <p style="text-align:justify"><strong>Query:</strong></p>
+                        <pre>SELECT EmpNo, SSN, COUNT(*) cnt
+FROM Employee
+GROUP BY EmpNo, SSN;</pre>
+                        <p style="text-align:justify"><strong>Output:</strong></p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220522173224/Select6.jpg"
+                                width="636">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p style="text-align:justify">To Order the above result set based upon EmpNo, we can use the
+                            ORDER BY Clause as shown below:</p>
+                        <p style="text-align:justify"><strong>Query:</strong></p>
+                        <div style="text-align:center;margin:20px 0;max-height:280px"
+                            id="GFG_AD_gfg_outstream_incontent-4" data-google-query-id="CLjUjaic4IMDFYVUnQkdaOUOoQ">
+                            <div id="google_ads_iframe_/27823234/gfg_outstream_incontent_3_0__container__"
+                                style="border: 0pt none; width: 300px; height: 0px;"></div>
+                        </div>
+                        <pre>SELECT EmpNo, SSN, COUNT(*) cnt
+FROM Employee
+GROUP BY EmpNo, SSN
+ORDER BY EmpNo;</pre>
+                        <p style="text-align:justify"><strong>Output:</strong></p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220522173331/Select7.jpg"
+                                width="652">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p style="text-align:justify">To perform filtering on Aggregated values, we need to use the
+                            HAVING clause as shown below.&nbsp;</p>
+                        <p style="text-align:justify"><strong>Query:</strong></p>
+                        <pre>SELECT EmpNo, SSN, COUNT(*) cnt
+FROM Employee
+GROUP BY EmpNo, SSN
+HAVING COUNT(*) = 2
+ORDER BY EmpNo;</pre>
+                        <p style="text-align:justify"><strong>Output:</strong></p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220522173512/Select8.jpg"
+                                width="644">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p style="text-align:justify">To SELECT records from Multiple tables, we would need to use the
+                            JOIN clause which can be either INNER JOIN or LEFT OUTER JOIN or RIGHT OUTER JOIN or other
+                            types as shown below.</p>
+                        <p style="text-align:justify"><strong>Query:</strong></p>
+                        <pre>SELECT e.EmpNo, e.SSN, e.DOB, eh.EmpNo as Older_EmpNo
+FROM Employee e
+INNER JOIN Employee_history eh on e.EmpNo = eh.EmpNo
+WHERE e.EmpNo = 1
+ORDER BY e.EmpNo;</pre>
+                        
+                        <h3 style="text-align:justify"><strong>UPDATE:</strong></h3>
+                        <p style="text-align:justify">UPDATE operation refers to changing any data existing in the Table
+                            and the UPDATE operation or statement in SQL Server includes the SET clause to specify which
+                            columns to be updated and use the WHERE clause to UPDATE specific records. The general
+                            syntax to update records inside a table will be:</p>
+                        <p style="text-align:justify"><strong>Query:</strong></p>
+                        <pre>UPDATE Table_Name
+SET column_Name = column_value
+WHERE Column_name = Filter_condition;</pre>
+                        <p style="text-align:justify"><strong>Output:</strong></p>
+                        <div style="text-align:center;margin:20px 0;max-height:280px"
+                            id="GFG_AD_gfg_outstream_incontent-6" data-google-query-id="CJDe56ic4IMDFQ9AnQkd1xcBsQ">
+                            <div id="google_ads_iframe_/27823234/gfg_outstream_incontent_4_0__container__"
+                                style="border: 0pt none; width: 300px; height: 0px;"></div>
+                        </div>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220522174544/Update.jpg"
+                                width="1100">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p style="text-align:justify">To update the record with EmpId = 3 to make EmpNo unique on the
+                            Employee table, we can use the below query:</p>
+                        <p style="text-align:justify">&nbsp;<strong>Query:</strong></p>
+                        <pre>UPDATE Employee
+SET EmpNo = '3'
+, SSN = '4984564512'
+, DOB = '1998-01-01';</pre>
+                        <p style="text-align:justify">Upon careful verification of the above query, we can notice that
+                            there is no “WHERE condition” specified out, and without a WHERE condition, execution of the
+                            above query will UPDATE all the records in the Employee table. Hence, we should be more
+                            careful whenever executing an UPDATE statement by ensuring appropriate WHERE clauses as
+                            shown below:</p>
+                        <p style="text-align:justify"><strong>Query:</strong></p>
+                        <pre>UPDATE Employee
+SET EmpNo = '3'
+, SSN = '4984564512'
+, DOB = '1998-01-01'
+WHERE EmpId = 3;</pre>
+                        <p style="text-align:justify"><strong>Output:</strong></p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220522174652/Update2.jpg"
+                                width="567">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p style="text-align:justify">&nbsp;</p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220522174758/Update3.jpg"
+                                width="1100">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p style="text-align:justify">We are able to see the EmpId valued 3 updated successfully with
+                            the correct values now.</p>
+                        
+                        <p style="text-align:justify">Similar to the INSERT clause, we can also UPDATE only limited
+                            records using the TOP clause as shown below:</p>
+                        <p style="text-align:justify"><strong>Query:</strong></p>
+                        <div style="text-align:center;margin:20px 0;max-height:280px"
+                            id="GFG_AD_gfg_outstream_incontent-7"></div>
+                        <pre>UPDATE TOP (5) Employee
+SET CreatedDt = GETDATE()
+, CreatedBy = 'system'
+WHERE CreatedDt IS NULL;</pre>
+                        <p style="text-align:justify"><strong>Output:</strong></p>
+                        <p></p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220522174855/Update4.jpg"
+                                width="565">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220522175030/Update5.jpg"
+                                width="1100">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p></p>
+                        <p style="text-align:justify">We can notice that the above UPDATE query has updated only 5
+                            records even though we have a lot of records with CreatedDt as NULL values.<br>&nbsp;</p>
+                        
+                        <h3 style="text-align:justify"><strong>DELETE:</strong></h3>
+                        <p style="text-align:justify">DELETE operation is used to delete or remove any existing records
+                            from the table. Similar to the UPDATE operation, one should be much more careful while
+                            executing the DELETE statement and ensure that it has the necessary WHERE clause to avoid
+                            accidental deletion of the entire table.&nbsp;</p>
+                        <p style="text-align:justify">To DELETE records from a table would be:</p>
+                        <p style="text-align:justify"><strong>Query:</strong></p>
+                        <pre>DELETE FROM Table_name
+WHERE column_name = Filter_condition;</pre>
+                        <p style="text-align:justify">To Delete records from Employee Table, we can use the below
+                            query:&nbsp;</p>
+                        <p style="text-align:justify"><strong>Query:</strong></p>
+                        <pre>DELETE FROM Employee
+WHERE EmpId = 10;</pre>
+                        <p style="text-align:justify"><strong>Output:</strong></p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220522175617/Delete.jpg"
+                                width="586">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <p style="text-align:justify">We can use the TOP Clause to delete only limited records for the
+                            selected WHERE condition as shown below.</p>
+                        <p style="text-align:justify"><strong>Query:</strong></p>
+                        <div style="text-align:center;margin:20px 0;max-height:280px"
+                            id="GFG_AD_gfg_outstream_incontent-9"></div>
+                        <pre>DELETE TOP(1) FROM Employee
+WHERE EmpId = 11;</pre>
+                        <p style="text-align:justify"><strong>Output:</strong></p>
+                        <div style="width: 810px" class="wp-caption alignnone"><img
+                                src="https://media.geeksforgeeks.org/wp-content/uploads/20220522175717/Delete2.jpg"
+                                width="591">
+                            <p class="wp-caption-text">&nbsp;</p>
+                        </div>
+                        <br>
+
+                        <h1><a href="task.html">Take Up Session Assignement</a></h1>
+                    </div>
+                </div>
+                <hr />
+
+            </div>
+
+    </div>
+    </article>
+    </div>
+
+    <!-- footer section -->
+
+    <footer class="footer text-center py-2 theme-bg-dark">
+        <small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a
+                href="http://hishobkar.github.io" target="_blank">Abhijeet. Hishobkar</a> for developers</small>
+
+    </footer>
+
+    <!-- footer ends -->
+
+    <!-- Javascript -->
+    <script src="../assets/plugins/jquery-3.3.1.min.js"></script>
+    <script src="../assets/plugins/popper.min.js"></script>
+    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Style Switcher (REMOVE ON YOUR PRODUCTION SITE) -->
+    <script src="../assets/js/demo/style-switcher.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".navbar-toggler").click();
+        });
+    </script>
+
+</body>
+
+</html>

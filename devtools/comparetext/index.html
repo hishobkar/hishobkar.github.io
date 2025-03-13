@@ -1,0 +1,131 @@
+<html>
+    <head>
+
+    <link rel="stylesheet" href="../../texteditor/libs/codemirror.min.css">
+    <script src="../../texteditor/libs/codemirror.min.js"></script>
+    <script src="../../texteditor/libs/javascript.min.js"></script> <!-- Change the mode as needed -->
+
+    <script src="./lib/diff.min.js"></script>
+        
+    </head>
+    <body>
+        <table style="width: 100%;" border="1" cellspacing="2" cellpadding="2">
+            <tr><td colspan="2">
+                <a href="../../index.html">hishobkar.github.io</a> | 
+                <a href="../index.html">Dev Tools</a>
+                <label>Theme :</label>
+                <select id="themeSelector">
+                    <option value="default">Default</option>
+                    <option value="material">Material</option>
+                    <option value="3024-day">3024 Day</option>
+                    <!-- Add more themes as needed -->
+                  </select>
+                  
+                <label>Mode :</label>
+                  <select id="modeSelector">
+                    <option value="javascript">JavaScript</option>
+                    <option value="xml">XML/HTML</option>
+                    <option value="css">CSS</option>
+                    <!-- Add more modes as needed -->
+                  </select>
+                  
+                  <!-- <label><input type="checkbox" id="lineNumbersCheckbox"> Line Numbers</label> -->
+                  <!-- <label><input type="checkbox" id="lineWrappingCheckbox"> Line Wrapping</label> -->
+                  
+            </td></tr>
+            <tr><th style="width: 50%;">Left</th><th style="width: 50%;">Right</th></tr>
+            <tr>
+                <td style="border: 1px;">
+                    <textarea id="leftText" rows="10" cols="50"></textarea>
+                </td>
+                <td>
+                    <textarea id="rightText" rows="10" cols="50"></textarea>
+                </td>
+            </tr>
+            <tr><td colspan="2" style="text-align: center;"><button onclick="compareText()">Compare Text</button></td></tr>
+            <tr><td colspan="2">
+                <div id="diffOutput" style="width: 100%;"></div>
+                <!-- <textarea id="diffOutput" style="height: 200px;width: 100%;"></textarea> -->
+            </td></tr>
+        </table>
+        
+        
+    </body>
+    <script>
+        function compareText() {
+          var leftText = editor1.getValue(); // document.getElementById('leftText').value;
+          var rightText = editor2.getValue(); // document.getElementById('rightText').value;
+      
+          var diff = Diff.diffLines(leftText, rightText);
+      
+          var diffHtml = '';
+          var lineNum = 1;
+      
+          diff.forEach(function(part) {
+              var color = part.added ? 'green' : part.removed ? 'red' : 'grey';
+              var lines = part.value.split('\n');
+              lines.forEach(function(line, index) {
+                  if (index > 0) { diffHtml += '<br>'; }
+                  
+                  if(color=='grey'){
+                    diffHtml += '<span style="color: ' + color + '">' + lineNum + ' | ' + line.replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;') + '</span>';
+                  } else {
+                    diffHtml += '<span style="color: ' + color + '">' + (lineNum-1) + ' | ' + line.replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;') + '</span>';
+                  }
+                  
+                  if(color=='grey'){ lineNum++; }                  
+              });
+          });
+      
+          document.getElementById('diffOutput').innerHTML = diffHtml;
+        }
+      </script>
+      
+    <script>
+
+        var editor1 = CodeMirror.fromTextArea(document.getElementById("leftText"), {
+            lineNumbers: true, // Display line numbers
+            mode: "javascript", // Set the programming language mode
+            lineWrapping: true
+        });
+        var editor2 = CodeMirror.fromTextArea(document.getElementById("rightText"), {
+            lineNumbers: true, // Display line numbers
+            mode: "javascript", // Set the programming language mode
+            lineWrapping: true
+        });
+        // var editor3 = CodeMirror.fromTextArea(document.getElementById("diffOutput"), {
+        //     lineNumbers: true, // Display line numbers
+        //     mode: "javascript", // Set the programming language mode
+        //     lineWrapping: true,
+        //     readOnly: true
+        // });
+
+        function updateEditorConfig() {
+            var theme = document.getElementById("themeSelector").value;
+            var mode = document.getElementById("modeSelector").value;
+            var lineNumbers = true; // document.getElementById("lineNumbersCheckbox").checked;
+            var lineWrapping = true; // document.getElementById("lineWrappingCheckbox").checked;
+
+            editor1.setOption("theme", theme);
+            editor1.setOption("mode", mode);
+            editor1.setOption("lineNumbers", lineNumbers);
+            editor1.setOption("lineWrapping", lineWrapping);
+
+            editor2.setOption("theme", theme);
+            editor2.setOption("mode", mode);
+            editor2.setOption("lineNumbers", lineNumbers);
+            editor2.setOption("lineWrapping", lineWrapping);
+
+            // editor3.setOption("theme", theme);
+            // editor3.setOption("mode", mode);
+            // editor3.setOption("lineNumbers", lineNumbers);
+            // editor3.setOption("lineWrapping", lineWrapping);
+        }
+
+        // Update editor configuration when user changes preferences
+        document.getElementById("themeSelector").addEventListener("change", updateEditorConfig);
+        document.getElementById("modeSelector").addEventListener("change", updateEditorConfig);
+        // document.getElementById("lineNumbersCheckbox").addEventListener("change", updateEditorConfig);
+        // document.getElementById("lineWrappingCheckbox").addEventListener("change", updateEditorConfig);
+    </script>
+</html>

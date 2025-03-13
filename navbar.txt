@@ -1,0 +1,221 @@
+
+				<!-- Blogs Starts -->
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+						data-mdb-toggle="dropdown" aria-expanded="false">
+						Blogs
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<li>
+							<a class="dropdown-item" href="#">
+								Dev Ops &raquo;
+							</a>
+							<ul class="dropdown-menu dropdown-submenu">
+								<li>
+									<a class="dropdown-item" href="./blog/what-is-devops/index.html">What is DevOps</a>
+								</li>
+								<!-- <li>
+									<a class="dropdown-item" href="#">Submenu item 3 &raquo; </a>
+									<ul class="dropdown-menu dropdown-submenu">
+										<li>
+											<a class="dropdown-item" href="#">Multi level 1</a>
+										</li>
+										<li>
+											<a class="dropdown-item" href="#">Multi level 2</a>
+										</li>
+									</ul>
+								</li> -->
+							</ul>
+						</li>
+
+						<li>
+							<a class="dropdown-item" href="#">
+								SQL &raquo;
+							</a>
+							<ul class="dropdown-menu dropdown-submenu">
+								<li>
+									<a class="dropdown-item" href="./blog/data-analytics/01_how-to-use-sql.html">How To
+										Use SQL</a>
+								</li>
+								<li><a class="dropdown-item" href="./blog/data-analytics/02_advanced-sql.html">Advanced
+										SQL</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<!-- Blogs End -->
+
+				<!-- Article Starts -->
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+						data-mdb-toggle="dropdown" aria-expanded="false">
+						Articles
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<li>
+							<a class="dropdown-item" href="#">
+								Dot Net Core 8 &raquo;
+							</a>
+							<ul class="dropdown-menu dropdown-submenu">
+								<li>
+									<a class="dropdown-item"
+										href="./articles/DotNetCore/concurrent-hosted-service-start-and-stop-in-dotnet-8/index.html">Concurrent
+										Hosted Service Start and Stop in dotnet core 8</a>
+								</li>
+								<li>
+									<a class="dropdown-item"
+										href="./articles/DotNetCore/introducing-the-new-ihostedlifecycleservice-interface-in-dotnet-8/index.html">The
+										new ihostedlifecycleservice interface in dotnet core 8</a>
+								</li>
+								<li>
+									<a class="dropdown-item"
+										href="./articles/DotNetCore/accessing-state-in-system-text-json-custom-converters/index.html">Accessing
+										State in System.text.json Custom Converters</a>
+								</li>
+								<!-- <li>
+									<a class="dropdown-item" href="#">Submenu item 3 &raquo; </a>
+									<ul class="dropdown-menu dropdown-submenu">
+										<li>
+											<a class="dropdown-item" href="#">Multi level 1</a>
+										</li>
+										<li>
+											<a class="dropdown-item" href="#">Multi level 2</a>
+										</li>
+									</ul>
+								</li> -->
+							</ul>
+						</li>
+						<li>
+							<a class="dropdown-item" href="#">Jetbrains  &raquo;</a>
+							<ul class="dropdown-menu dropdown-submenu">
+								<li>
+									<a class="dropdown-item"
+									href="./articles/DotNetCore/automating-memory-profiling-with-the-jetbrains-dotmemory-profiler-api/index.html">Automating
+									Memory Profiling with the Jetbrains Dotmemory Profiler API</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<!-- Article End -->
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle text-white" href="#" id="category1Dropdown" role="button"
+						data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						More
+					</a>
+					<div class="dropdown-menu" aria-labelledby="category1Dropdown">
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#">Stay Tuned for below Concepts</a>
+						<div class="dropdown-divider"></div>
+
+						<!-- C programming start -->
+						<div class="dropdown">
+							<a class="dropdown-item dropdown-toggle" href="#" id="submenu1" role="button"
+								data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Basics of C Programming
+							</a>
+							<div class="dropdown-menu" aria-labelledby="submenu1">
+								<a class="dropdown-item" href="">Fundamentals Concepts :</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="">Demystifying C Pointers</a>
+								<a class="dropdown-item" href="">C Preprocessor Magic</a>
+								<a class="dropdown-item" href="">Building Blocks: Data Types and Operators</a>
+								<a class="dropdown-item" href="">Control Flow Champions</a>
+								<a class="dropdown-item" href="">Function Powerhouse: Designing and Using Functions</a>
+								<!-- <a class="dropdown-item" href=""></a> -->
+
+								<a class="dropdown-item" href="">Intermediate Concepts :</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="">Mastering Arrays: One-Dimensional and Multi-Dimensional
+									Wonders</a>
+								<a class="dropdown-item" href="">Structuring Data: Unleashing Structures and Unions</a>
+								<a class="dropdown-item" href="">File Magic: Reading and Writing to Files</a>
+								<a class="dropdown-item" href="">Command Line Warriors</a>
+								<a class="dropdown-item" href="">Make Files and Libraries: Reusable Code Power</a>
+								<!-- <a class="dropdown-item" href=""></a> -->
+
+								<a class="dropdown-item" href="">Advanced Concepts:</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="">Memory Management Masters</a>
+								<a class="dropdown-item" href="">Pointers and Arrays</a>
+								<a class="dropdown-item" href="">Preprocessor Macros</a>
+								<a class="dropdown-item" href="">Multithreading Mania</a>
+								<a class="dropdown-item" href="">Building Your Own Data Structures</a>
+								<!-- <a class="dropdown-item" href=""></a> -->
+
+								<a class="dropdown-item" href="">Special Topics:</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="">C for Embedded Systems</a>
+								<a class="dropdown-item" href="">C and Security</a>
+								<a class="dropdown-item" href="">Interfacing with Hardware</a>
+								<a class="dropdown-item" href="">C in the Modern World</a>
+								<a class="dropdown-item" href="">C Programming Challenges</a>
+								<!-- <a class="dropdown-item" href=""></a> -->
+							</div>
+						</div>
+						<!-- C programming end -->
+
+						<!-- Angulra Start -->
+						<div class="dropdown">
+							<a class="dropdown-item dropdown-toggle" href="#" id="submenu1" role="button"
+								data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Web UI - Angular 17
+							</a>
+							<div class="dropdown-menu" aria-labelledby="submenu1">
+								<a class="dropdown-item" href="">Standalone Components: Breaking Free</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="">Explore the benefits and implications of using
+									standalone components without NgModules.</a>
+								<a class="dropdown-item" href="">Discuss migration strategies for existing Angular
+									projects.</a>
+								<a class="dropdown-item" href="">Showcase practical examples of using standalone
+									components in diverse scenarios.</a>
+								<!-- <a class="dropdown-item" href=""></a> -->
+
+								<a class="dropdown-item" href="">Enhanced Routing: New Tricks for Navigation</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="">Deep dive into the refined routing system, including
+									dynamic imports, route guards, and resolvers.</a>
+								<a class="dropdown-item" href="">Demonstrate how to optimize lazy loading and enhance
+									user experiences with seamless navigation.</a>
+								<a class="dropdown-item" href="">Share tips for handling complex routing scenarios
+									effectively.</a>
+
+								<!-- <a class="dropdown-item" href=""></a> -->
+
+								<a class="dropdown-item" href="">Built-in Standalone Directives: Powering Up Forms</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="">Uncover the benefits of using standalone directives
+									like ngIf, ngFor, and ngSwitch without NgModules.</a>
+								<a class="dropdown-item" href="">Explore examples of building dynamic forms and reusable
+									UI components with standalone directives.</a>
+								<!-- <a class="dropdown-item" href=""></a> -->
+
+								<a class="dropdown-item" href="">Improved TypeScript Support: Embrace Modern
+									Features</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="">Explain how Angular 17 leverages TypeScript 4.9 for
+									enhanced type safety and developer productivity.</a>
+								<a class="dropdown-item" href="">Highlight new TypeScript features like control flow
+									analysis for conditional types and improved type inference.</a>
+								<a class="dropdown-item" href="">Demonstrate how to write more robust and maintainable
+									Angular code with these advancements.</a>
+								<!-- <a class="dropdown-item" href=""></a> -->
+
+								<a class="dropdown-item" href="">Dependency Injection Refresh: Refined Injection
+									Patterns</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="">Dive into the streamlined dependency injection system,
+									including improvements for providers and injection tokens.</a>
+								<a class="dropdown-item" href="">Explore advanced techniques like hierarchical injectors
+									and custom injection tokens for flexible dependency management.</a>
+								<a class="dropdown-item" href="">Share best practices for organizing and managing
+									dependencies effectively in large-scale Angular applications.</a>
+								<!-- <a class="dropdown-item" href=""></a> -->
+							</div>
+						</div>
+						<!-- Angulra End -->
+
+					</div>
+				</li>

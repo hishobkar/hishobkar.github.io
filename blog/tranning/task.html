@@ -1,0 +1,344 @@
+<html>
+
+<head>
+    <title>Abhijeet. Hishobkar</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog Template">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <!-- FontAwesome JS-->
+    <script defer src="../assets/js/fontawsome_v5.7.1_all.js"></script>
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="../assets/css/theme-3.css">
+
+    <script src="../../js/qrcode.min.js"></script>
+    <style>
+        #myModal {
+    z-index: 1050; /* Adjust the value as needed */
+}
+
+    </style>
+</head>
+
+<body data-spy="scroll" data-target=".navbar-collapse">
+    <!-- preloader section -->
+    <div class="preloader">
+        <div class="sk-spinner sk-spinner-wordpress">
+            <span class="sk-inner-circle"></span>
+        </div>
+    </div>
+
+    <header class="header text-center">
+        <h1 class="blog-name pt-lg-4 mb-0"><a href="index.html">Abhijeet's Blog</a></h1>
+
+        <nav class="navbar navbar-expand-lg navbar-dark">
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="navigation" class="collapse navbar-collapse flex-column">
+                <div class="profile-section pt-3 pt-lg-0">
+                    <img class="profile-image mb-3 rounded-circle mx-auto" src="../assets/images/profile.png"
+                        alt="image">
+
+                    <div class="bio mb-3">Hi, my name is Abhijeet. Hishobkar.<br>My skillset extends beyond just coding.
+                    </div>
+                    <!--//bio-->
+                    <ul class="social-list list-inline py-3 mx-auto">
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-github-alt fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-stack-overflow fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-codepen fa-fw"></i></a></li>
+                    </ul><!--//social-list-->
+                    <hr>
+                </div><!--//profile-section-->
+
+                <ul class="navbar-nav flex-column text-left">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html"><i class="fas fa-home fa-fw mr-2"></i>Blog Home</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="../blog-post.html"><i class="fas fa-bookmark fa-fw mr-2"></i>Blog
+                            Post <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../blog-list.html"><i class="fas fa-list fa-fw mr-2"></i>Blog
+                            List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../index.html#home"><i class="fas fa-user fa-fw mr-2"></i>About
+                            Me</a>
+                    </li>
+                </ul>
+
+                <div class="my-2 my-md-3">
+                    <a class="btn btn-primary" href="../../index.html#contact" target="_blank">Get in Touch</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <div class="main-wrapper">
+
+        <article class="blog-post px-3 py-5 p-md-5">
+            <div class="container">
+
+                <!-- <div id="myModal" class="modal col-md-8" style="display: none;">
+                    <div class="modal-content">
+                        <span class="close">×</span>
+                        <div id="display-container"></div>
+                    </div>
+                </div> -->
+                <div id="myModal" class="modal position-fixed" style="display: none;max-width: 1200px;position: absolute;top: 50px;left: 400px;">
+                    <div class="modal-content">
+                        <span class="close">×</span>
+                        <div id="display-container"></div>
+                    </div>
+                </div>
+                
+                <h1><a href="index.html">Take Up Tranning</a></h1>
+                <br>
+                <h2>Assignemt :</h2>
+                <ul class="list-group">
+
+                    <li class="list-group-item">
+                        <button class="btn btn-primary rounded-pill btnTask" val="1">Ask Abhijeet</button>
+                        <button class="btn btn-primary rounded-pill">Task 1</button>
+                        1. Display the first 5 rows of the "Customer" table.
+                    </li>
+                    <li class="list-group-item">
+                        <button class="btn btn-primary rounded-pill btnTask" val="2">Ask Abhijeet</button>
+                        <button class="btn btn-primary rounded-pill">Task 2</button>
+                        2. Find the total number of rows in the "Product" table.
+                    </li>
+                    <li class="list-group-item">
+                        <button class="btn btn-primary rounded-pill btnTask" val="3">Ask Abhijeet</button>
+                        <button class="btn btn-primary rounded-pill">Task 3</button>
+                        3. Retrieve all columns from the "SalesOrderHeader" table.
+                    </li>
+                    <li class="list-group-item">
+                        <button class="btn btn-primary rounded-pill btnTask" val="4">Ask Abhijeet</button>
+                        <button class="btn btn-primary rounded-pill">Task 4</button>
+                        4. Show unique values from the "ProductCategory" column in the "Product" table.
+                    </li>
+                    <li class="list-group-item">
+                        <button class="btn btn-primary rounded-pill btnTask" val="5">Ask Abhijeet</button>
+                        <button class="btn btn-primary rounded-pill">Task 5</button>
+                        5. Retrieve the product names and prices from the "Product" table.
+                    </li>
+                    <li class="list-group-item">
+                        <button class="btn btn-primary rounded-pill btnTask" val="6">Ask Abhijeet</button>
+                        <button class="btn btn-primary rounded-pill">Task 6</button>
+                        6. Display customers from the "Customer" table whose last name is "Johnson".
+                    </li>
+                    <li class="list-group-item">
+                        <button class="btn btn-primary rounded-pill btnTask" val="7">Ask Abhijeet</button>
+                        <button class="btn btn-primary rounded-pill">Task 7</button>
+                        7. List the product names and their corresponding categories from the "Product" and
+                        "ProductCategory" tables.
+                    </li>
+                    <li class="list-group-item">
+                        <button class="btn btn-primary rounded-pill btnTask" val="8">Ask Abhijeet</button>
+                        <button class="btn btn-primary rounded-pill">Task 8</button>
+                        8. Find the average order quantity from the "SalesOrderDetail" table.
+                    </li>
+                    <li class="list-group-item">
+                        <button class="btn btn-primary rounded-pill btnTask" val="9">Ask Abhijeet</button>
+                        <button class="btn btn-primary rounded-pill">Task 9</button>
+                        9. Sort the "Product" table based on the "Name" column in descending order.
+                    </li>
+                    <li class="list-group-item">
+                        <button class="btn btn-primary rounded-pill btnTask" val="10">Ask Abhijeet</button>
+                        <button class="btn btn-primary rounded-pill">Task 10</button>
+                        10. Count the number of distinct product names in the "Product" table.
+                    </li>
+                    <li class="list-group-item">
+                        <button class="btn btn-primary rounded-pill btnTask" val="11">Ask Abhijeet</button>
+                        <button class="btn btn-primary rounded-pill">Task 11</button>
+                        11. Show orders from the "SalesOrderHeader" table with a total due amount greater than 200.
+                    </li>
+                    <li class="list-group-item">
+                        <button class="btn btn-primary rounded-pill btnTask" val="12">Ask Abhijeet</button>
+                        <button class="btn btn-primary rounded-pill">Task 12</button>
+                        12. Retrieve the top 3 most expensive products from the "Product" table.
+                    </li>
+                    <li class="list-group-item">
+                        <button class="btn btn-primary rounded-pill btnTask" val="13">Ask Abhijeet</button>
+                        <button class="btn btn-primary rounded-pill">Task 13</button>
+                        13. Calculate the total sales amount for each order in the "SalesOrderHeader" table.
+                    </li>
+                    <li class="list-group-item">
+                        <button class="btn btn-primary rounded-pill btnTask" val="14">Ask Abhijeet</button>
+                        <button class="btn btn-primary rounded-pill">Task 14</button>
+                        14. Display customers from the "Customer" table whose city is "Seattle".
+                    </li>
+                    <li class="list-group-item">
+                        <button class="btn btn-primary rounded-pill btnTask" val="15">Ask Abhijeet</button>
+                        <button class="btn btn-primary rounded-pill">Task 15</button>
+                        15. Filter the "Product" table to display products with a price less than 100.
+                    </li>
+                    <li class="list-group-item">
+                        <button class="btn btn-primary rounded-pill btnTask" val="16">Ask Abhijeet</button>
+                        <button class="btn btn-primary rounded-pill">Task 16</button>
+                        16. Update the "Product" table to set the price to 75 for products with a price greater than 75.
+                    </li>
+                    <li class="list-group-item">
+                        <button class="btn btn-primary rounded-pill btnTask" val="17">Ask Abhijeet</button>
+                        <button class="btn btn-primary rounded-pill">Task 17</button>
+                        17. Insert a new product into the "Product" table.
+                    </li>
+                    <li class="list-group-item">
+                        <button class="btn btn-primary rounded-pill btnTask" val="18">Ask Abhijeet</button>
+                        <button class="btn btn-primary rounded-pill">Task 18</button>
+                        18. Delete all products from the "Product" table with a price greater than 200.
+                    </li>
+                    <li class="list-group-item">
+                        <button class="btn btn-primary rounded-pill btnTask" val="19">Ask Abhijeet</button>
+                        <button class="btn btn-primary rounded-pill">Task 19</button>
+                        19. Retrieve the average order quantity for each product from the "SalesOrderDetail" table.
+                    </li>
+                    <li class="list-group-item">
+                        <button class="btn btn-primary rounded-pill btnTask" val="20">Ask Abhijeet</button>
+                        <button class="btn btn-primary rounded-pill">Task 20</button>
+                        20. Join the "Product" and "SalesOrderDetail" tables to display product information along with
+                        order details.
+                    </li>
+                </ul>
+
+            </div>
+        </article>
+    </div>
+
+    <!-- footer section -->
+
+    <footer class="footer text-center py-2 theme-bg-dark">
+        <small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a
+                href="http://hishobkar.github.io" target="_blank">Abhijeet. Hishobkar</a> for developers</small>
+
+    </footer>
+
+    <!-- footer ends -->
+
+    <!-- Javascript -->
+    <script src="../assets/plugins/jquery-3.3.1.min.js"></script>
+    <script src="../assets/plugins/popper.min.js"></script>
+    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Style Switcher (REMOVE ON YOUR PRODUCTION SITE) -->
+    <script src="../assets/js/demo/style-switcher.js"></script>
+
+    <script src="purify.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".navbar-toggler").click();
+        });
+
+        function displaySafeHTML(html, targetId) {
+            // Get the target div element
+            const targetElement = document.getElementById(targetId);
+
+            // Use DOMPurify to sanitize the HTML
+            const sanitizedHTML = DOMPurify.sanitize(html);
+
+            // Set the sanitized HTML as the innerHTML of the target div
+            targetElement.innerHTML = sanitizedHTML;
+
+            var buttonElement1 = targetElement.querySelector('button');
+            if (buttonElement1) {
+                buttonElement1.parentNode.removeChild(buttonElement1);
+            }
+
+            var buttonElement2 = targetElement.querySelector('button');
+            if (buttonElement2) {
+                buttonElement2.parentNode.removeChild(buttonElement2);
+            }
+
+            var buttonElement3 = targetElement.querySelector('button');
+            if (buttonElement3) {
+                buttonElement3.parentNode.removeChild(buttonElement3);
+            }
+
+            var buttonElement4 = targetElement.querySelector('button');
+            if (buttonElement4) {
+                buttonElement4.parentNode.removeChild(buttonElement4);
+            }
+
+            // Replace the original content with the sanitized content (without the button)
+            targetElement.innerHTML = targetElement.innerHTML;
+        }
+
+        $(document).ready(function () {
+            $(".btnTask").click(function () {
+                var i = $(this).attr("val");
+                // alert(i);
+                // var myurl = "SQLTranningKit/Home/GetGeneratedData?id=" + i;
+                var myurl = "./file.json";
+                $.ajax({
+                    url: myurl,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (response) {
+                        // Filter data based on Id
+                        var filteredData = response.filter(function (item) {
+                            // return Number(String(item.Id).trim()) === Number(i);
+                            var itemId = Number(String(item.Id).trim());
+                            var targetId = Number(i);
+
+                            console.log(itemId, targetId, itemId === targetId); // Log values
+
+                            return itemId === targetId;
+                        });
+
+                        // Check if there is data with Id = 1
+                        if (filteredData.length > 0) {
+                            // Handle the data as needed
+                            // console.log(filteredData[0]);
+                            // alert('Received data: ' + JSON.stringify(filteredData[0]));
+
+                            const displayContainer = document.getElementById('display-container');
+
+                            // Call the function to display sanitized HTML with animation
+                            displaySafeHTML(filteredData[0].A, "display-container");
+                            $("#myModal").css("display", "block");
+                        } else {
+                            alert('No data found with this task!');
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        // Handle errors
+                        console.error('Error:', textStatus, ' - ', errorThrown);
+                        alert('Error fetching data. See console for details.');
+                    }
+                });
+
+            });
+
+
+            $(".close").click(function () {
+                $("#myModal").css("display", "none");
+            });
+
+            // Close modal when clicking outside the modal content
+            $(window).click(function (event) {
+                if (event.target == $("#myModal")[0]) {
+                    $("#myModal").css("display", "none");
+                }
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>

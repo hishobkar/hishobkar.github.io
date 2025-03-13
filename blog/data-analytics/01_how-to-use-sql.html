@@ -1,0 +1,476 @@
+<html>
+
+<head>
+	<title>Abhijeet. Hishobkar</title>
+
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Blog Template">
+	<meta name="author" content="Xiaoying Riley at 3rd Wave Media">
+	<link rel="shortcut icon" href="../favicon.ico">
+
+	<!-- FontAwesome JS-->
+	<script defer src="../assets/js/fontawsome_v5.7.1_all.js"></script>
+
+	<!-- Theme CSS -->
+	<link id="theme-style" rel="stylesheet" href="../assets/css/theme-3.css">
+
+	<script src="../../js/qrcode.min.js"></script>
+</head>
+
+<body data-spy="scroll" data-target=".navbar-collapse">
+	<!-- preloader section -->
+	<div class="preloader">
+		<div class="sk-spinner sk-spinner-wordpress">
+			<span class="sk-inner-circle"></span>
+		</div>
+	</div>
+
+	<header class="header text-center">
+		<h1 class="blog-name pt-lg-4 mb-0"><a href="index.html">Abhijeet's Blog</a></h1>
+
+		<nav class="navbar navbar-expand-lg navbar-dark">
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+				aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div id="navigation" class="collapse navbar-collapse flex-column">
+				<div class="profile-section pt-3 pt-lg-0">
+					<img class="profile-image mb-3 rounded-circle mx-auto" src="../assets/images/profile.png"
+						alt="image">
+
+					<div class="bio mb-3">Hi, my name is Abhijeet. Hishobkar.<br>My skillset extends beyond just coding.
+					</div>
+					<!--//bio-->
+					<ul class="social-list list-inline py-3 mx-auto">
+						<li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+						<li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
+						<li class="list-inline-item"><a href="#"><i class="fab fa-github-alt fa-fw"></i></a></li>
+						<li class="list-inline-item"><a href="#"><i class="fab fa-stack-overflow fa-fw"></i></a></li>
+						<li class="list-inline-item"><a href="#"><i class="fab fa-codepen fa-fw"></i></a></li>
+					</ul><!--//social-list-->
+					<hr>
+				</div><!--//profile-section-->
+
+				<ul class="navbar-nav flex-column text-left">
+					<li class="nav-item">
+						<a class="nav-link" href="../index.html"><i class="fas fa-home fa-fw mr-2"></i>Blog Home</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="../blog-post.html"><i class="fas fa-bookmark fa-fw mr-2"></i>Blog
+							Post <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="../blog-list.html"><i class="fas fa-list fa-fw mr-2"></i>Blog
+							List</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="../../index.html#home"><i class="fas fa-user fa-fw mr-2"></i>About
+							Me</a>
+					</li>
+				</ul>
+
+				<div class="my-2 my-md-3">
+					<a class="btn btn-primary" href="../../index.html#contact" target="_blank">Get in Touch</a>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+
+	<div class="main-wrapper container">
+
+		<article>
+			<div>
+				<main>
+					<header>
+						<h1>How to Use SQL: A Beginner’s Guide</h1>
+						<div><label> by <a href="https://www.linkedin.com/in/hishobkar">Abhijeet. Hishobkar</a>, UPDATED
+								ON <time>JULY 27, 2023</time> </label> <label>14 mins read</label>
+							<div> <img src="01_header.jpg"> </div>
+						</div>
+					</header><br>
+					<div>
+						<p><span style="">When you’re beginning your journey into data analytics, you need to learn
+								about accessing and manipulating data stored in databases. Relational databases that
+								store tabular data in rows and columns remain a powerful and convenient way to manage
+								data. Structured Query Language (SQL) is a standard programming language used to
+								retrieve and manipulate data in databases. </span></p>
+						<p><span style="">By the end of this article, you’ll have a better understanding of what SQL is,
+								how to use SQL, and where to learn more about it. </span></p>
+						<p><span style="">You can use this clickable menu to skip ahead to any section. </span></p>
+						<ol>
+							<li style=""><a href="#what-is-sql"><span style="">What is SQL?</span></a></li>
+							<li style=""><a href="#what-does-sql-do"><span style="">What does SQL do?</span></a></li>
+							<li style=""><a href="#how-to-use-sql"><span style="">How to use SQL (for
+										beginners)</span></a></li>
+							<li style=""><a href="#next-steps"><span style="">Next steps</span></a></li>
+						</ol>
+						<p><span style="">Ready to learn more about how to use SQL? Let’s get started!</span> </p>
+						<h2><span style="">1. What is SQL?</span></h2>
+						<p><span style="">Structured Query Language, or SQL, is a standard programming language with its
+								foundations in relational algebra that enables users to access and manage data in a
+								database. It is a 4th generation programming language that is fairly human-readable,
+								closely matching human language compared to programming languages like Java or C++.
+								Because of its readability, SQL is easy to learn and use, which has kept it relevant in
+								the field of data analytics for over 40 years. </span></p>
+						<p><span style="">To use SQL, we often rely on Relational Database Management Systems (RDBMS)
+								that enable the creation of relational databases. Databases inside an RDBMS store data
+								in objects called tables utilizing a tabular format, storing records by columns and rows
+								similar to what you see when using a spreadsheet. Columns are referred to as
+							</span><b>fields</b><span style="">, and rows are referred to as </span><b>records</b><span
+								style="">.</span></p>
+						<p><span style="">By 1987, SQL had become a standard of both the American National Standards
+								Institute (ANSI), and the International Organization for Standardization (ISO). Although
+								it is a standard, there are different varieties of SQL developed by different companies
+								like Microsoft and Oracle:</span></p>
+						<ul>
+							<li><a href="https://www.sqlite.org/index.html"><span style="">SQLite</span></a></li>
+							<li><a href="https://www.mysql.com/"><span style="">MySQL</span></a> </li>
+							<li><a href="https://www.postgresql.org/" rel="noopener"><span
+										style="">PostgreSQL</span></a></li>
+							<li><a href="https://www.microsoft.com/en-us/sql-server/sql-server-downloads"><span
+										style="">Microsoft SQL Server</span></a><span style=""> and </span><a
+									href="https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15"><span
+										style="">SQL Server Management Studio</span></a></li>
+							<li><a href="https://www.oracle.com/downloads/"><span style="">Oracle</span></a></li>
+							<li><a href="https://cloud.google.com/bigquery"><span style="">Google BigQuery</span></a>
+							</li>
+						</ul>
+						<p><span style="">Because SQL is a standard, each brand of SQL supports the core commands and
+								syntax used to select and filter data, and insert, update and delete records. Each brand
+								has slight differences in functionality, so refer to the documentation for whichever
+								brand you’re using if you encounter errors, or are attempting to use advanced features.
+							</span></p>
+						<h2><span style="">2. What does SQL do?</span></h2>
+						<p><span style="">SQL is not like a typical programming language (like </span>Javascript<span
+								style="">, for example) that relies on constructs like iteration and recursion. We don’t
+								need to tell SQL how to process data in the database—we simply give SQL server commands
+								to perform a task (like selecting records) and the Query Engine under the hood generates
+								an execution plan that it uses for efficient operation. </span> </p>
+						<p><span style="">Selecting data and working with rows, columns, and tables is only the tip of
+								the SQL iceberg! Most brands of SQL support functionality for aggregating data,
+								indexing, creating user-defined functions and stored procedures, looping, using logical
+								operators and variables, and managing user security. </span></p>
+						<p><span style="">Going beyond the operations performed using SQL, server and query performance
+								tuning is both an art and science that could fill volumes of text on its own. In this
+								tutorial, we’ll first explore the SQL basics and cover the following SQL
+								commands:</span> </p>
+						<ul>
+							<li style=""><span style="">Creating a database</span></li>
+							<li style=""><span style="">Creating tables</span> </li>
+							<li style=""><span style="">Inserting records</span></li>
+							<li style=""><span style="">Selecting records</span></li>
+							<li style=""><span style="">Filtering records</span></li>
+							<li style=""><span style="">Updating records</span> </li>
+							<li style=""><span style="">Modifying tables</span> </li>
+						</ul>
+						<h2><span style="">3. How to use SQL (for beginners)</span></h2>
+						<p><span style="">After picking the band of SQL you want to use (for these examples, we will be
+								using Microsoft SQL Server), start by downloading and installing the necessary software.
+								Every command we use should work across all brands of SQL, but if you want to follow
+								along using Microsoft SQL Server and SQL Server Management Studio (SSMS) you can
+							</span><a href="https://www.microsoft.com/en-us/sql-server/sql-server-downloads"><span
+									style="">download and install</span></a><span style=""> Microsoft SQL Server
+								Developer version on either Windows or Linux.</span></p>
+						<p><span style="">After installing and setting up SQL Server, </span><a
+								href="https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16"><span
+									style="">download and install</span></a><span style=""> SQL Server Management
+								Studios. SSMS gives us a graphic user interface to interact with SQL Server.</span></p>
+						<p><span style="">With SSMS installed, launch the application and it will ask you to connect to
+								the SQL Server you just set up:</span></p>
+						<p><img src=".//images/how-to-use-sql0.png" alt="How to use SQL: Tutorial figure 1" height="347"
+								data-srcset=""></p>
+						<p><span style="">If the server name is not populated automatically, select the Browse More
+								option from the Server Name list and you should see your local SQL Server install
+								available to select. </span></p>
+						<p><span style="">Once connected to SQL Server through SSMS, it will open and look like
+								this:</span></p>
+						<p><img src="./images/how-to-use-sql1.png" alt="How to use SQL: Tutorial figure 2" height="425"
+								sizes="(max-width: 512px) 100vw, 512px"></p>
+						<p><span style="">The Object Explorer panel visualizes different components, or objects, of the
+								database server. </span></p>
+						<p><span style="">The Query Editor panel lets you type SQL code that can be executed against the
+								selected database. We’ll cover more of the layout of SSMS in more detail after creating
+								our first database.</span></p>
+						<h3><span style="">How to use SQL: Creating a database</span></h3>
+						<p><span style="">In order to learn and practice SQL skills, we need a database to store our
+								tables and data. Creating a new database is simple and can be done one of two
+								ways:</span></p>
+						<ul>
+							<li style=""><span style="">Right click the Databases folder and select</span><b> New
+									Database</b><span style="">. Then follow the prompts.</span></li>
+							<li style=""><span style="">Use the CREATE DATABASE SQL command.</span></li>
+						</ul>
+						<p><span style="">We will use the SQL command to create the new database. In the Query Editor
+								panel, type the following SQL command:</span></p>
+						<pre><code>CREATE DATABASE exampleDatabase</code><code></code></pre>
+						<p><span style="">Click the </span><b>Execute</b><span style=""> button (or F5 on the
+								keyboard). </span></p>
+						<p><span style="">The SQL statement will run and the Messages panel will appear confirming the
+								command completed successfully. </span></p>
+						<p><span style="">Expand the Databases folder in the Object Explorer panel and you should see
+								the </span><b>exampleDatabase </b><span style="">database (right click the folder and
+								select </span><i><span style="">Refresh </span></i><span style="">if you do not see the
+								database automatically) :</span></p>
+						<p><img decoding="async" src="./images/how-to-use-sql2.png"
+								alt="How to use SQL: Tutorial figure 3" height="331" data-srcset=""></p>
+						<p><span style="">Right click on the exampleDatabase object and select </span><b>New
+								Query</b><span style="">. A new Query Editor tab will appear and the exampleDatabase
+								object will be selected in the dropdown list next to the Execute button. This dropdown
+								list contains the names of the databases on which you can run SQL statements. </span>
+						</p>
+						<p><img decoding="async" src="./images/how-to-use-sql3.png"
+								alt="How to use SQL: Tutorial figure 4" height="217" data-srcset=""></p>
+						<h3><span style="">How to use SQL: Creating a table</span></h3>
+						<p><span style="">In SSMS, we can use the </span><b>CREATE TABLE</b><span style=""> command to
+								create a new table in our database. </span> </p>
+						<p><span style="">Before creating the table, we need to think about what data we want to store.
+								Let’s imagine we run a business that deals with clients, and we want to store data about
+								them. We will start by creating a table named </span><b>client </b><span style="">that
+								will store records about our clients. What information might we want to store in the
+								table’s fields? Name? Gender? Years of service? </span></p>
+						<p><span style="">When creating tables, we need to define the fields inside the table and their
+							</span><i><span style="">data types</span></i><span style="">. Every column, local variable,
+								parameter or expression used in SQL server needs a data type. There are several
+								different data types, but for now let’s focus on using these three:</span></p>
+						<p><b>VARCHAR: </b><span style="">The VARCHAR(n) data type stores characters and strings of text
+								where n is the maximum number of characters the field can store. If you want to set it
+								to max, use VARCHAR(max).</span></p>
+						<p><b>INT: </b><span style="">The INT data type stores exact numbers, like 1, 3, 7… etc. It does
+								not store numbers that contain decimals.</span></p>
+						<p><b>FLOAT:  </b><span style="">The FLOAT data type stores floating decimal point numbers. Due
+								to the way computers work, floating point numbers are approximate which means not all
+								values in the range of possible values can be expressed. </span></p>
+						<p><span style="">Use the </span><b>CREATE TABLE</b><span style=""> SQL command to create the
+							</span><i><span style="">clients </span></i><span style="">table and define the fields with
+								their data types:</span></p>
+						<pre><code> CREATE TABLE client ( clientID int not null , firstName varchar(50) , lastName varchar(50) , gender varchar(1) , yearsServiced int , discountRate float )</code><code></code></pre>
+						<p><span style="">Notice we include an integer field named </span><b>clientID </b><span
+								style="">and include the key words </span><b>not null</b><span style="">. We consider
+								clientID an primary key field, so we want to make sure it is populated for each record
+								in the table. Using a primary key field allows us to set up relationships without
+								duplicating fields in other tables. This concept is called
+							</span><b>normalization</b><span style=""> and is an important part of data architecture in
+								relational databases. We’ll explore normalization more in later examples.</span> </p>
+						<p><span style="">After creating the </span><b>client</b> <span style="">table, expand the
+								tables folder to see the client</span> <span style="">table in the database. Expand the
+								client table to see the fields we created:</span></p>
+						<p><img decoding="async" src="./images/how-to-use-sql4.png"
+								alt="How to use SQL: Tutorial figure 5" height="327" data-srcset=""></p>
+						<p><span style="">Notice the column name and data type are represented in the object explorer,
+								which is helpful when dealing with many tables and lots of fields. Now that we have a
+								table, it’s time to insert some data.</span></p>
+						<h3><span style="">How to use SQL: Inserting records into a table</span></h3>
+						<p><span style="">The SQL command to insert records into a table is </span><b>INSERT INTO
+							</b><span style="">followed by</span> <span style="">the table name and the columns
+								receiving data. The syntax looks like this:</span></p>
+						<p><span style="">INSERT INTO <table_name> (col 1, col 2, col 3…)</span> </p>
+						<p><span style="">Values (val1, val2, va3…)</span></p>
+						<p><span style="">As a shortcut, if you’re inserting values for all columns in a table, the
+								column names do not need to be specified.</span></p>
+						<p><span style="">Let’s make up some fake data to insert into the client table:</span> </p>
+						<pre><code>INSERT INTO client (clientID, firstName, lastName, gender, yearsServiced, discountRate) values (1, 'Eric', 'Klep', 'M', 2, 0.03)</code></pre>
+						<p><span style="">Notice we put our varchar values in between quotes (‘’) to indicate the
+								beginning and end of the string of characters. The values for data types
+							</span><b>int</b><span style=""> and </span><b>float</b><span style=""> do not need the
+								single quote. </span></p>
+						<p><span style="">Execute the SQL statement and notice the messages returned say </span><b>1 row
+								affected</b><span style="">, indicating the row was inserted successfully. Let’s add a
+								few more records using the same method, but without specifying the column names since
+								we’re inserting data into each field:</span></p>
+						<pre><code>INSERT INTO client values (2, 'Kristen', 'Moss', 'F', 1, 0.01) INSERT INTO client values (3, 'Johnny', 'Carson', 'm', 4, 0.05) INSERT INTO client values (3, 'Alex', 'Porter', null, 4, 0.05)</code></pre>
+						<p><span style="">Now that we have records in our table, it’s time to query the database to
+								retrieve our data. </span></p>
+						<div data-category-id="3"> </div>
+						<h3><span style="">How to use SQL: Selecting data</span> </h3>
+						<p><span style="">The SQL command to retrieve data from a database is </span><b>SELECT</b><span
+								style="">. The returned data is stored in a virtual results table called the
+							</span><b>results-set</b><span style="">.</span></p>
+						<p><span style="">If we want to see all of the records in our client table, instead of including
+								every column in our SELECT statement, we use the  </span><b>* wildcard</b><span
+								style="">. The following SELECT statement returns all columns and all rows from the
+								client table:</span></p>
+						<p><span style="">SELECT * FROM client </span></p>
+						<p><img decoding="async" src="./images/how-to-use-sql5.png"
+								alt="How to use SQL: Tutorial figure 6" height="231" data-srcset=""></p>
+						<p><span style="">As expected, all fields return and we can see the four records we inserted
+								into the client table. </span></p>
+						<p><span style="">We can specify the fields we want to include in the output by adding them to
+								the select statement instead of using *. For example, if we want to return only the
+							</span><b>clientID</b><span style=""> and </span><b>firstName</b><span style=""> fields,
+								we’d use this query:</span></p>
+						<pre><code>SELECT clientID, firstName FROM client</code></pre>
+						<p><img decoding="async" src="./images/how-to-use-sql6.png"
+								alt="How to use SQL: Tutorial figure 7" height="200" data-srcset=""></p>
+						<p><span style="">We can also select distinct records by adding the </span><b>DISTINCT </b><span
+								style="">keyword after SELECT in our statement. Doing so returns the unique value,
+								excluding duplicates. For example, since our </span><b>clientID</b> <span style="">field
+								contains two records with a value of 3, using SELECT DISTINCT will return three results
+								instead of four:</span></p>
+						<pre><code>SELECT DISTINCT clientID FROM client</code></pre>
+						<p><img decoding="async" src="./images/how-to-use-sql7.png"
+								alt="How to use SQL: Tutorial figure 8" height="193" data-srcset=""></p>
+						<p><span style="">If we were to include the </span><b>firstName</b> <span style="">column in our
+								SELECT DISTINCT statement, we’d still get four records because the combination of
+								clientID and firstName would all be unique since the combination of the two fields is
+								not duplicated in the table. Give it a try:</span></p>
+						<pre><code>SELECT DISTINCT clientID, firstName FROM client</code></pre>
+						<p><span style="">When dealing with large datasets, or looking for particular records, we need
+								to filter the data. Now that we know how to select records, let’s explore filtering
+								them.</span></p>
+						<h3><span style="">How to use SQL: Filtering results</span></h3>
+						<p><span style="">Using the </span><b>WHERE </b><span style="">clause in our SELECT statement,
+								we can filter for specific values we want, or do not want, to return. It allows us to
+								return records that meet a given condition. The WHERE clause can be used with
+							</span><b>UPDATE</b><span style=""> and </span><b>DELETE</b><span style=""> statements as
+								well.</span></p>
+						<p><span style="">Let’s say we only want to return records from our </span><i><span
+									style="">client </span></i><span style="">table that have a clientID equal to 3.
+								We’d add a WHERE clause at the end of our select statement that says WHERE clientID =
+								3:</span></p>
+						<pre><code>SELECT * FROM client WHERE clientID = 3</code></pre>
+						<p><img decoding="async" src="./images/how-to-use-sql8.png"
+								alt="How to use SQL: Tutorial figure 9" height="98" data-srcset=""></p>
+						<p><span style="">As expected, we get two results since two records have clientID 3.</span></p>
+						<p><span style="">There are more operators we can use in addition to = in a WHERE clause:</span>
+						</p>
+						<ul>
+							<li style=""><span style="">></span> </li>
+							<li style=""><span style="">>=</span> </li>
+							<li style=""><span style="">
+									<< /span>
+							</li>
+							<li style=""><span style="">
+									<=< /span>
+							</li>
+							<li style=""><span style=""> !=</span> </li>
+							<li style=""><span style="">AND</span></li>
+							<li style=""><span style="">OR</span></li>
+							<li style=""><span style="">IN ()</span> </li>
+							<li style="">ISNULL()</li>
+						</ul>
+						<p><span style=""> For example, if we wanted to find records that have Eric as a first name or
+								more than 3 years serviced, we could use our logical OR:</span></p>
+						<pre><code>SELECT * FROM client WHERE firstName = 'Eric' OR yearsServiced > 3</code></pre>
+						<p><img decoding="async" src="./images/how-to-use-sql9.png"
+								alt="How to use SQL: Tutorial figure 10" height="111" data-srcset=""></p>
+						<p><span style="">Notice we don’t get our record for clientID 2 because it meets neither
+								condition specified in our WHERE clause. Since we used OR, results are returned if
+								either of the conditions are true. If we would have used AND instead of OR, we would get
+								0 results returned since there are no records where the </span><b>firstName</b> <span
+								style="">is Eric and </span><b>yearsServiced</b> <span style="">is greater than
+								3. </span></p>
+						<h4><span style="">What is a primary key in a SQL table?</span></h4>
+						<p><span style="">When looking at the results from our SELECT statements, we can see a problem.
+								Notice that the </span><b>clientID</b> <span style="">for client Alex Porter is
+								identical to the </span><b>clientID</b> <span style="">for Johnny Carson. We want the
+								clientID value to be unique per row so we can use the clientID as a </span><b>primary
+								key</b> <span style="">and </span><b>foreign key</b> <span style="">when creating
+								relationships with other tables in our database</span><b><i>.</i></b><span
+								style=""> </span></p>
+						<p><span style="">A </span><b>primary key</b><span style=""> is what’s called a table
+								constraint, and it must contain unique values. A table can have only one primary key.
+								The primary key value cannot be null.</span></p>
+						<p><span style="">Before we can alter our table to add a primary key constraint on the clientID
+								field, we need to fix the duplicate clientID value. To fix the value, we use an UPDATE
+								statement. Then we can use an ALTER TABLE command to add the primary key constraint to
+								the table. </span></p>
+						<h3><span style="">How to use SQL: Updating records</span></h3>
+						<p><span style="">Use the </span><b>UPDATE </b><span style="">statement to modify records in a
+								table. To update records, you must use the SET keyword to change the old value to the
+								new value. When updating records, make sure to use the WHERE clause to specify which
+								records should be updated or else all records will be updated. </span></p>
+						<p><span style="">Let’s set the clientID to 4 for Alex Porter’s record:</span> </p>
+						<pre><code>UPDATE client SET clientID = 4 WHERE firstName = ‘Alex’ AND clientID = 3</code><code></code></pre>
+						<p><span style="">Executing the UPDATE statement should return a message that says </span><b>1
+								row affected</b><span style="">. Run a SELECT *  statement to confirm the record is
+								updated.</span></p>
+						<p><span style="">SELECT * FROM client</span></p>
+						<p><img decoding="async" src="./images/how-to-use-sql10.png"
+								alt="How to use SQL: Tutorial figure 11" height="132" data-srcset=""></p>
+						<p><span style="">We successfully updated the record and can now add a primary key constraint to
+								the client table on the clientID field. </span></p>
+						<pre><code>ALTER TABLE client ADD PRIMARY KEY (clientID)</code></pre>
+						<p><span style="">After executing the ALTER TABLE statement, you will see a message that says
+								“Commands completed successfully.” To test the new table constraint, try updating Alex’s
+								clientID back to 3 instead of 4. You should receive an error message.</span></p>
+						<p><img decoding="async" src="./images/how-to-use-sql11.png"
+								alt="How to use SQL: Tutorial figure 12" height="65" data-srcset=""></p>
+						<h3><span style="">How to use SQL: takeaways for beginner SQL concepts </span></h3>
+						<p><span style="">We just covered a ton of SQL concepts, so let’s review what we’ve learned
+								before moving to the next section and learning more advanced SQL commands:</span></p>
+						<ul>
+							<li style=""><span style="">CREATE DATABASE is used to create a new database in the SQL
+									server.</span></li>
+							<li style=""><span style="">CREATE TABLE is used to create new tables in a database.</span>
+							</li>
+							<li style=""><span style="">Data types must be defined for each field in a table.</span>
+							</li>
+							<li style=""><span style="">Good database design is centered around the concept called
+									normalization.</span></li>
+							<li style=""><span style="">Tables often have primary keys which must be unique per
+									record.</span></li>
+							<li style=""><span style="">Tables can be altered.</span></li>
+							<li style=""><span style="">INSERT INTO is the SQL command to insert new records into a
+									table.</span></li>
+							<li style=""><span style="">UPDATE is used to update records in a table.</span></li>
+							<li style=""><span style="">SELECT statements are used to query data and retrieve records
+									from tables.</span></li>
+							<li style=""><span style="">WHERE is used to filter records based on specific
+									conditions.</span></li>
+						</ul>
+						<h2><span style="">4. Next steps</span> </h2>
+						<p><span style="">SQL is a great skill to have if you want to work with data. By following the
+								examples in this guide, you’ve laid a foundation for continuing to learn more about how
+								to use SQL and how to use it for data analytics. Having been around for over 40 years,
+								SQL is a very deep topic, and this beginner’s guide only scratches the surface. </span>
+						</p>
+						<p><span style="">If you’re set up with Microsoft SQL Server, I recommend reviewing their
+								documentation since it is filled with fantastic examples for every SQL topic. You can
+								find datasets online from websites like Kaggle.com and import them into SQL server.
+								Beyond official documentation, people have written text books or created online courses
+								explaining how to performance tune SQL queries, or set up proper data architecture, or
+								create efficient indexes on tables, and so on. You may also be interested in the <a
+									href="./02_advanced-sql.html">next tutorial for advanced SQL</a>.</span></p>
+						<p><span style="">Even though there is a lot to learn, there are thousands of online guides or
+								books covering everything you want to know about SQL. You could also make great use of
+								gaining a SQL certification. Stay patient, practice by loading data into your server,
+								and you’ll become a SQL master in no time. </span></p>
+					</div>
+				</main>
+			</div>
+		</article>
+	</div>
+
+	<!-- footer section -->
+
+	<footer class="footer text-center py-2 theme-bg-dark">
+		<small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a
+				href="http://hishobkar.github.io" target="_blank">Abhijeet. Hishobkar</a> for developers</small>
+
+	</footer>
+
+	<!-- footer ends -->
+
+	<!-- Javascript -->
+	<script src="../assets/plugins/jquery-3.3.1.min.js"></script>
+	<script src="../assets/plugins/popper.min.js"></script>
+	<script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+	<!-- Style Switcher (REMOVE ON YOUR PRODUCTION SITE) -->
+	<script src="../assets/js/demo/style-switcher.js"></script>
+
+	<script>
+		$(document).ready(function () {
+			$(".navbar-toggler").click();
+		});
+	</script>
+
+</body>
+
+</html>

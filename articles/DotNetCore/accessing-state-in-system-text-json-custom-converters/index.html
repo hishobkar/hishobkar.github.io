@@ -1,0 +1,1211 @@
+<html>
+
+<head>
+  <title>Abhijeet. Hishobkar</title>
+
+  <!-- Meta -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Blog Template">
+  <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
+  <link rel="shortcut icon" href="../../../blog/favicon.ico">
+
+  <!-- FontAwesome JS-->
+  <script defer src="../../../blog/assets/js/fontawsome_v5.7.1_all.js"></script>
+
+  <!-- Theme CSS -->
+  <link id="theme-style" rel="stylesheet" href="../../../blog/assets/css/theme-3.css">
+
+  <script src="../../js/qrcode.min.js"></script>
+</head>
+
+<body data-spy="scroll" data-target=".navbar-collapse">
+  <!-- preloader section -->
+  <div class="preloader">
+    <div class="sk-spinner sk-spinner-wordpress">
+      <span class="sk-inner-circle"></span>
+    </div>
+  </div>
+
+  <header class="header text-center">
+    <h1 class="blog-name pt-lg-4 mb-0"><a href="../../../blog/index.html">Abhijeet's Blog</a></h1>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+        aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div id="navigation" class="collapse navbar-collapse flex-column">
+        <div class="profile-section pt-3 pt-lg-0">
+          <img class="profile-image mb-3 rounded-circle mx-auto" src="../../../blog/assets/images/profile.png"
+            alt="image">
+
+          <div class="bio mb-3">Hi, my name is Abhijeet. Hishobkar.<br>My skillset extends beyond just coding.
+          </div>
+          <!--//bio-->
+          <ul class="social-list list-inline py-3 mx-auto">
+            <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
+            <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
+            <li class="list-inline-item"><a href="#"><i class="fab fa-github-alt fa-fw"></i></a></li>
+            <li class="list-inline-item"><a href="#"><i class="fab fa-stack-overflow fa-fw"></i></a></li>
+            <li class="list-inline-item"><a href="#"><i class="fab fa-codepen fa-fw"></i></a></li>
+          </ul><!--//social-list-->
+          <hr>
+        </div><!--//profile-section-->
+
+        <ul class="navbar-nav flex-column text-left">
+          <li class="nav-item">
+            <a class="nav-link" href="../../../blog/index.html"><i class="fas fa-home fa-fw mr-2"></i>Blog Home</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="../../../blog/blog-post.html"><i class="fas fa-bookmark fa-fw mr-2"></i>Blog
+              Post <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../../../blog/blog-list.html"><i class="fas fa-list fa-fw mr-2"></i>Blog
+              List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../../../blog/../../index.html#home"><i class="fas fa-user fa-fw mr-2"></i>About
+              Me</a>
+          </li>
+        </ul>
+
+        <div class="my-2 my-md-3">
+          <a class="btn btn-primary" href="../../../blog/../../index.html#contact" target="_blank">Get in Touch</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+
+  <div class="main-wrapper">
+
+    <article class="blog-post px-3 py-5 p-md-5">
+      
+  <div class="container">
+    <div class="post-inner-content">
+      <header class="entry-header page-header">
+
+        <h1 class="entry-title ">Accessing State in&nbsp;System.Text.Json&nbsp;Custom Converters</h1>
+        <div class="author">
+          <label class="post_info ds-implicit">
+            by
+            <a href="https://www.linkedin.com/in/hishobkar" target="_blank">Abhijeet. Hishobkar</a>, UPDATED ON
+            <time class="ENTRY-DATE PUBLISHED UPDATED" datetime="2023-07-27T09:48:11+02:00">OCT 24, 2022</time>
+          </label>
+          <label class="read_time">120 mins read</label>
+        </div>
+				<div id="qrcode" class="mt-1"></div>
+      </header><!-- .entry-header -->
+
+      <div class="entry-content">
+        <!-- PRyC WP: Add custom content to bottom of post/page: Standard Content START -->
+        <div id="pryc-wp-acctp-original-content">
+          <p>In this post, I describe several techniques that can provide additional state to custom JsonConverters when
+            using System.Text.Json.</p>
+          <p>While building the new <a href="https://github.com/elastic/elasticsearch-net">.NET client for
+              Elasticsearch</a>, one of the key objectives I gave myself was to move away from the internal
+            Utf8Json-based serializer used in v7. The obvious choice was to look at redesigning the serialization using
+            System.Text.Json.</p>
+          <p>System.Text.Json was introduced as part of the .NET Core 3.0 release. Since that release, it ships “in the
+            box” as part of the base class libraries. It is also available as a .NET Standard compatible NuGet package,
+            which can also be consumed from .NET Framework projects. This namespace and its types support
+            (de)serialization of JSON to/from .NET types. It was designed to provide a modern JSON library as part of
+            the BCL, focusing on high performance.</p>
+          <h2>System.Text.Json</h2>
+          <p>System.Text.Json is a good choice for the v8 Elasticsearch client for .NET for several reasons:</p>
+          <ul>
+            <li>It’s included as part of the BCL for many versions and therefore requires fewer additional dependencies.
+            </li>
+            <li>Its high-performance design is suited to our JSON-heavy workloads.</li>
+            <li>Microsoft fully supports it.</li>
+            <li>We can remove complex and difficult-to-maintain code from our client assembly.</li>
+          </ul>
+          <p>Some types used in the client are quite complex to model and present extra challenges for serialization. In
+            particular, Elasticsearch uses requests and responses that can include polymorphic data. For example, one of
+            many possible queries may be sent when performing a search. Each query may have different properties.
+            Similarly, search responses may include a variety of different aggregations.</p>
+          <p>The solution for these more complex types in the Elasticsearch .NET client is to leverage custom
+            converters. With custom converters, we have complete control over reading and writing the JSON to serialize
+            it to and from our objects. The v8 Elasticsearch .NET client includes many custom converters, some manually
+            crafted and some code-generated.</p>
+          <p>In some situations, these converters require access to extra state to serialize the types correctly. One
+            typical example is when we have types which include field names. In the client, we support a concept of
+            inference which is where properties on a type can be used to infer the name of things, such as fields. This
+            reduces the use of magic strings which can be quite brittle. We use information from the
+            ElasticsearchClientSettings instance to correctly infer field names based on any configuration the user may
+            have provided.</p>
+          <p>The upshot is that we need access to the ElasticsearchClientSettings instance inside many custom
+            converters. Fortunately, there are a few ways to achieve this. We’ll begin with the technically correct way
+            to handle this before learning about some of the downsides and limitations it imposes.</p>
+          <h2>Registering Customer Converters on JsonSerializerOptions</h2>
+          <p>Custom converters can be registered for types in several ways. We can add an attribute to types or
+            properties specifying the specific converter that should be used. In this scenario, an instance of the
+            converter is created on-demand the first time a type is (de)serialized and cached for reuse across
+            subsequent serialization operations. When using this approach, converters must include a parameterless
+            default constructor so that an instance can be created when needed. This requirement makes it difficult to
+            supply additional state for the converter.</p>
+          <p>The solution is to register an instance of the converter with the JsonSerializerOptions instance. Using
+            this mechanism, we can control the creation of the converter instances and call other constructors, passing
+            additional state into them via their arguments.</p>
+          <p>Take, for example, this simplified FieldConverter:</p>
+
+
+          <div class="wp-block-syntaxhighlighter-code ">
+            <div>
+              <div id="highlighter_571128" class="syntaxhighlighter  csharp">
+                <table border="0" cellpadding="0" cellspacing="0">
+                  <tbody>
+                    <tr>
+                      <td class="gutter">
+                        <div class="line number1 index0 alt2">1</div>
+                        <div class="line number2 index1 alt1">2</div>
+                        <div class="line number3 index2 alt2">3</div>
+                        <div class="line number4 index3 alt1">4</div>
+                        <div class="line number5 index4 alt2">5</div>
+                        <div class="line number6 index5 alt1">6</div>
+                        <div class="line number7 index6 alt2">7</div>
+                        <div class="line number8 index7 alt1">8</div>
+                        <div class="line number9 index8 alt2">9</div>
+                        <div class="line number10 index9 alt1">10</div>
+                        <div class="line number11 index10 alt2">11</div>
+                        <div class="line number12 index11 alt1">12</div>
+                        <div class="line number13 index12 alt2">13</div>
+                        <div class="line number14 index13 alt1">14</div>
+                        <div class="line number15 index14 alt2">15</div>
+                        <div class="line number16 index15 alt1">16</div>
+                        <div class="line number17 index16 alt2">17</div>
+                        <div class="line number18 index17 alt1">18</div>
+                        <div class="line number19 index18 alt2">19</div>
+                        <div class="line number20 index19 alt1">20</div>
+                        <div class="line number21 index20 alt2">21</div>
+                        <div class="line number22 index21 alt1">22</div>
+                        <div class="line number23 index22 alt2">23</div>
+                        <div class="line number24 index23 alt1">24</div>
+                        <div class="line number25 index24 alt2">25</div>
+                        <div class="line number26 index25 alt1">26</div>
+                        <div class="line number27 index26 alt2">27</div>
+                        <div class="line number28 index27 alt1">28</div>
+                        <div class="line number29 index28 alt2">29</div>
+                        <div class="line number30 index29 alt1">30</div>
+                        <div class="line number31 index30 alt2">31</div>
+                        <div class="line number32 index31 alt1">32</div>
+                        <div class="line number33 index32 alt2">33</div>
+                        <div class="line number34 index33 alt1">34</div>
+                        <div class="line number35 index34 alt2">35</div>
+                        <div class="line number36 index35 alt1">36</div>
+                      </td>
+                      <td class="code">
+                        <div class="container">
+                          <div class="line number1 index0 alt2"><code class="csharp keyword">internal</code> <code
+                              class="csharp keyword">sealed</code> <code class="csharp keyword">class</code> <code
+                              class="csharp plain">FieldConverter : JsonConverter&lt;Field&gt;</code></div>
+                          <div class="line number2 index1 alt1"><code class="csharp plain">{</code></div>
+                          <div class="line number3 index2 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">private</code> <code class="csharp keyword">readonly</code> <code
+                              class="csharp plain">IElasticsearchClientSettings _settings;</code></div>
+                          <div class="line number4 index3 alt1">&nbsp;</div>
+                          <div class="line number5 index4 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">public</code> <code
+                              class="csharp plain">FieldConverter(IElasticsearchClientSettings settings) =&gt; _settings = settings;</code>
+                          </div>
+                          <div class="line number6 index5 alt1">&nbsp;</div>
+                          <div class="line number7 index6 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">public</code> <code class="csharp keyword">override</code> <code
+                              class="csharp plain">Field? Read(</code><code class="csharp keyword">ref</code> <code
+                              class="csharp plain">Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)</code>
+                          </div>
+                          <div class="line number8 index7 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code>
+                          </div>
+                          <div class="line number9 index8 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp comments">// Omitted for brevity</code></div>
+                          <div class="line number10 index9 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code>
+                          </div>
+                          <div class="line number11 index10 alt2">&nbsp;</div>
+                          <div class="line number12 index11 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">public</code> <code class="csharp keyword">override</code> <code
+                              class="csharp keyword">void</code> <code
+                              class="csharp plain">Write(Utf8JsonWriter writer, Field value, JsonSerializerOptions options)</code>
+                          </div>
+                          <div class="line number13 index12 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code>
+                          </div>
+                          <div class="line number14 index13 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">if</code> <code class="csharp plain">(value </code><code
+                              class="csharp keyword">is</code> <code class="csharp keyword">null</code><code
+                              class="csharp plain">)</code></div>
+                          <div class="line number15 index14 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">{</code></div>
+                          <div class="line number16 index15 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">writer.WriteNullValue();</code></div>
+                          <div class="line number17 index16 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">return</code><code class="csharp plain">;</code></div>
+                          <div class="line number18 index17 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">}</code></div>
+                          <div class="line number19 index18 alt2">&nbsp;</div>
+                          <div class="line number20 index19 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">var</code> <code
+                              class="csharp plain">fieldName = _settings.Inferrer.Field(value);</code></div>
+                          <div class="line number21 index20 alt2">&nbsp;</div>
+                          <div class="line number22 index21 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">if</code> <code class="csharp plain">(</code><code
+                              class="csharp keyword">string</code><code
+                              class="csharp plain">.IsNullOrEmpty(value.Format))</code></div>
+                          <div class="line number23 index22 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">{</code></div>
+                          <div class="line number24 index23 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">writer.WriteStringValue(fieldName);</code></div>
+                          <div class="line number25 index24 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">}</code></div>
+                          <div class="line number26 index25 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">else</code></div>
+                          <div class="line number27 index26 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">{</code></div>
+                          <div class="line number28 index27 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">writer.WriteStartObject();</code></div>
+                          <div class="line number29 index28 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">writer.WritePropertyName(</code><code
+                              class="csharp string">"field"</code><code class="csharp plain">);</code></div>
+                          <div class="line number30 index29 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">writer.WriteStringValue(fieldName);</code></div>
+                          <div class="line number31 index30 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">writer.WritePropertyName(</code><code
+                              class="csharp string">"format"</code><code class="csharp plain">);</code></div>
+                          <div class="line number32 index31 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">writer.WriteStringValue(value.Format);</code></div>
+                          <div class="line number33 index32 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">writer.WriteEndObject();</code></div>
+                          <div class="line number34 index33 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">}</code></div>
+                          <div class="line number35 index34 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code>
+                          </div>
+                          <div class="line number36 index35 alt1"><code class="csharp plain">}</code></div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+          <p>The constructor accepts and stores an instance of IElasticsearchClientSettings. The Write method accesses
+            the settings instance to infer the field name for the Field instance being serialized. Consequently, I
+            cannot assign this converter to the Field type using an attribute.</p>
+          <p>Instead, I must register the instance with the JsonSerializerOptions for the request/response serializer.
+          </p>
+
+
+          <div class="wp-block-syntaxhighlighter-code ">
+            <div>
+              <div id="highlighter_542012" class="syntaxhighlighter  csharp">
+                <table border="0" cellpadding="0" cellspacing="0">
+                  <tbody>
+                    <tr>
+                      <td class="gutter">
+                        <div class="line number1 index0 alt2">1</div>
+                        <div class="line number2 index1 alt1">2</div>
+                        <div class="line number3 index2 alt2">3</div>
+                        <div class="line number4 index3 alt1">4</div>
+                        <div class="line number5 index4 alt2">5</div>
+                        <div class="line number6 index5 alt1">6</div>
+                        <div class="line number7 index6 alt2">7</div>
+                        <div class="line number8 index7 alt1">8</div>
+                        <div class="line number9 index8 alt2">9</div>
+                        <div class="line number10 index9 alt1">10</div>
+                        <div class="line number11 index10 alt2">11</div>
+                        <div class="line number12 index11 alt1">12</div>
+                        <div class="line number13 index12 alt2">13</div>
+                        <div class="line number14 index13 alt1">14</div>
+                        <div class="line number15 index14 alt2">15</div>
+                        <div class="line number16 index15 alt1">16</div>
+                      </td>
+                      <td class="code">
+                        <div class="container">
+                          <div class="line number1 index0 alt2"><code class="csharp keyword">public</code> <code
+                              class="csharp plain">DefaultRequestResponseSerializer(IElasticsearchClientSettings settings)</code>
+                          </div>
+                          <div class="line number2 index1 alt1"><code class="csharp plain">{</code></div>
+                          <div class="line number3 index2 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">Options = </code><code class="csharp keyword">new</code> <code
+                              class="csharp plain">JsonSerializerOptions</code></div>
+                          <div class="line number4 index3 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">{&nbsp;&nbsp; </code></div>
+                          <div class="line number5 index4 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,</code>
+                          </div>
+                          <div class="line number6 index5 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">IncludeFields = </code><code class="csharp keyword">true</code><code
+                              class="csharp plain">,</code></div>
+                          <div class="line number7 index6 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">Converters =</code></div>
+                          <div class="line number8 index7 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">{</code></div>
+                          <div class="line number9 index8 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">new</code> <code
+                              class="csharp plain">FieldConverter(settings),</code></div>
+                          <div class="line number10 index9 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp comments">// Many other converters</code></div>
+                          <div class="line number11 index10 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">},</code></div>
+                          <div class="line number12 index11 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">PropertyNamingPolicy = JsonNamingPolicy.CamelCase</code></div>
+                          <div class="line number13 index12 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">};</code>
+                          </div>
+                          <div class="line number14 index13 alt1">&nbsp;</div>
+                          <div class="line number15 index14 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">_settings = settings;</code></div>
+                          <div class="line number16 index15 alt1"><code class="csharp plain">}</code></div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+          <p>This isn’t too painful when the number of custom converters remains small. It’s arguably a bit more
+            problematic when there are lots of converters. The main concern is that with this approach, we create an
+            instance of each converter upfront before its ever used. Since we cannot know in advance which features of
+            the library consumers may use, we may be allocating some converters which are never required. But that’s not
+            the main problem with this approach.</p>
+          <h2>Generated Customer Converters</h2>
+          <p>The Field type that uses the FieldConverter shown above is a manually created class in the library.
+            Registering the custom converter is simple because I can also manually ensure it’s added to the options.
+            However, we now generate most of the Elasticsearch .NET client library types from a specification. This
+            means that any generated types requiring a converter that uses the IElasticsearchClientSettings would also
+            need to be registered with the options instance. I had a few ideas for solving this, but none were
+            particularly pleasing. I was also conscious of trying to avoid an explosion of converter instances on the
+            options which may never be needed. I landed on a reasonably clever hack that worked quite well.</p>
+          <h2>Misusing Get Converter</h2>
+          <p>My approach was relatively simple. Define a custom converter that does no actual conversion but can be
+            retrieved when required to grab the IElasticsearchClientSettings.</p>
+
+
+          <div class="wp-block-syntaxhighlighter-code ">
+            <div>
+              <div id="highlighter_940580" class="syntaxhighlighter  csharp">
+                <table border="0" cellpadding="0" cellspacing="0">
+                  <tbody>
+                    <tr>
+                      <td class="gutter">
+                        <div class="line number1 index0 alt2">1</div>
+                        <div class="line number2 index1 alt1">2</div>
+                        <div class="line number3 index2 alt2">3</div>
+                        <div class="line number4 index3 alt1">4</div>
+                        <div class="line number5 index4 alt2">5</div>
+                        <div class="line number6 index5 alt1">6</div>
+                        <div class="line number7 index6 alt2">7</div>
+                        <div class="line number8 index7 alt1">8</div>
+                        <div class="line number9 index8 alt2">9</div>
+                      </td>
+                      <td class="code">
+                        <div class="container">
+                          <div class="line number1 index0 alt2"><code class="csharp keyword">internal</code> <code
+                              class="csharp keyword">sealed</code> <code class="csharp keyword">class</code> <code
+                              class="csharp plain">ExtraSerializationData : JsonConverter&lt;ExtraSerializationData&gt;</code>
+                          </div>
+                          <div class="line number2 index1 alt1"><code class="csharp plain">{</code></div>
+                          <div class="line number3 index2 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">public</code> <code
+                              class="csharp plain">ExtraSerializationData(IElasticsearchClientSettings settings) =&gt; Settings = settings;</code>
+                          </div>
+                          <div class="line number4 index3 alt1">&nbsp;</div>
+                          <div class="line number5 index4 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">public</code> <code
+                              class="csharp plain">IElasticsearchClientSettings Settings { </code><code
+                              class="csharp keyword">get</code><code class="csharp plain">; }</code></div>
+                          <div class="line number6 index5 alt1">&nbsp;</div>
+                          <div class="line number7 index6 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">public</code> <code class="csharp keyword">override</code> <code
+                              class="csharp plain">ExtraSerializationData? Read(</code><code
+                              class="csharp keyword">ref</code> <code
+                              class="csharp plain">Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =&gt; </code><code
+                              class="csharp keyword">throw</code> <code class="csharp keyword">new</code> <code
+                              class="csharp plain">NotImplementedException();</code></div>
+                          <div class="line number8 index7 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">public</code> <code class="csharp keyword">override</code> <code
+                              class="csharp keyword">void</code> <code
+                              class="csharp plain">Write(Utf8JsonWriter writer, ExtraSerializationData value, JsonSerializerOptions options) =&gt; </code><code
+                              class="csharp keyword">throw</code> <code class="csharp keyword">new</code> <code
+                              class="csharp plain">NotImplementedException();</code></div>
+                          <div class="line number9 index8 alt2"><code class="csharp plain">}</code></div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+          <p><span data-contrast="none">This converter is defined as a converter for its own type. This is weird but
+              perfectly fine for how I intended to use it. Its Read and Write methods are not implemented. It accepts
+              an&nbsp;IElasticsearchClientSettings&nbsp;instance in its constructor and exposes it through a read-only
+              property.&nbsp;</span>&nbsp;</p>
+          <p><span data-contrast="none">This can then be registered with the&nbsp;JsonSerializerOptions, just as
+              before.&nbsp;</span>&nbsp;</p>
+
+
+          <div class="wp-block-syntaxhighlighter-code ">
+            <div>
+              <div id="highlighter_170208" class="syntaxhighlighter  csharp">
+                <table border="0" cellpadding="0" cellspacing="0">
+                  <tbody>
+                    <tr>
+                      <td class="gutter">
+                        <div class="line number1 index0 alt2">1</div>
+                        <div class="line number2 index1 alt1">2</div>
+                        <div class="line number3 index2 alt2">3</div>
+                        <div class="line number4 index3 alt1">4</div>
+                        <div class="line number5 index4 alt2">5</div>
+                        <div class="line number6 index5 alt1">6</div>
+                        <div class="line number7 index6 alt2">7</div>
+                        <div class="line number8 index7 alt1">8</div>
+                        <div class="line number9 index8 alt2">9</div>
+                        <div class="line number10 index9 alt1">10</div>
+                        <div class="line number11 index10 alt2">11</div>
+                        <div class="line number12 index11 alt1">12</div>
+                        <div class="line number13 index12 alt2">13</div>
+                        <div class="line number14 index13 alt1">14</div>
+                        <div class="line number15 index14 alt2">15</div>
+                        <div class="line number16 index15 alt1">16</div>
+                        <div class="line number17 index16 alt2">17</div>
+                      </td>
+                      <td class="code">
+                        <div class="container">
+                          <div class="line number1 index0 alt2"><code class="csharp keyword">public</code> <code
+                              class="csharp plain">DefaultRequestResponseSerializer(IElasticsearchClientSettings settings)</code>
+                          </div>
+                          <div class="line number2 index1 alt1"><code class="csharp plain">{</code></div>
+                          <div class="line number3 index2 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">Options = </code><code class="csharp keyword">new</code> <code
+                              class="csharp plain">JsonSerializerOptions</code></div>
+                          <div class="line number4 index3 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">{&nbsp;&nbsp; </code></div>
+                          <div class="line number5 index4 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,</code>
+                          </div>
+                          <div class="line number6 index5 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">IncludeFields = </code><code class="csharp keyword">true</code><code
+                              class="csharp plain">,</code></div>
+                          <div class="line number7 index6 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">Converters =</code></div>
+                          <div class="line number8 index7 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">{</code></div>
+                          <div class="line number9 index8 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">new</code> <code
+                              class="csharp plain">FieldConverter(settings),</code></div>
+                          <div class="line number10 index9 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">new</code> <code
+                              class="csharp plain">ExtraSerializationData(settings)</code></div>
+                          <div class="line number11 index10 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp comments">// Many other converters</code></div>
+                          <div class="line number12 index11 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">},</code></div>
+                          <div class="line number13 index12 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">PropertyNamingPolicy = JsonNamingPolicy.CamelCase</code></div>
+                          <div class="line number14 index13 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">};</code>
+                          </div>
+                          <div class="line number15 index14 alt2">&nbsp;</div>
+                          <div class="line number16 index15 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">_settings = settings;</code></div>
+                          <div class="line number17 index16 alt2"><code class="csharp plain">}</code></div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+          <p>Now the clever bit! I can retrieve my ExtraSerializationData converter from the options in code-generated
+            converters that require access to settings.</p>
+
+
+          <div class="wp-block-syntaxhighlighter-code ">
+            <div>
+              <div id="highlighter_66141" class="syntaxhighlighter  csharp">
+                <table border="0" cellpadding="0" cellspacing="0">
+                  <tbody>
+                    <tr>
+                      <td class="gutter">
+                        <div class="line number1 index0 alt2">1</div>
+                        <div class="line number2 index1 alt1">2</div>
+                        <div class="line number3 index2 alt2">3</div>
+                        <div class="line number4 index3 alt1">4</div>
+                        <div class="line number5 index4 alt2">5</div>
+                        <div class="line number6 index5 alt1">6</div>
+                        <div class="line number7 index6 alt2">7</div>
+                        <div class="line number8 index7 alt1">8</div>
+                        <div class="line number9 index8 alt2">9</div>
+                        <div class="line number10 index9 alt1">10</div>
+                        <div class="line number11 index10 alt2">11</div>
+                        <div class="line number12 index11 alt1">12</div>
+                        <div class="line number13 index12 alt2">13</div>
+                        <div class="line number14 index13 alt1">14</div>
+                        <div class="line number15 index14 alt2">15</div>
+                        <div class="line number16 index15 alt1">16</div>
+                        <div class="line number17 index16 alt2">17</div>
+                        <div class="line number18 index17 alt1">18</div>
+                        <div class="line number19 index18 alt2">19</div>
+                        <div class="line number20 index19 alt1">20</div>
+                        <div class="line number21 index20 alt2">21</div>
+                        <div class="line number22 index21 alt1">22</div>
+                        <div class="line number23 index22 alt2">23</div>
+                        <div class="line number24 index23 alt1">24</div>
+                        <div class="line number25 index24 alt2">25</div>
+                        <div class="line number26 index25 alt1">26</div>
+                        <div class="line number27 index26 alt2">27</div>
+                        <div class="line number28 index27 alt1">28</div>
+                        <div class="line number29 index28 alt2">29</div>
+                        <div class="line number30 index29 alt1">30</div>
+                        <div class="line number31 index30 alt2">31</div>
+                        <div class="line number32 index31 alt1">32</div>
+                      </td>
+                      <td class="code">
+                        <div class="container">
+                          <div class="line number1 index0 alt2"><code class="csharp keyword">internal</code> <code
+                              class="csharp keyword">sealed</code> <code class="csharp keyword">class</code> <code
+                              class="csharp plain">SortOptionsConverter : JsonConverter&lt;SortOptions&gt;</code></div>
+                          <div class="line number2 index1 alt1"><code class="csharp plain">{</code></div>
+                          <div class="line number3 index2 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">public</code> <code class="csharp keyword">override</code> <code
+                              class="csharp plain">SortOptions Read(</code><code class="csharp keyword">ref</code> <code
+                              class="csharp plain">Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)</code>
+                          </div>
+                          <div class="line number4 index3 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code>
+                          </div>
+                          <div class="line number5 index4 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp comments">// Omitted for brevity</code></div>
+                          <div class="line number6 index5 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code>
+                          </div>
+                          <div class="line number7 index6 alt2">&nbsp;</div>
+                          <div class="line number8 index7 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">public</code> <code class="csharp keyword">override</code> <code
+                              class="csharp keyword">void</code> <code
+                              class="csharp plain">Write(Utf8JsonWriter writer, SortOptions value, JsonSerializerOptions options)</code>
+                          </div>
+                          <div class="line number9 index8 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code>
+                          </div>
+                          <div class="line number10 index9 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">writer.WriteStartObject();</code></div>
+                          <div class="line number11 index10 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">if</code> <code
+                              class="csharp plain">(value.AdditionalPropertyName </code><code
+                              class="csharp keyword">is</code> <code
+                              class="csharp plain">IUrlParameter urlParameter)</code></div>
+                          <div class="line number12 index11 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">{</code></div>
+                          <div class="line number13 index12 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">var</code> <code
+                              class="csharp plain">extraData = options.GetConverter(</code><code
+                              class="csharp keyword">typeof</code><code
+                              class="csharp plain">(ExtraSerializationData)) </code><code
+                              class="csharp keyword">as</code> <code class="csharp plain">ExtraSerializationData;</code>
+                          </div>
+                          <div class="line number14 index13 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">var</code> <code
+                              class="csharp plain">propertyName = urlParameter.GetString(extraData.Settings);</code>
+                          </div>
+                          <div class="line number15 index14 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">writer.WritePropertyName(propertyName);</code></div>
+                          <div class="line number16 index15 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">}</code></div>
+                          <div class="line number17 index16 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">else</code></div>
+                          <div class="line number18 index17 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">{</code></div>
+                          <div class="line number19 index18 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">writer.WritePropertyName(value.VariantName);</code></div>
+                          <div class="line number20 index19 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">}</code></div>
+                          <div class="line number21 index20 alt2">&nbsp;</div>
+                          <div class="line number22 index21 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp comments">// Omitted for brevity</code></div>
+                          <div class="line number23 index22 alt2">&nbsp;</div>
+                          <div class="line number24 index23 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">writer.WriteEndObject();</code></div>
+                          <div class="line number25 index24 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code>
+                          </div>
+                          <div class="line number26 index25 alt1"><code class="csharp plain">}</code></div>
+                          <div class="line number27 index26 alt2">&nbsp;</div>
+                          <div class="line number28 index27 alt1"><code class="csharp plain">[JsonConverter(</code><code
+                              class="csharp keyword">typeof</code><code
+                              class="csharp plain">(SortOptionsConverter))]</code></div>
+                          <div class="line number29 index28 alt2"><code class="csharp keyword">public</code> <code
+                              class="csharp keyword">sealed</code> <code class="csharp keyword">partial</code> <code
+                              class="csharp keyword">class</code> <code class="csharp plain">SortOptions</code></div>
+                          <div class="line number30 index29 alt1"><code class="csharp plain">{</code></div>
+                          <div class="line number31 index30 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp comments">// Omitted for brevity</code></div>
+                          <div class="line number32 index31 alt1"><code class="csharp plain">}</code></div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+          <p>The JsonSerializerOptions exposes a GetConverter method which accepts a Type as its argument. This resolves
+            an instance of a JsonConverter for the Type. The write method calls this method to get the converter for the
+            ExtraSerializationData type (which is in fact itself). As the return type of the GetConverter method is
+            JsonConverter, it must be cast as the ExtraSerializationData.</p>
+          <p>With the converter retrieved, the code can use the Settings property to access the
+            IElasticsearchClientSettings instance required to perform its conversion. As I described, this is a
+            technique I was equally proud and ashamed of at the same time!</p>
+          <h2>API Proposal</h2>
+          <p>After this experience and some responses to my tweet, it was clear that I wasn’t the only person with this
+            requirement. I decided to open an issue on the <a href="https://github.com/dotnet/runtime/issues/71718">.NET
+              runtime repository</a> to propose solving this in the public API.</p>
+          <p>Two solutions came to mind. The first was to unseal the JsonSerializerOptions type, which consumers such as
+            myself could then extend with additional properties. We could then cast the JsonSerializerOptions to our
+            derived type inside converters to access the extra state. A second option (which I made the primary
+            proposal) was to support a property bag on the existing JsonSerializerOptions type. This would allow
+            consumers to store objects in a dictionary for later retrieval.</p>
+          <p>At the time of writing, this proposal has been closed in favour of <a
+              href="https://github.com/dotnet/runtime/issues/63795">another GitHub issue</a> tracking this requirement.
+            Fortunately, <a href="https://twitter.com/eiriktsarpalis">Eirik Tsarpalis</a>, one of the Microsoft
+            developers involved in System.Text.Json, provided another solution.</p>
+          <blockquote>
+            <p>Update!! My proposal issue has now been reopened as the alternative proposal did not solve the same
+              requirement identified in this post. Hopefully both proposals may make it into a future release.</p>
+          </blockquote>
+          <h2>Leveraging a ConditionalWeakTable</h2>
+          <p>Eirik asked if I had considered using a ConditionalWeakTable to dynamically attach data to options
+            instances. I replied that I hadn’t, as I was unaware of that type’s existence! I quickly referred to the <a
+              href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.conditionalweaktable-2">documentation</a>
+            to learn about the type.</p>
+          <p>The documentation only includes the API definition with a single sentence summarising the purpose of this
+            type.</p>
+          <blockquote>
+            <p>Enables compilers to dynamically attach object fields to managed objects.</p>
+          </blockquote>
+          <p>There is a little more detail in the examples and remarks. In essence, this type provides a way to link two
+            runtime object instances but in such a way that those instances are not rooted to the GC forever. The key is
+            a managed object to which we want to attach additional properties at runtime.</p>
+          <p>The references used inside the implementation are weak, and the keys stored in the table do not persist
+            once references to the object outside the table are destroyed. This would only be a concern in the case of
+            my library should a consumer null all references to the ElasticsearchClient and/or dispose of it in their
+            code. If a regular dictionary were used instead of the ConditionalWeakTable then the JsonSerializerOptions
+            may never be disposed of in such a case. In reality, this is not the likely behaviour for consumers who
+            generally should have a singleton instance of ElasticsearchClient for the life of their application, but
+            that’s not guaranteed.</p>
+          <p>It sounded promising as a cleaner solution for my work on the .NET client, so I proceeded to apply it to my
+            code. I would first need a singleton instance of a ConditionalWeakTable to hold my settings. I added a
+            static property to the ElasticsearchClient type that would allow my internal code to retrieve the
+            IElasticsearchClientSettings corresponding to an instance of JsonSerializerOptions used by the default
+            request/response serializer for the client. I named this property SettingsTable.</p>
+
+
+          <div class="wp-block-syntaxhighlighter-code ">
+            <div>
+              <div id="highlighter_969448" class="syntaxhighlighter  csharp">
+                <table border="0" cellpadding="0" cellspacing="0">
+                  <tbody>
+                    <tr>
+                      <td class="gutter">
+                        <div class="line number1 index0 alt2">1</div>
+                        <div class="line number2 index1 alt1">2</div>
+                        <div class="line number3 index2 alt2">3</div>
+                        <div class="line number4 index3 alt1">4</div>
+                        <div class="line number5 index4 alt2">5</div>
+                        <div class="line number6 index5 alt1">6</div>
+                      </td>
+                      <td class="code">
+                        <div class="container">
+                          <div class="line number1 index0 alt2"><code class="csharp keyword">public</code> <code
+                              class="csharp keyword">sealed</code> <code class="csharp keyword">partial</code> <code
+                              class="csharp keyword">class</code> <code class="csharp plain">ElasticsearchClient</code>
+                          </div>
+                          <div class="line number2 index1 alt1"><code class="csharp plain">{</code></div>
+                          <div class="line number3 index2 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">internal</code> <code class="csharp keyword">static</code> <code
+                              class="csharp plain">ConditionalWeakTable&lt;JsonSerializerOptions, IElasticsearchClientSettings&gt; SettingsTable { </code><code
+                              class="csharp keyword">get</code><code class="csharp plain">; } = </code><code
+                              class="csharp keyword">new</code><code class="csharp plain">();</code></div>
+                          <div class="line number4 index3 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div>
+                          <div class="line number5 index4 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp comments">// Omitted for brevity</code></div>
+                          <div class="line number6 index5 alt1"><code class="csharp plain">}</code></div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+          <p>After creating the JsonSerializerOptions for the serializer, I also make sure to add an entry to the
+            SettingsTable, weakly tying the options to the IElasticsearchClientSettings for the client.</p>
+
+
+          <div class="wp-block-syntaxhighlighter-code ">
+            <div>
+              <div id="highlighter_374011" class="syntaxhighlighter  csharp">
+                <table border="0" cellpadding="0" cellspacing="0">
+                  <tbody>
+                    <tr>
+                      <td class="gutter">
+                        <div class="line number1 index0 alt2">1</div>
+                        <div class="line number2 index1 alt1">2</div>
+                        <div class="line number3 index2 alt2">3</div>
+                        <div class="line number4 index3 alt1">4</div>
+                        <div class="line number5 index4 alt2">5</div>
+                        <div class="line number6 index5 alt1">6</div>
+                        <div class="line number7 index6 alt2">7</div>
+                        <div class="line number8 index7 alt1">8</div>
+                        <div class="line number9 index8 alt2">9</div>
+                        <div class="line number10 index9 alt1">10</div>
+                        <div class="line number11 index10 alt2">11</div>
+                        <div class="line number12 index11 alt1">12</div>
+                        <div class="line number13 index12 alt2">13</div>
+                        <div class="line number14 index13 alt1">14</div>
+                        <div class="line number15 index14 alt2">15</div>
+                        <div class="line number16 index15 alt1">16</div>
+                        <div class="line number17 index16 alt2">17</div>
+                        <div class="line number18 index17 alt1">18</div>
+                      </td>
+                      <td class="code">
+                        <div class="container">
+                          <div class="line number1 index0 alt2"><code class="csharp keyword">public</code> <code
+                              class="csharp plain">DefaultRequestResponseSerializer(IElasticsearchClientSettings settings)</code>
+                          </div>
+                          <div class="line number2 index1 alt1"><code class="csharp plain">{</code></div>
+                          <div class="line number3 index2 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">Options = </code><code class="csharp keyword">new</code> <code
+                              class="csharp plain">JsonSerializerOptions</code></div>
+                          <div class="line number4 index3 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">{&nbsp;&nbsp; </code></div>
+                          <div class="line number5 index4 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,</code>
+                          </div>
+                          <div class="line number6 index5 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">IncludeFields = </code><code class="csharp keyword">true</code><code
+                              class="csharp plain">,</code></div>
+                          <div class="line number7 index6 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">Converters =</code></div>
+                          <div class="line number8 index7 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">{</code></div>
+                          <div class="line number9 index8 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">new</code> <code
+                              class="csharp plain">FieldConverter(settings),</code></div>
+                          <div class="line number10 index9 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp comments">// Many other converters</code></div>
+                          <div class="line number11 index10 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">},</code></div>
+                          <div class="line number12 index11 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">PropertyNamingPolicy = JsonNamingPolicy.CamelCase</code></div>
+                          <div class="line number13 index12 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">};</code>
+                          </div>
+                          <div class="line number14 index13 alt1">&nbsp;</div>
+                          <div class="line number15 index14 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">ElasticsearchClient.SettingsTable.Add(Options, settings);</code>
+                          </div>
+                          <div class="line number16 index15 alt1">&nbsp;</div>
+                          <div class="line number17 index16 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">_settings = settings;</code></div>
+                          <div class="line number18 index17 alt1"><code class="csharp plain">}</code></div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+          <p>Next, I needed a way to access the settings on-demand inside converters. As this task would occur in
+            several places, I decided to introduce an extension method for this:</p>
+
+
+          <div class="wp-block-syntaxhighlighter-code ">
+            <div>
+              <div id="highlighter_392207" class="syntaxhighlighter  csharp">
+                <table border="0" cellpadding="0" cellspacing="0">
+                  <tbody>
+                    <tr>
+                      <td class="gutter">
+                        <div class="line number1 index0 alt2">1</div>
+                        <div class="line number2 index1 alt1">2</div>
+                        <div class="line number3 index2 alt2">3</div>
+                        <div class="line number4 index3 alt1">4</div>
+                        <div class="line number5 index4 alt2">5</div>
+                      </td>
+                      <td class="code">
+                        <div class="container">
+                          <div class="line number1 index0 alt2"><code class="csharp keyword">internal</code> <code
+                              class="csharp keyword">static</code> <code class="csharp keyword">class</code> <code
+                              class="csharp plain">JsonSerializerOptionsExtensions</code></div>
+                          <div class="line number2 index1 alt1"><code class="csharp plain">{</code></div>
+                          <div class="line number3 index2 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">public</code> <code class="csharp keyword">static</code> <code
+                              class="csharp keyword">bool</code> <code
+                              class="csharp plain">TryGetClientSettings(</code><code class="csharp keyword">this</code>
+                            <code class="csharp plain">JsonSerializerOptions options, </code><code
+                              class="csharp keyword">out</code> <code
+                              class="csharp plain">IElasticsearchClientSettings settings) =&gt;</code></div>
+                          <div class="line number4 index3 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">ElasticsearchClient.SettingsTable.TryGetValue(options, </code><code
+                              class="csharp keyword">out</code> <code class="csharp plain">settings);</code></div>
+                          <div class="line number5 index4 alt2"><code class="csharp plain">}</code></div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+          <p>This extension method is defined for the JsonSerializerOptions type, and it uses the SettingsTable to
+            attempt to look up the settings instance which relates to the JsonSerializerOptions. Converters, including
+            code-generated ones, can easily access the settings they need.</p>
+
+
+          <div class="wp-block-syntaxhighlighter-code ">
+            <div>
+              <div id="highlighter_676677" class="syntaxhighlighter  csharp">
+                <table border="0" cellpadding="0" cellspacing="0">
+                  <tbody>
+                    <tr>
+                      <td class="gutter">
+                        <div class="line number1 index0 alt2">1</div>
+                        <div class="line number2 index1 alt1">2</div>
+                        <div class="line number3 index2 alt2">3</div>
+                        <div class="line number4 index3 alt1">4</div>
+                        <div class="line number5 index4 alt2">5</div>
+                        <div class="line number6 index5 alt1">6</div>
+                        <div class="line number7 index6 alt2">7</div>
+                        <div class="line number8 index7 alt1">8</div>
+                        <div class="line number9 index8 alt2">9</div>
+                        <div class="line number10 index9 alt1">10</div>
+                        <div class="line number11 index10 alt2">11</div>
+                        <div class="line number12 index11 alt1">12</div>
+                        <div class="line number13 index12 alt2">13</div>
+                        <div class="line number14 index13 alt1">14</div>
+                        <div class="line number15 index14 alt2">15</div>
+                        <div class="line number16 index15 alt1">16</div>
+                        <div class="line number17 index16 alt2">17</div>
+                        <div class="line number18 index17 alt1">18</div>
+                        <div class="line number19 index18 alt2">19</div>
+                        <div class="line number20 index19 alt1">20</div>
+                        <div class="line number21 index20 alt2">21</div>
+                        <div class="line number22 index21 alt1">22</div>
+                        <div class="line number23 index22 alt2">23</div>
+                        <div class="line number24 index23 alt1">24</div>
+                        <div class="line number25 index24 alt2">25</div>
+                      </td>
+                      <td class="code">
+                        <div class="container">
+                          <div class="line number1 index0 alt2"><code class="csharp keyword">internal</code> <code
+                              class="csharp keyword">sealed</code> <code class="csharp keyword">class</code> <code
+                              class="csharp plain">WildcardQueryConverter : JsonConverter&lt;WildcardQuery&gt;</code>
+                          </div>
+                          <div class="line number2 index1 alt1"><code class="csharp plain">{</code></div>
+                          <div class="line number3 index2 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">public</code> <code class="csharp keyword">override</code> <code
+                              class="csharp plain">WildcardQuery Read(</code><code class="csharp keyword">ref</code>
+                            <code
+                              class="csharp plain">Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)</code>
+                          </div>
+                          <div class="line number4 index3 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code>
+                          </div>
+                          <div class="line number5 index4 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp comments">// Omitted for brevity</code></div>
+                          <div class="line number6 index5 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code>
+                          </div>
+                          <div class="line number7 index6 alt2">&nbsp;</div>
+                          <div class="line number8 index7 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">public</code> <code class="csharp keyword">override</code> <code
+                              class="csharp keyword">void</code> <code
+                              class="csharp plain">Write(Utf8JsonWriter writer, WildcardQuery value, JsonSerializerOptions options)</code>
+                          </div>
+                          <div class="line number9 index8 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">{</code>
+                          </div>
+                          <div class="line number10 index9 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">if</code> <code class="csharp plain">(value.Field </code><code
+                              class="csharp keyword">is</code> <code class="csharp keyword">null</code><code
+                              class="csharp plain">)</code></div>
+                          <div class="line number11 index10 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">throw</code> <code class="csharp keyword">new</code> <code
+                              class="csharp plain">JsonException(</code><code
+                              class="csharp string">"Unable to serialize WildcardQuery because the `Field` property is not set. Field name queries must include a valid field name."</code><code
+                              class="csharp plain">);</code></div>
+                          <div class="line number12 index11 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">if</code> <code
+                              class="csharp plain">(options.TryGetClientSettings(</code><code
+                              class="csharp keyword">out</code> <code class="csharp keyword">var</code> <code
+                              class="csharp plain">settings))</code></div>
+                          <div class="line number13 index12 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">{</code></div>
+                          <div class="line number14 index13 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">writer.WriteStartObject();</code></div>
+                          <div class="line number15 index14 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">writer.WritePropertyName(settings.Inferrer.Field(value.Field));</code>
+                          </div>
+                          <div class="line number16 index15 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">writer.WriteStartObject();</code></div>
+                          <div class="line number17 index16 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp comments">// Omitted for brevity</code></div>
+                          <div class="line number18 index17 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">writer.WriteEndObject();</code></div>
+                          <div class="line number19 index18 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">writer.WriteEndObject();</code></div>
+                          <div class="line number20 index19 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">return</code><code class="csharp plain">;</code></div>
+                          <div class="line number21 index20 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp plain">}</code></div>
+                          <div class="line number22 index21 alt1">&nbsp;</div>
+                          <div class="line number23 index22 alt2"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp keyword">throw</code> <code class="csharp keyword">new</code> <code
+                              class="csharp plain">JsonException(</code><code
+                              class="csharp string">"Unable to retrieve client settings required to infer field."</code><code
+                              class="csharp plain">);</code></div>
+                          <div class="line number24 index23 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="csharp plain">}</code>
+                          </div>
+                          <div class="line number25 index24 alt2"><code class="csharp plain">}</code></div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+          <p>The above example, taken from a code-generated converter, calls TryGetClientSettings on the
+            JsonSerializerOptions passed into the Write method. We always expect the settings to be accessible via the
+            ConditionalWeakTable but will throw an exception should that not be the case for some reason. Once the
+            converter method has access to the settings, it can complete its serialization work.</p>
+          <p>Since this converter no longer requires a constructor to accept the IElasticsearchClientSettings, it
+            doesn’t need to be added directly to the collection of converters registered with the JsonSerializerOptions
+            and can be created on-demand by the System.Text.Json library if any types require it.</p>
+
+
+          <div class="wp-block-syntaxhighlighter-code ">
+            <div>
+              <div id="highlighter_842161" class="syntaxhighlighter  csharp">
+                <table border="0" cellpadding="0" cellspacing="0">
+                  <tbody>
+                    <tr>
+                      <td class="gutter">
+                        <div class="line number1 index0 alt2">1</div>
+                        <div class="line number2 index1 alt1">2</div>
+                        <div class="line number3 index2 alt2">3</div>
+                        <div class="line number4 index3 alt1">4</div>
+                        <div class="line number5 index4 alt2">5</div>
+                      </td>
+                      <td class="code">
+                        <div class="container">
+                          <div class="line number1 index0 alt2"><code class="csharp plain">[JsonConverter(</code><code
+                              class="csharp keyword">typeof</code><code
+                              class="csharp plain">(WildcardQueryConverter))]</code></div>
+                          <div class="line number2 index1 alt1"><code class="csharp keyword">public</code> <code
+                              class="csharp keyword">sealed</code> <code class="csharp keyword">partial</code> <code
+                              class="csharp keyword">class</code> <code
+                              class="csharp plain">WildcardQuery : Query</code></div>
+                          <div class="line number3 index2 alt2"><code class="csharp plain">{</code></div>
+                          <div class="line number4 index3 alt1"><code
+                              class="csharp spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code
+                              class="csharp comments">// Omitted for brevity</code></div>
+                          <div class="line number5 index4 alt2"><code class="csharp plain">}</code></div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+          <p>The WildcardQuery is attributed with the JsonConverterAttribute to define its converter. The converter
+            instance is only created if the consuming application defines a WildcardQuery, which needs to be serialized
+            as part of the search request.</p>
+          <blockquote>
+            <p>NOTE: Eric from Microsoft highlighted that for extra efficient of avoidning the ConditionalWeakTable
+              lookup per serialization operation, a ConverterFactory could be used to perform that work once per
+              converter. It’s a good suggestion which I’ll review, measure and likely implement at some point. Once I
+              do, I’ll try to follow up with a new post on that improvement.</p>
+          </blockquote>
+          <h2>Summary</h2>
+          <p>I’m pretty pleased with the end result that the ConditionalWeakTable approach enables. It solves my two
+            main challenges, allowing me to avoid creating potentially unused converter instances purely to register
+            them with the JsonSerializerOptions. It simplifies the generated code for converters which can leverage my
+            extension method to access settings if they require them for inference.</p>
+          <p>The ConditionalWeakTable class was unknown to me and not an obvious choice. I still think that the
+            System.Text.Json library can and should solve this in a more discoverable way for consumers. While it’s a
+            more advanced requirement, I’m sure others may require additional static state for their customer
+            converters. Until this <a href="https://github.com/dotnet/runtime/issues/63795">.NET runtime issue</a> is
+            resolved and .NET ships with an in-the-box solution, perhaps consider using a ConditionalWeakTable for the
+            job.</p>
+          <!-- PRyC WP: Add custom content to bottom of post/page: Standard Content START -->
+        </div>
+      </div>
+    </div>
+</div>
+
+</article>
+</div>
+
+<!-- footer section -->
+
+<footer class="footer text-center py-2 theme-bg-dark">
+  <small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a
+      href="http://hishobkar.github.io" target="_blank">Abhijeet. Hishobkar</a> for developers</small>
+
+</footer>
+
+<!-- footer ends -->
+
+<!-- Javascript -->
+<script src="../../../blog/assets/plugins/jquery-3.3.1.min.js"></script>
+<script src="../../../blog/assets/plugins/popper.min.js"></script>
+<script src="../../../blog/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Style Switcher (REMOVE ON YOUR PRODUCTION SITE) -->
+<script src="../../../blog/assets/js/demo/style-switcher.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $(".navbar-toggler").click();
+  });
+</script>
+
+</body>
+
+</html>
