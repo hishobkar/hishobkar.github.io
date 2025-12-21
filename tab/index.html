@@ -46,7 +46,8 @@ canvas {
 }
 
 #date {
-    font-size: 80px;
+    font-weight: bold;
+    font-size: 100px;
 }
 
 .fake-cursor {
@@ -72,6 +73,10 @@ canvas {
     left: 10px;
     z-index: 40;
     font-size: 14px;
+}
+
+.ampm {
+    font-size: 0.5em;
 }
 </style>
 </head>
@@ -133,7 +138,7 @@ function updateDateTime() {
     var day = pad(ist.getDate());
     var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
-    document.getElementById("time").innerHTML = pad(h) + ":" + m + ":" + s + " " + ampm;
+    document.getElementById("time").innerHTML = pad(h) + ":" + m + ":" + s + " <span class=\"ampm\">" + ampm + "</span>";
     document.getElementById("date").innerHTML = day + "-" + months[ist.getMonth()] + "-" + ist.getFullYear();
 }
 
@@ -155,8 +160,8 @@ window.onresize = resizeCanvas;
 
 var bubbles = [];
 var bubbleCount = 30;
-var baseSize = 50;
-var speedFactor = 3;
+var baseSize = 80;
+var speedFactor = 10;
 
 for (var i = 0; i < bubbleCount; i++) {
     bubbles.push({
