@@ -2,67 +2,89 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>India Time Clock</title>
-
-<!-- Bootstrap (optional, safe for old Chrome) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+<title>India Clock Fullscreen</title>
 
 <style>
-    body {
-        margin: 0;
-        background: #000;
-        color: #fff;
-        overflow: hidden;
-        height: 100vh;
-        font-family: Arial, sans-serif;
-    }
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    color: #fff;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
 
-    .clock-container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        z-index: 10;
-    }
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
 
-    #time {
-        font-size: 150px;
-        font-weight: bold;
-    }
+.clock-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 10;
+}
 
-    #date {
-        font-size: 80px;
-    }
+#time {
+    font-size: 170px;
+    font-weight: bold;
+}
 
-    canvas {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 1;
-    }
+#date {
+    font-size: 80px;
+}
 
-    .fake-cursor {
-        position: fixed;
-        width: 16px;
-        height: 16px;
-        background: rgba(255,255,255,0.8);
-        border-radius: 50%;
-        z-index: 20;
-    }
+.fake-cursor {
+    position: fixed;
+    width: 16px;
+    height: 16px;
+    background: rgba(255,255,255,0.8);
+    border-radius: 50%;
+    z-index: 20;
+}
+
+#fsBtn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 30;
+    background: #000;
+    color: #fff;
+    border: 1px solid #555;
+    padding: 6px 10px;
+    font-size: 12px;
+}
 </style>
 </head>
 
 <body>
 
+<!-- Bubble background -->
 <canvas id="bubbleCanvas"></canvas>
 
+<!-- Clock -->
 <div class="clock-container">
     <div id="time">00:00:00</div>
     <div id="date">01-Jan-1970</div>
 </div>
 
+<!-- Fake cursor -->
 <div id="fakeCursor" class="fake-cursor"></div>
+
+<!-- Fullscreen button -->
+<button id="fsBtn">Fullscreen</button>
+
+<!-- Invisible video (keeps screen awake as much as possible) -->
+<video autoplay loop muted playsinline style="display:none">
+    <source src="data:video/mp4;base64,AAAAIGZ0eXBtcDQyAAAAAG1wNDFtcDQyaXNvbQAAAAhmcmVlAAACZ21kYXQAAAAAAA==" type="video/mp4">
+</video>
 
 <script>
 /* ======================
@@ -74,11 +96,7 @@ function pad(n) {
 
 function updateDateTime() {
     var now = new Date();
-
-    // convert to UTC
     var utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-
-    // IST = UTC + 5:30
     var ist = new Date(utc + (5.5 * 60 * 60 * 1000));
 
     var h = pad(ist.getHours());
@@ -146,18 +164,28 @@ function drawBubbles() {
 drawBubbles();
 
 /* ======================
-   FAKE CURSOR MOVE
+   FAKE CURSOR
 ====================== */
 function moveFakeCursor() {
-    var cursor = document.getElementById("fakeCursor");
+    var c = document.getElementById("fakeCursor");
     var x = Math.random() * (window.innerWidth - 20);
     var y = Math.random() * (window.innerHeight - 20);
-    cursor.style.left = x + "px";
-    cursor.style.top = y + "px";
+    c.style.left = x + "px";
+    c.style.top = y + "px";
 }
 
 moveFakeCursor();
 setInterval(moveFakeCursor, 30000);
+
+/* ======================
+   FULLSCREEN (OLD CHROME)
+====================== */
+document.getElementById("fsBtn").onclick = function () {
+    var el = document.documentElement;
+    if (el.requestFullscreen) el.requestFullscreen();
+    else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+    else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
+};
 </script>
 
 </body>
