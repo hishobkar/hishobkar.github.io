@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>India Time Clock</title>
+
+    <!-- Bootstrap CSS -->
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+        rel="stylesheet"
+    >
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        #time {
+            font-size: 4rem;
+            font-weight: bold;
+        }
+        #date {
+            font-size: 2rem;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <div id="time">00:00:00</div>
+    <div id="date">01-Jan-1970</div>
+</div>
+
+<script>
+    function updateDateTime() {
+        const now = new Date();
+
+        const timeFormatter = new Intl.DateTimeFormat('en-GB', {
+            timeZone: 'Asia/Kolkata',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        });
+
+        const dateFormatter = new Intl.DateTimeFormat('en-GB', {
+            timeZone: 'Asia/Kolkata',
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric'
+        });
+
+        $('#time').text(timeFormatter.format(now));
+        $('#date').text(dateFormatter.format(now).replace(/ /g, '-'));
+    }
+
+    // Initial load
+    updateDateTime();
+
+    // Update every second
+    setInterval(updateDateTime, 1000);
+</script>
+
+</body>
+</html>
