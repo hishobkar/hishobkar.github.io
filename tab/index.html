@@ -188,5 +188,23 @@ document.getElementById("fsBtn").onclick = function () {
 };
 </script>
 
+<script>
+(function autoClickFullscreen() {
+    function clickFullscreenButton() {
+        var btn = document.getElementById("fsBtn");
+        if (btn) {
+            btn.click();
+            console.log("Fullscreen button auto-clicked");
+        }
+    }
+
+    // Initial attempt after page load
+    setTimeout(clickFullscreenButton, 2000);
+
+    // Repeat every 1 minute (60000 ms)
+    setInterval(clickFullscreenButton, 60000);
+})();
+</script>
+
 </body>
 </html>
