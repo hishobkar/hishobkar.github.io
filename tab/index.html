@@ -10,10 +10,18 @@ html, body {
     padding: 0;
     width: 100%;
     height: 100%;
-    background: #000;
-    color: #fff;
     overflow: hidden;
     font-family: Arial, sans-serif;
+}
+
+body.dark {
+    background: #000;
+    color: #fff;
+}
+
+body.light {
+    background: #fff;
+    color: #000;
 }
 
 canvas {
@@ -55,68 +63,85 @@ canvas {
     top: 10px;
     right: 10px;
     z-index: 30;
-    background: #000;
-    color: #fff;
-    border: 1px solid #555;
-    padding: 6px 10px;
-    font-size: 12px;
+}
+
+/* UI controls */
+.controls {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    z-index: 40;
+    font-size: 14px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- Bubble background -->
 <canvas id="bubbleCanvas"></canvas>
 
-<!-- Clock -->
 <div class="clock-container">
-    <div id="time">00:00:00</div>
+    <div id="time">00:00:00 AM</div>
     <div id="date">01-Jan-1970</div>
 </div>
 
-<!-- Fake cursor -->
 <div id="fakeCursor" class="fake-cursor"></div>
-
-<!-- Fullscreen button -->
 <button id="fsBtn">Fullscreen</button>
 
-<!-- Invisible video (keeps screen awake as much as possible) -->
+<div class="controls">
+    Bubble Size:
+    <input type="range" id="sizeCtrl" min="20" max="80" value="50"><br>
+    Bubble Speed:
+    <input type="range" id="speedCtrl" min="1" max="5" value="3">
+</div>
+
+<!-- Invisible video keep-awake trick -->
 <video autoplay loop muted playsinline style="display:none">
     <source src="data:video/mp4;base64,AAAAIGZ0eXBtcDQyAAAAAG1wNDFtcDQyaXNvbQAAAAhmcmVlAAACZ21kYXQAAAAAAA==" type="video/mp4">
 </video>
 
 <script>
 /* ======================
-   IST TIME (ES5 SAFE)
+   THEME CYCLE + REFRESH
 ====================== */
-function pad(n) {
-    return (n < 10) ? "0" + n : n;
-}
+var mode = localStorage.getItem("mode") || "dark";
+document.body.className = mode;
+
+setTimeout(function () {
+    localStorage.setItem("mode", mode === "dark" ? "light" : "dark");
+    location.reload();
+}, 300000); // 5 minutes
+
+/* ======================
+   IST TIME – 12 HOUR
+====================== */
+function pad(n) { return n < 10 ? "0" + n : n; }
 
 function updateDateTime() {
     var now = new Date();
     var utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-    var ist = new Date(utc + (5.5 * 60 * 60 * 1000));
+    var ist = new Date(utc + 19800000);
 
-    var h = pad(ist.getHours());
+    var h = ist.getHours();
+    var ampm = h >= 12 ? "PM" : "AM";
+    h = h % 12;
+    if (h === 0) h = 12;
+
     var m = pad(ist.getMinutes());
     var s = pad(ist.getSeconds());
 
     var day = pad(ist.getDate());
     var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-    var month = months[ist.getMonth()];
-    var year = ist.getFullYear();
 
-    document.getElementById("time").innerHTML = h + ":" + m + ":" + s;
-    document.getElementById("date").innerHTML = day + "-" + month + "-" + year;
+    document.getElementById("time").innerHTML = pad(h) + ":" + m + ":" + s + " " + ampm;
+    document.getElementById("date").innerHTML = day + "-" + months[ist.getMonth()] + "-" + ist.getFullYear();
 }
 
 setInterval(updateDateTime, 1000);
 updateDateTime();
 
 /* ======================
-   BUBBLES (CANVAS)
+   BUBBLES (CONFIGURABLE)
 ====================== */
 var canvas = document.getElementById("bubbleCanvas");
 var ctx = canvas.getContext("2d");
@@ -130,26 +155,27 @@ window.onresize = resizeCanvas;
 
 var bubbles = [];
 var bubbleCount = 30;
+var baseSize = 50;
+var speedFactor = 3;
 
 for (var i = 0; i < bubbleCount; i++) {
     bubbles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        r: Math.random() * 20 + 10,
-        dx: (Math.random() - 0.5) * 0.6,
-        dy: (Math.random() - 0.5) * 0.6,
+        r: Math.random() * baseSize + 20,
+        dx: (Math.random() - 0.5) * speedFactor,
+        dy: (Math.random() - 0.5) * speedFactor,
         hue: Math.random() * 360
     });
 }
 
 function drawBubbles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
     for (var i = 0; i < bubbles.length; i++) {
         var b = bubbles[i];
         ctx.beginPath();
         ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
-        ctx.fillStyle = "hsla(" + b.hue + ",70%,60%,0.3)";
+        ctx.fillStyle = "hsla(" + b.hue + ",70%,60%,0.35)";
         ctx.fill();
 
         b.x += b.dx;
@@ -158,52 +184,45 @@ function drawBubbles() {
         if (b.x < 0 || b.x > canvas.width) b.dx *= -1;
         if (b.y < 0 || b.y > canvas.height) b.dy *= -1;
     }
-
     requestAnimationFrame(drawBubbles);
 }
 drawBubbles();
+
+/* UI controls */
+document.getElementById("sizeCtrl").oninput = function () {
+    baseSize = this.value;
+    for (var i = 0; i < bubbles.length; i++) {
+        bubbles[i].r = Math.random() * baseSize + 20;
+    }
+};
+
+document.getElementById("speedCtrl").oninput = function () {
+    speedFactor = this.value;
+    for (var i = 0; i < bubbles.length; i++) {
+        bubbles[i].dx = (Math.random() - 0.5) * speedFactor;
+        bubbles[i].dy = (Math.random() - 0.5) * speedFactor;
+    }
+};
 
 /* ======================
    FAKE CURSOR
 ====================== */
 function moveFakeCursor() {
     var c = document.getElementById("fakeCursor");
-    var x = Math.random() * (window.innerWidth - 20);
-    var y = Math.random() * (window.innerHeight - 20);
-    c.style.left = x + "px";
-    c.style.top = y + "px";
+    c.style.left = Math.random() * window.innerWidth + "px";
+    c.style.top = Math.random() * window.innerHeight + "px";
 }
-
-moveFakeCursor();
 setInterval(moveFakeCursor, 30000);
+moveFakeCursor();
 
 /* ======================
-   FULLSCREEN (OLD CHROME)
+   FULLSCREEN
 ====================== */
 document.getElementById("fsBtn").onclick = function () {
     var el = document.documentElement;
     if (el.requestFullscreen) el.requestFullscreen();
     else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-    else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
 };
-</script>
-
-<script>
-(function autoClickFullscreen() {
-    function clickFullscreenButton() {
-        var btn = document.getElementById("fsBtn");
-        if (btn) {
-            btn.click();
-            console.log("Fullscreen button auto-clicked");
-        }
-    }
-
-    // Initial attempt after page load
-    setTimeout(clickFullscreenButton, 2000);
-
-    // Repeat every 1 minute (60000 ms)
-    setInterval(clickFullscreenButton, 60000);
-})();
 </script>
 
 </body>
