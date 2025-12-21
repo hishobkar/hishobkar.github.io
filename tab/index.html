@@ -1,73 +1,163 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>India Time Clock</title>
+<meta charset="UTF-8">
+<title>India Time Clock</title>
 
-    <!-- Bootstrap CSS -->
-    <link 
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
-        rel="stylesheet"
-    >
+<!-- Bootstrap (optional, safe for old Chrome) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<style>
+    body {
+        margin: 0;
+        background: #000;
+        color: #fff;
+        overflow: hidden;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+    }
 
-    <style>
-        body {
-            background-color: #000;
-            color: #fff;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-        #time {
-            font-size: 4rem;
-            font-weight: bold;
-        }
-        #date {
-            font-size: 2rem;
-            margin-top: 10px;
-        }
-    </style>
+    .clock-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        z-index: 10;
+    }
+
+    #time {
+        font-size: 48px;
+        font-weight: bold;
+    }
+
+    #date {
+        font-size: 24px;
+    }
+
+    canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+
+    .fake-cursor {
+        position: fixed;
+        width: 16px;
+        height: 16px;
+        background: rgba(255,255,255,0.8);
+        border-radius: 50%;
+        z-index: 20;
+    }
+</style>
 </head>
+
 <body>
 
-<div>
+<canvas id="bubbleCanvas"></canvas>
+
+<div class="clock-container">
     <div id="time">00:00:00</div>
     <div id="date">01-Jan-1970</div>
 </div>
 
+<div id="fakeCursor" class="fake-cursor"></div>
+
 <script>
-    function updateDateTime() {
-        const now = new Date();
+/* ======================
+   IST TIME (ES5 SAFE)
+====================== */
+function pad(n) {
+    return (n < 10) ? "0" + n : n;
+}
 
-        const timeFormatter = new Intl.DateTimeFormat('en-GB', {
-            timeZone: 'Asia/Kolkata',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            hour12: false
-        });
+function updateDateTime() {
+    var now = new Date();
 
-        const dateFormatter = new Intl.DateTimeFormat('en-GB', {
-            timeZone: 'Asia/Kolkata',
-            day: '2-digit',
-            month: 'short',
-            year: 'numeric'
-        });
+    // convert to UTC
+    var utc = now.getTime() + (now.getTimezoneOffset() * 60000);
 
-        $('#time').text(timeFormatter.format(now));
-        $('#date').text(dateFormatter.format(now).replace(/ /g, '-'));
+    // IST = UTC + 5:30
+    var ist = new Date(utc + (5.5 * 60 * 60 * 1000));
+
+    var h = pad(ist.getHours());
+    var m = pad(ist.getMinutes());
+    var s = pad(ist.getSeconds());
+
+    var day = pad(ist.getDate());
+    var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    var month = months[ist.getMonth()];
+    var year = ist.getFullYear();
+
+    document.getElementById("time").innerHTML = h + ":" + m + ":" + s;
+    document.getElementById("date").innerHTML = day + "-" + month + "-" + year;
+}
+
+setInterval(updateDateTime, 1000);
+updateDateTime();
+
+/* ======================
+   BUBBLES (CANVAS)
+====================== */
+var canvas = document.getElementById("bubbleCanvas");
+var ctx = canvas.getContext("2d");
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.onresize = resizeCanvas;
+
+var bubbles = [];
+var bubbleCount = 30;
+
+for (var i = 0; i < bubbleCount; i++) {
+    bubbles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 20 + 10,
+        dx: (Math.random() - 0.5) * 0.6,
+        dy: (Math.random() - 0.5) * 0.6,
+        hue: Math.random() * 360
+    });
+}
+
+function drawBubbles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (var i = 0; i < bubbles.length; i++) {
+        var b = bubbles[i];
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+        ctx.fillStyle = "hsla(" + b.hue + ",70%,60%,0.3)";
+        ctx.fill();
+
+        b.x += b.dx;
+        b.y += b.dy;
+
+        if (b.x < 0 || b.x > canvas.width) b.dx *= -1;
+        if (b.y < 0 || b.y > canvas.height) b.dy *= -1;
     }
 
-    // Initial load
-    updateDateTime();
+    requestAnimationFrame(drawBubbles);
+}
+drawBubbles();
 
-    // Update every second
-    setInterval(updateDateTime, 1000);
+/* ======================
+   FAKE CURSOR MOVE
+====================== */
+function moveFakeCursor() {
+    var cursor = document.getElementById("fakeCursor");
+    var x = Math.random() * (window.innerWidth - 20);
+    var y = Math.random() * (window.innerHeight - 20);
+    cursor.style.left = x + "px";
+    cursor.style.top = y + "px";
+}
+
+moveFakeCursor();
+setInterval(moveFakeCursor, 30000);
 </script>
 
 </body>
