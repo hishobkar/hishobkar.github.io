@@ -23,8 +23,14 @@
     }
 
     .container {
-        max-width: 900px;
-        text-align: center;
+    max-width: 900px;
+    text-align: left;
+    }
+
+    #content {
+        white-space: pre-line;
+        line-height: 1.9;
+        font-size: 1.15rem;
     }
 
     h1 {
@@ -78,23 +84,37 @@ document.addEventListener("visibilitychange", () => {
 // Fetch random Wikipedia article
 async function loadArticle() {
     try {
-        const response = await fetch(
+        // Get random article
+        const randomResp = await fetch(
             "https://en.wikipedia.org/api/rest_v1/page/random/summary"
         );
+        const randomData = await randomResp.json();
 
-        const data = await response.json();
+        const title = randomData.title;
 
-        document.getElementById("title").textContent =
-            data.title || "Interesting Read";
+        // Get full article HTML
+        const articleResp = await fetch(
+            `https://en.wikipedia.org/api/rest_v1/page/html/${encodeURIComponent(title)}`
+        );
 
-        document.getElementById("content").textContent =
-            data.extract || "No summary available.";
-    } catch (e) {
-        document.getElementById("title").textContent =
-            "Unable to Load";
+        const html = await articleResp.text();
 
-        document.getElementById("content").textContent =
-            "Please refresh and try again.";
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+
+        // Collect paragraphs
+        const paragraphs = [...doc.querySelectorAll("p")]
+            .map(p => p.textContent.trim())
+            .filter(text => text.length > 50);
+
+        // Take first 8-15 paragraphs
+        const content = paragraphs.slice(0, 12).join("\n\n");
+
+        document.getElementById("title").textContent = title;
+        document.getElementById("content").textContent = content;
+
+    } catch (err) {
+        console.error(err);
     }
 }
 
