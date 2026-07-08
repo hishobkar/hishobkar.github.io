@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Loading… — .NET Interview Prep</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+	<style>
+		:root {
+			--brand: #3366CC;
+			--brand-dark: #274d99;
+			--bg: #f4f6fb;
+			--card-bg: #ffffff;
+			--text: #1f2430;
+			--muted: #5a6270;
+			--border: #e2e6ef;
+			--code-bg: #f0f2f8;
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			margin: 0;
+			font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+			background: var(--bg);
+			color: var(--text);
+		}
+
+		header.topbar {
+			background: var(--brand);
+			color: #fff;
+			padding: 16px 20px;
+			display: flex;
+			align-items: center;
+			gap: 16px;
+			position: sticky;
+			top: 0;
+			z-index: 10;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+		}
+
+		header.topbar a.back {
+			color: #fff;
+			text-decoration: none;
+			font-size: 0.9rem;
+			border: 1px solid rgba(255, 255, 255, 0.5);
+			border-radius: 6px;
+			padding: 6px 12px;
+			white-space: nowrap;
+		}
+
+		header.topbar a.back:hover {
+			background: rgba(255, 255, 255, 0.15);
+		}
+
+		header.topbar h1 {
+			font-size: 1rem;
+			margin: 0;
+			font-weight: 500;
+			opacity: 0.95;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		main {
+			max-width: 860px;
+			margin: 0 auto;
+			padding: 30px 20px 80px;
+		}
+
+		#doc {
+			background: var(--card-bg);
+			border: 1px solid var(--border);
+			border-radius: 10px;
+			padding: 36px 42px;
+			box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+			line-height: 1.65;
+			word-wrap: break-word;
+		}
+
+		#doc h1, #doc h2, #doc h3, #doc h4 {
+			color: var(--brand-dark);
+			line-height: 1.3;
+		}
+
+		#doc h1 {
+			border-bottom: 2px solid var(--border);
+			padding-bottom: 10px;
+			margin-top: 0;
+		}
+
+		#doc h2 {
+			margin-top: 2.2em;
+			border-bottom: 1px solid var(--border);
+			padding-bottom: 6px;
+		}
+
+		#doc h3 {
+			margin-top: 1.6em;
+		}
+
+		#doc a { color: var(--brand); }
+
+		#doc code {
+			background: var(--code-bg);
+			padding: 2px 6px;
+			border-radius: 4px;
+			font-size: 0.88em;
+			font-family: Consolas, "Courier New", monospace;
+		}
+
+		#doc pre {
+			background: #1e2430;
+			color: #e6e8ef;
+			padding: 16px 18px;
+			border-radius: 8px;
+			overflow-x: auto;
+		}
+
+		#doc pre code {
+			background: none;
+			color: inherit;
+			padding: 0;
+			font-size: 0.85rem;
+		}
+
+		#doc blockquote {
+			border-left: 4px solid var(--brand);
+			margin: 1em 0;
+			padding: 4px 16px;
+			color: var(--muted);
+			background: #f7f9ff;
+		}
+
+		#doc table {
+			border-collapse: collapse;
+			width: 100%;
+			margin: 1em 0;
+			font-size: 0.92rem;
+		}
+
+		#doc th, #doc td {
+			border: 1px solid var(--border);
+			padding: 8px 10px;
+			text-align: left;
+		}
+
+		#doc th {
+			background: #eef2fc;
+		}
+
+		#doc hr {
+			border: none;
+			border-top: 1px solid var(--border);
+			margin: 2.2em 0;
+		}
+
+		#doc li { margin: 4px 0; }
+
+		.state-msg {
+			text-align: center;
+			color: var(--muted);
+			padding: 60px 20px;
+		}
+
+		@media (prefers-color-scheme: dark) {
+			:root {
+				--bg: #14161c;
+				--card-bg: #1c1f28;
+				--text: #e4e6ed;
+				--muted: #9aa1b0;
+				--border: #2c303c;
+				--code-bg: #262a36;
+			}
+			#doc blockquote { background: #1f2433; }
+			#doc th { background: #232838; }
+		}
+	</style>
+</head>
+
+<body>
+
+	<header class="topbar">
+		<a class="back" href="index.html">&larr; All Docs</a>
+		<h1 id="doc-title">Loading…</h1>
+	</header>
+
+	<main>
+		<div id="doc">
+			<p class="state-msg">Loading document…</p>
+		</div>
+	</main>
+
+	<script>
+		const ALLOWED_DOCS = [
+			"prompt.md",
+			"Interview_Prep_Questions.md",
+			"Inter_Prep_Answers.md",
+			"Interview_Prep_Answer1.md"
+		];
+
+		const params = new URLSearchParams(window.location.search);
+		const requested = params.get("doc") || "";
+		const docEl = document.getElementById("doc");
+		const titleEl = document.getElementById("doc-title");
+
+		function showError(message) {
+			titleEl.textContent = "Not found";
+			document.title = "Not found — .NET Interview Prep";
+			docEl.innerHTML = '<p class="state-msg">' + message + ' &nbsp;<a href="index.html">Go back</a></p>';
+		}
+
+		if (!ALLOWED_DOCS.includes(requested)) {
+			showError("That document isn't available.");
+		} else {
+			titleEl.textContent = requested;
+			document.title = requested + " — .NET Interview Prep";
+
+			fetch(requested)
+				.then(function (res) {
+					if (!res.ok) throw new Error("HTTP " + res.status);
+					return res.text();
+				})
+				.then(function (markdown) {
+					document.title = requested + " — .NET Interview Prep";
+					docEl.innerHTML = marked.parse(markdown);
+				})
+				.catch(function (err) {
+					showError("Could not load " + requested + " (" + err.message + ").");
+				});
+		}
+	</script>
+
+</body>
+
+</html>
