@@ -1,19 +1,548 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Redirecting...</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>hishobkar — Systems Engineering Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0D13;
+    --bg-elev:#101623;
+    --bg-elev-2:#141B2B;
+    --border:#212A3D;
+    --border-soft:#1A2233;
+    --text:#E8ECF4;
+    --text-dim:#8A93AC;
+    --text-faint:#4E5871;
+    --cyan:#4FD8C4;
+    --magenta:#E8659E;
+    --amber:#F2B84B;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --sans: 'Inter', -apple-system, sans-serif;
+  }
 
-    <!-- Instant redirect -->
-    <meta http-equiv="refresh" content="0; url=https://hishobkar.github.io/portfolio/">
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
 
-    <script>
-        window.location.replace("https://hishobkar.github.io/portfolio/");
-    </script>
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.5;
+    background-image:
+      linear-gradient(var(--border-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border-soft) 1px, transparent 1px);
+    background-size: 42px 42px;
+    background-position: -1px -1px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  }
+
+  a{color:inherit; text-decoration:none;}
+
+  .wrap{max-width:1160px; margin:0 auto; padding:0 28px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:96px 0 72px;
+    position:relative;
+    border-bottom:1px solid var(--border);
+    background:
+      radial-gradient(ellipse 900px 420px at 12% -10%, rgba(79,216,196,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 380px at 100% 0%, rgba(232,101,158,0.08), transparent 60%);
+  }
+  .kicker{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--cyan);
+    letter-spacing:0.02em;
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:28px;
+  }
+  .kicker::before{
+    content:'';
+    width:8px; height:8px; border-radius:50%;
+    background:var(--cyan);
+    box-shadow:0 0 0 3px rgba(79,216,196,0.18);
+    animation:pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{box-shadow:0 0 0 3px rgba(79,216,196,0.18);}
+    50%{box-shadow:0 0 0 6px rgba(79,216,196,0.06);}
+  }
+  .hero h1{
+    font-family:var(--mono);
+    font-weight:800;
+    font-size:clamp(32px, 5vw, 54px);
+    line-height:1.12;
+    letter-spacing:-0.01em;
+    max-width:820px;
+  }
+  .hero h1 .grad{
+    background:linear-gradient(90deg, var(--cyan), var(--amber) 55%, var(--magenta));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero p.lede{
+    margin-top:22px;
+    max-width:620px;
+    font-size:17px;
+    color:var(--text-dim);
+  }
+  .hero-cta{
+    margin-top:36px;
+    display:flex; gap:14px; flex-wrap:wrap;
+  }
+  .btn{
+    font-family:var(--mono);
+    font-size:13.5px;
+    font-weight:600;
+    padding:12px 20px;
+    border-radius:6px;
+    border:1px solid var(--border);
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition:border-color .15s ease, transform .15s ease, background .15s ease;
+  }
+  .btn-primary{background:var(--cyan); color:#04211C; border-color:var(--cyan);}
+  .btn-primary:hover{transform:translateY(-1px); background:#5FE6D2;}
+  .btn-ghost{color:var(--text); background:var(--bg-elev);}
+  .btn-ghost:hover{border-color:var(--text-faint); transform:translateY(-1px);}
+
+  .stat-row{
+    margin-top:56px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    border-top:1px solid var(--border);
+    border-left:1px solid var(--border);
+  }
+  .stat{
+    border-right:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+    padding:20px 22px;
+  }
+  .stat .num{
+    font-family:var(--mono);
+    font-size:28px;
+    font-weight:700;
+  }
+  .stat .label{
+    margin-top:4px;
+    font-size:12.5px;
+    color:var(--text-dim);
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+  }
+  .stat:nth-child(1) .num{color:var(--cyan);}
+  .stat:nth-child(2) .num{color:var(--amber);}
+  .stat:nth-child(3) .num{color:var(--magenta);}
+  .stat:nth-child(4) .num{color:var(--cyan);}
+
+  /* ---------- SECTION HEADERS ---------- */
+  section{padding:76px 0;}
+  section + section{border-top:1px solid var(--border);}
+  .sec-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    margin-bottom:36px;
+    flex-wrap:wrap;
+  }
+  .sec-eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--text-faint);
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  .sec-title{
+    font-family:var(--mono);
+    font-size:26px;
+    font-weight:700;
+  }
+  .sec-desc{
+    max-width:440px;
+    color:var(--text-dim);
+    font-size:14.5px;
+  }
+
+  /* ---------- FLAGSHIP GRID ---------- */
+  .flagship-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:20px;
+  }
+  .card{
+    background:var(--bg-elev);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:26px;
+    position:relative;
+    overflow:hidden;
+    transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+  .card::before{
+    content:'';
+    position:absolute; top:0; left:0; right:0; height:3px;
+    background:var(--accent-color, var(--cyan));
+    opacity:0.85;
+  }
+  .card:hover{
+    transform:translateY(-3px);
+    border-color:var(--accent-color, var(--cyan));
+    box-shadow:0 14px 32px -18px var(--accent-color, var(--cyan));
+  }
+  .card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+    margin-bottom:14px;
+  }
+  .card h3{
+    font-family:var(--mono);
+    font-size:17.5px;
+    font-weight:700;
+    line-height:1.3;
+  }
+  .status-pill{
+    font-family:var(--mono);
+    font-size:10.5px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    padding:4px 9px;
+    border-radius:20px;
+    white-space:nowrap;
+    color:var(--accent-color, var(--cyan));
+    border:1px solid var(--accent-color, var(--cyan));
+    background:color-mix(in srgb, var(--accent-color, var(--cyan)) 12%, transparent);
+  }
+  .card p.desc{
+    color:var(--text-dim);
+    font-size:14px;
+    margin-bottom:18px;
+    min-height:42px;
+  }
+  .tech-row{display:flex; flex-wrap:wrap; gap:7px; margin-bottom:20px;}
+  .tech-chip{
+    font-family:var(--mono);
+    font-size:11.5px;
+    padding:4px 9px;
+    border-radius:5px;
+    background:var(--bg-elev-2);
+    border:1px solid var(--border);
+    color:var(--text-dim);
+  }
+  .card-link{
+    font-family:var(--mono);
+    font-size:13px;
+    font-weight:600;
+    color:var(--accent-color, var(--cyan));
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .card-link svg{transition:transform .15s ease;}
+  .card:hover .card-link svg{transform:translate(2px,-2px);}
+
+  /* ---------- PARITY LEDGER (AWS vs Azure) ---------- */
+  .ledger{
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+    background:var(--bg-elev);
+  }
+  .ledger-head{
+    display:grid;
+    grid-template-columns:180px 1fr 1fr;
+    font-family:var(--mono);
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--text-faint);
+    border-bottom:1px solid var(--border);
+  }
+  .ledger-head > div{padding:14px 20px;}
+  .ledger-head .aws-col{color:var(--amber); border-left:1px solid var(--border);}
+  .ledger-head .azure-col{color:var(--cyan); border-left:1px solid var(--border);}
+  .ledger-row{
+    display:grid;
+    grid-template-columns:180px 1fr 1fr;
+    border-bottom:1px solid var(--border-soft);
+  }
+  .ledger-row:last-child{border-bottom:none;}
+  .ledger-row:hover{background:rgba(255,255,255,0.015);}
+  .ledger-label{
+    padding:18px 20px;
+    display:flex;
+    align-items:center;
+    font-family:var(--mono);
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--text);
+  }
+  .ledger-cell{
+    padding:14px 20px;
+    border-left:1px solid var(--border-soft);
+    display:flex;
+    align-items:center;
+  }
+  .ledger-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    width:100%;
+    padding:10px 14px;
+    border-radius:7px;
+    border:1px solid transparent;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .ledger-item:hover{border-color:var(--border); background:var(--bg-elev-2);}
+  .ledger-item .name{font-size:13.5px; font-weight:500;}
+  .ledger-item svg{opacity:0.5; flex-shrink:0; transition:opacity .15s ease, transform .15s ease;}
+  .ledger-item:hover svg{opacity:1; transform:translate(2px,-2px);}
+  .dot{width:7px; height:7px; border-radius:50%; margin-right:9px; flex-shrink:0;}
+
+  /* ---------- PROTOCOL GRID ---------- */
+  .proto-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:14px;
+  }
+  .proto-card{
+    background:var(--bg-elev);
+    border:1px solid var(--border);
+    border-radius:9px;
+    padding:20px;
+    transition:transform .15s ease, border-color .15s ease;
+  }
+  .proto-card:hover{transform:translateY(-2px); border-color:var(--accent-color, var(--cyan));}
+  .proto-tag{
+    font-family:var(--mono);
+    font-size:10.5px;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--accent-color, var(--cyan));
+    margin-bottom:10px;
+  }
+  .proto-card h4{font-family:var(--mono); font-size:15px; font-weight:700; margin-bottom:8px;}
+  .proto-card p{font-size:12.5px; color:var(--text-dim); margin-bottom:14px; min-height:32px;}
+  .proto-link{font-family:var(--mono); font-size:12px; font-weight:600; color:var(--text-dim); display:inline-flex; align-items:center; gap:5px;}
+  .proto-card:hover .proto-link{color:var(--accent-color, var(--cyan));}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:52px 0 64px;
+    border-top:1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:20px;
+  }
+  footer .f-left{font-family:var(--mono); font-size:13px; color:var(--text-dim);}
+  footer .f-left strong{color:var(--text);}
+  footer .f-links{display:flex; gap:22px; font-family:var(--mono); font-size:13px;}
+  footer .f-links a{color:var(--text-dim); transition:color .15s ease;}
+  footer .f-links a:hover{color:var(--cyan);}
+
+  @media (max-width:820px){
+    .flagship-grid{grid-template-columns:1fr;}
+    .proto-grid{grid-template-columns:repeat(2,1fr);}
+    .stat-row{grid-template-columns:repeat(2,1fr);}
+    .ledger-head, .ledger-row{grid-template-columns:1fr;}
+    .ledger-label{border-bottom:1px solid var(--border-soft);}
+    .ledger-cell{border-left:none; border-top:1px solid var(--border-soft);}
+    .ledger-head .aws-col, .ledger-head .azure-col{border-left:none; border-top:1px solid var(--border);}
+  }
+  @media (max-width:520px){
+    .proto-grid{grid-template-columns:1fr;}
+    .hero{padding:64px 0 48px;}
+  }
+</style>
 </head>
 <body>
-    <p>If you are not redirected automatically,
-        <a href="https://hishobkar.github.io/portfolio/">click here</a>.
-    </p>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">SYSTEM STATUS: ACTIVELY SHIPPING</div>
+    <h1>Enterprise backend systems,<br>built <span class="grad">cloud-agnostic</span> by design.</h1>
+    <p class="lede">A working portfolio of event-driven microservices, dual-cloud infrastructure proofs (AWS &amp; Azure, side by side), and API protocol implementations — all in C# / .NET, Python, and Terraform.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://github.com/hishobkar" target="_blank" rel="noopener">
+        View GitHub Profile
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+      </a>
+      <a class="btn btn-ghost" href="#flagship">Browse Projects ↓</a>
+    </div>
+
+    <div class="stat-row" id="stat-row"></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section id="flagship">
+    <div class="sec-head">
+      <div>
+        <div class="sec-eyebrow">// Featured builds</div>
+        <div class="sec-title">Flagship Projects</div>
+      </div>
+      <p class="sec-desc">Full applications — not proofs of concept. Event-driven architecture, risk scoring, and IoT monitoring at production scale.</p>
+    </div>
+    <div class="flagship-grid" id="flagship-grid"></div>
+  </section>
+
+  <section id="parity">
+    <div class="sec-head">
+      <div>
+        <div class="sec-eyebrow">// Infrastructure parity</div>
+        <div class="sec-title">AWS ⇄ Azure, Implemented in Parallel</div>
+      </div>
+      <p class="sec-desc">Nine core infrastructure patterns, each solved twice — once per cloud — to demonstrate provider-agnostic engineering.</p>
+    </div>
+    <div class="ledger">
+      <div class="ledger-head">
+        <div>Pattern</div>
+        <div class="aws-col">AWS</div>
+        <div class="azure-col">Azure</div>
+      </div>
+      <div id="ledger-body"></div>
+    </div>
+  </section>
+
+  <section id="protocols">
+    <div class="sec-head">
+      <div>
+        <div class="sec-eyebrow">// Communication layer</div>
+        <div class="sec-title">API &amp; Protocol Implementations</div>
+      </div>
+      <p class="sec-desc">Eight interface styles, each with a dedicated reference implementation — from REST to real-time messaging.</p>
+    </div>
+    <div class="proto-grid" id="proto-grid"></div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="f-left"><strong>hishobkar</strong> — .NET / Cloud / Distributed Systems</div>
+  <div class="f-links">
+    <a href="https://github.com/hishobkar" target="_blank" rel="noopener">GitHub</a>
+    <a href="#flagship">Projects</a>
+    <a href="#parity">Cloud POCs</a>
+    <a href="#protocols">Protocols</a>
+  </div>
+</footer>
+
+<script>
+const PROJECTS = [
+  { id: 'intelligent-properity-inspection-platform', title: 'Intelligent Property Inspection', description: 'An enterprise-grade, event-driven microservices solution for property inspection and risk scoring.', tech: ['C#', '.NET 10', 'Web API', 'SQL Server', 'Python', 'HCL', 'PowerShell', 'Dockerfile'], repoUrl: 'https://github.com/hishobkar/Intelligent-Property-Inspection-Platform', status: 'active', accent: 'cyan' },
+  { id: 'renewable-energy-platform', title: 'Smart Renewable Energy Monitoring', description: 'An enterprise-grade microservices system to monitor, analyze, and manage renewable energy assets including wind turbines and solar farms.', tech: ['C#', '.NET', 'Python', 'HTML', 'Shell', 'HCL', 'Dockerfile'], repoUrl: 'https://github.com/hishobkar/Renewable-Energy-Platform', status: 'active', accent: 'magenta' },
+  { id: 'poc-microservices-CQRS', title: 'CQRS Microservices', description: 'CQRS, Event-Driven Architecture, and Microservices using .NET 10, Kafka, and SQL Server.', tech: ['C#', 'Dockerfile'], repoUrl: 'https://github.com/hishobkar/poc-microservices-CQRS', status: 'active', accent: 'amber' },
+  { id: 'visitor-management', title: 'Visitor Management System', description: 'A simple visitor management system built with JavaScript, HTML, and CSS. Tracks and manages visitors efficiently.', tech: ['Vue', 'Python', 'JavaScript', 'HTML', 'CSS'], repoUrl: 'https://github.com/hishobkar/visitor-management', status: 'active', accent: 'cyan' },
+  { id: 'poc-aws-storage', title: 'AWS S3 Storage', description: 'AWS Storage and S3 Bucket Management using C# and Python.', tech: ['C#', '.NET', 'Python', 'AWS'], repoUrl: 'https://github.com/hishobkar/poc-asw-azure/tree/main/01-storage/aws-s3', status: 'active', accent: 'amber', pattern: 'Storage', cloud: 'aws' },
+  { id: 'poc-azure-blob-storage', title: 'Azure Blob Storage', description: 'Azure Blob Storage Management using C# and Python.', tech: ['C#', '.NET', 'Python', 'Azure'], repoUrl: 'https://github.com/hishobkar/poc-asw-azure/tree/main/01-storage/azure-blob-storage', status: 'active', accent: 'cyan', pattern: 'Storage', cloud: 'azure' },
+  { id: 'poc-aws-relational-database', title: 'AWS Aurora PostgreSQL', description: 'AWS Aurora PostgreSQL Database Management using C# and Python.', tech: ['C#', '.NET', 'Python', 'AWS'], repoUrl: 'https://github.com/hishobkar/poc-asw-azure/tree/main/02-relational-db/aws-aurora-postgresql', status: 'active', accent: 'amber', pattern: 'Relational Database', cloud: 'aws' },
+  { id: 'poc-azure-relational-database', title: 'Azure SQL Database', description: 'Azure SQL Database Management using C# and Python.', tech: ['C#', '.NET', 'Python', 'Azure'], repoUrl: 'https://github.com/hishobkar/poc-asw-azure/tree/main/02-relational-db/azure-sql', status: 'active', accent: 'cyan', pattern: 'Relational Database', cloud: 'azure' },
+  { id: 'poc-aws-nosql-database', title: 'AWS DynamoDB', description: 'AWS DynamoDB Management using C# and Python.', tech: ['C#', '.NET', 'Python', 'AWS'], repoUrl: 'https://github.com/hishobkar/poc-asw-azure/tree/main/03-nosql-db/aws-dynamodb', status: 'active', accent: 'amber', pattern: 'NoSQL Database', cloud: 'aws' },
+  { id: 'poc-azure-nosql-database', title: 'Azure Cosmos DB', description: 'Azure Cosmos DB Management using C# and Python.', tech: ['C#', '.NET', 'Python', 'Azure'], repoUrl: 'https://github.com/hishobkar/poc-asw-azure/tree/main/03-nosql-db/azure-cosmosdb', status: 'active', accent: 'cyan', pattern: 'NoSQL Database', cloud: 'azure' },
+  { id: 'poc-aws-messaging', title: 'AWS SQS / SNS', description: 'AWS SQS Management using C# and Python.', tech: ['C#', '.NET', 'Python', 'AWS'], repoUrl: 'https://github.com/hishobkar/poc-asw-azure/tree/main/04-messaging/aws-sqs-sns', status: 'active', accent: 'amber', pattern: 'Messaging', cloud: 'aws' },
+  { id: 'poc-azure-messaging', title: 'Azure Service Bus', description: 'Azure Service Bus Management using C# and Python.', tech: ['C#', '.NET', 'Python', 'Azure'], repoUrl: 'https://github.com/hishobkar/poc-asw-azure/tree/main/04-messaging/azure-servicebus', status: 'active', accent: 'cyan', pattern: 'Messaging', cloud: 'azure' },
+  { id: 'poc-aws-containerization', title: 'AWS ECS', description: 'AWS ECS Management using C# and Python.', tech: ['C#', '.NET', 'Python', 'AWS'], repoUrl: 'https://github.com/hishobkar/poc-asw-azure/tree/main/05-containers', status: 'active', accent: 'amber', pattern: 'Containerization', cloud: 'aws' },
+  { id: 'poc-azure-containerization', title: 'Azure Container Registry', description: 'Azure Container Registry Management using C# and Python.', tech: ['C#', '.NET', 'Python', 'Azure'], repoUrl: 'https://github.com/hishobkar/poc-asw-azure/tree/main/05-containers', status: 'active', accent: 'cyan', pattern: 'Containerization', cloud: 'azure' },
+  { id: 'poc-aws-secrets', title: 'AWS Secrets Manager', description: 'AWS Secrets Manager Management using C# and Python.', tech: ['C#', '.NET', 'Python', 'AWS'], repoUrl: 'https://github.com/hishobkar/poc-asw-azure/tree/main/06-secrets/aws-secrets-manager', status: 'active', accent: 'amber', pattern: 'Secrets Management', cloud: 'aws' },
+  { id: 'poc-azure-secrets', title: 'Azure Key Vault', description: 'Azure Key Vault Management using C# and Python.', tech: ['C#', '.NET', 'Python', 'Azure'], repoUrl: 'https://github.com/hishobkar/poc-asw-azure/tree/main/06-secrets/azure-keyvault', status: 'active', accent: 'cyan', pattern: 'Secrets Management', cloud: 'azure' },
+  { id: 'poc-aws-monitoring', title: 'AWS CloudWatch / X-Ray', description: 'AWS CloudWatch Management using C# and Python.', tech: ['C#', '.NET', 'Python', 'AWS'], repoUrl: 'https://github.com/hishobkar/poc-asw-azure/tree/main/07-monitoring/aws-cloudwatch-xray', status: 'active', accent: 'amber', pattern: 'Monitoring', cloud: 'aws' },
+  { id: 'poc-azure-monitoring', title: 'Azure Monitor / App Insights', description: 'Azure Monitor Management using C# and Python.', tech: ['C#', '.NET', 'Python', 'Azure'], repoUrl: 'https://github.com/hishobkar/poc-asw-azure/tree/main/07-monitoring/azure-appinsights', status: 'active', accent: 'cyan', pattern: 'Monitoring', cloud: 'azure' },
+  { id: 'poc-aws-integration', title: 'AWS EventBridge', description: 'AWS EventBridge Management using C# and Python.', tech: ['C#', '.NET', 'Python', 'AWS'], repoUrl: 'https://github.com/hishobkar/poc-asw-azure/tree/main/08-integration/aws-mini-energy', status: 'active', accent: 'amber', pattern: 'Integration', cloud: 'aws' },
+  { id: 'poc-azure-integration', title: 'Azure Logic Apps', description: 'Azure Logic Apps Management using C# and Python.', tech: ['C#', '.NET', 'Python', 'Azure'], repoUrl: 'https://github.com/hishobkar/poc-asw-azure/tree/main/08-integration/azure-mini-inspection', status: 'active', accent: 'cyan', pattern: 'Integration', cloud: 'azure' },
+  { id: 'poc-aws-terraform', title: 'AWS Terraform', description: 'AWS Terraform Management using C# and Python.', tech: ['C#', '.NET', 'Python', 'AWS'], repoUrl: 'https://github.com/hishobkar/poc-asw-azure/tree/main/09-terraform/aws', status: 'active', accent: 'amber', pattern: 'Infrastructure as Code', cloud: 'aws' },
+  { id: 'poc-azure-terraform', title: 'Azure Terraform', description: 'Azure Terraform Management using C# and Python.', tech: ['C#', '.NET', 'Python', 'Azure'], repoUrl: 'https://github.com/hishobkar/poc-asw-azure/tree/main/09-terraform/azure', status: 'active', accent: 'cyan', pattern: 'Infrastructure as Code', cloud: 'azure' },
+  { id: 'poc-JWT-Authentication', title: 'JWT Authentication', description: 'JWT Authentication Management using C# and Python.', tech: ['C#', '.NET', 'JWT', 'OAuth'], repoUrl: 'https://github.com/hishobkar/poc-projects/tree/main/poc-Jwt-Oauth', status: 'active', accent: 'magenta' },
+  { id: 'poc-REST-API', title: 'REST API', description: 'REST API Management using C# and Python.', tech: ['C#', '.NET', 'REST', 'API'], repoUrl: 'https://github.com/hishobkar/poc-projects/tree/main/poc-REST-API', status: 'active', accent: 'amber' },
+  { id: 'poc-SOAP-API', title: 'SOAP API', description: 'SOAP API Management using C# and Python.', tech: ['C#', '.NET', 'SOAP', 'API'], repoUrl: 'https://github.com/hishobkar/poc-projects/tree/main/poc-SOAP-API', status: 'active', accent: 'cyan' },
+  { id: 'poc-GraphQL-API', title: 'GraphQL API', description: 'GraphQL API Management using C# and Python.', tech: ['C#', '.NET', 'GraphQL', 'API'], repoUrl: 'https://github.com/hishobkar/poc-projects/tree/main/poc-GraphQL-API', status: 'active', accent: 'cyan' },
+  { id: 'poc-gRPC-API', title: 'gRPC API', description: 'gRPC API Management using C# and Python.', tech: ['C#', '.NET', 'gRPC', 'API'], repoUrl: 'https://github.com/hishobkar/poc-projects/tree/main/poc-gRPC-API', status: 'active', accent: 'magenta' },
+  { id: 'poc-MQTT-API', title: 'MQTT API', description: 'MQTT API Management using C# and Python.', tech: ['C#', '.NET', 'MQTT', 'API'], repoUrl: 'https://github.com/hishobkar/poc-projects/tree/main/poc-MQTT-API', status: 'active', accent: 'amber' },
+  { id: 'poc-WebSocket', title: 'WebSocket', description: 'WebSocket Management using C# and Python.', tech: ['C#', '.NET', 'WebSocket', 'API'], repoUrl: 'https://github.com/hishobkar/poc-projects/tree/main/poc-WebSocket', status: 'active', accent: 'cyan' },
+  { id: 'poc-SignalR', title: 'SignalR', description: 'SignalR Management using C# and Python.', tech: ['C#', '.NET', 'SignalR', 'API'], repoUrl: 'https://github.com/hishobkar/poc-projects/tree/main/poc-SignalR', status: 'active', accent: 'magenta' },
+];
+
+const ACCENT_HEX = { cyan: '#4FD8C4', magenta: '#E8659E', amber: '#F2B84B' };
+const ARROW = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>`;
+
+function esc(s){ const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+// ---- classify ----
+const flagship = PROJECTS.filter(p => !p.id.startsWith('poc-'));
+const cloudPocs = PROJECTS.filter(p => p.pattern);
+const protocolPocs = PROJECTS.filter(p => p.id.startsWith('poc-') && !p.pattern);
+
+// ---- stats ----
+const allTech = new Set();
+PROJECTS.forEach(p => p.tech.forEach(t => allTech.add(t)));
+const patterns = [...new Set(cloudPocs.map(p => p.pattern))];
+
+const stats = [
+  { num: PROJECTS.length, label: 'Public Repositories' },
+  { num: patterns.length, label: 'AWS / Azure Parity Pairs' },
+  { num: protocolPocs.length, label: 'API Protocols Implemented' },
+  { num: allTech.size, label: 'Technologies in Use' },
+];
+document.getElementById('stat-row').innerHTML = stats.map(s => `
+  <div class="stat"><div class="num">${s.num}</div><div class="label">${s.label}</div></div>
+`).join('');
+
+// ---- flagship cards ----
+document.getElementById('flagship-grid').innerHTML = flagship.map(p => `
+  <a class="card" style="--accent-color:${ACCENT_HEX[p.accent]}" href="${p.repoUrl}" target="_blank" rel="noopener">
+    <div class="card-top">
+      <h3>${esc(p.title)}</h3>
+      <span class="status-pill">${esc(p.status)}</span>
+    </div>
+    <p class="desc">${esc(p.description)}</p>
+    <div class="tech-row">${p.tech.map(t => `<span class="tech-chip">${esc(t)}</span>`).join('')}</div>
+    <span class="card-link">View repository ${ARROW}</span>
+  </a>
+`).join('');
+
+// ---- parity ledger ----
+document.getElementById('ledger-body').innerHTML = patterns.map(pattern => {
+  const aws = cloudPocs.find(p => p.pattern === pattern && p.cloud === 'aws');
+  const azure = cloudPocs.find(p => p.pattern === pattern && p.cloud === 'azure');
+  const cell = (p, color) => p ? `
+    <a class="ledger-item" href="${p.repoUrl}" target="_blank" rel="noopener">
+      <span style="display:flex; align-items:center;"><span class="dot" style="background:${color}"></span><span class="name">${esc(p.title)}</span></span>
+      ${ARROW}
+    </a>` : '<span style="color:var(--text-faint); font-family:var(--mono); font-size:12.5px; padding:10px 14px;">—</span>';
+  return `
+    <div class="ledger-row">
+      <div class="ledger-label">${esc(pattern)}</div>
+      <div class="ledger-cell">${cell(aws, ACCENT_HEX.amber)}</div>
+      <div class="ledger-cell">${cell(azure, ACCENT_HEX.cyan)}</div>
+    </div>`;
+}).join('');
+
+// ---- protocol grid ----
+document.getElementById('proto-grid').innerHTML = protocolPocs.map(p => `
+  <a class="proto-card" style="--accent-color:${ACCENT_HEX[p.accent]}" href="${p.repoUrl}" target="_blank" rel="noopener">
+    <div class="proto-tag">${esc(p.tech.find(t => !['C#','.NET','API'].includes(t)) || 'API')}</div>
+    <h4>${esc(p.title)}</h4>
+    <p>${esc(p.description)}</p>
+    <span class="proto-link">Source ${ARROW}</span>
+  </a>
+`).join('');
+</script>
 </body>
 </html>
